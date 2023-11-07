@@ -1,5 +1,5 @@
 <?php
 
 
-define("ROOT", "http://localhost/school/public");
-define("ASSETS", "http://localhost/school/public/assets");
+define("ROOT", "http://localhost/babycare/public");
+define("ASSETS", "http://localhost/babycare/public/assets");
