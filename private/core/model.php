@@ -9,10 +9,16 @@ class Model extends Database
 
     public function where($column, $value)
     {
-        $query = "select * from $this->table where :column = :value";
+        $column = addslashes($column);
+        $query = "select * from $this->table where $column = :value";
         return $this->query($query, [
-            'column'=>$column,
-            'value'=>$value
+            'value' => $value
         ]);
+    }
+
+    public function findAll()
+    {
+        $query = "select * from $this->table";
+        return $this->query($query);
     }
 }

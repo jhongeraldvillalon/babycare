@@ -4,8 +4,9 @@ class Home extends Controller
 {
     public function index()
     {
-        $db = new Database();
-        $data = $db->query("select * from users");
+        $user = $this->load_model("User");
+        $data = $user->findAll();
+        // $data = $user->where("first_name", 'Jhon Gerald');
          
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
