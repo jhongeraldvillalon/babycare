@@ -4,8 +4,8 @@ class Database
 {
     private function connect()
     {
-        $string = "mysql:host=localhost;dbname=babycare;";
-        if (!$con = new PDO($string, "root", "")) {
+        $string = DBDRIVER . ":host=" . DBHOST . ";dbname=". DBNAME . ";";
+        if (!$con = new PDO($string, DBUSER, DBPASS)) {
             // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             die("Can't connect to database");
         }
@@ -13,7 +13,7 @@ class Database
         return $con;
     }
 
-    private function run($query, $data = [], $data_type = "object")
+    public function query($query, $data = [], $data_type = "object")
     {
         $con = $this->connect();
         $stmt = $con->prepare($query);
@@ -35,7 +35,7 @@ class Database
         return false;
     }
 
-    public function query()
-    {
-    }
+    // public function query()
+    // {
+    // }
 }
