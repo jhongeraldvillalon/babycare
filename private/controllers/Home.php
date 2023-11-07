@@ -4,7 +4,7 @@ class Home extends Controller
 {
     public function index()
     {
-        $user = $this->load_model("User");
+        $user = new User();
         $data = $user->findAll();
         // $data = $user->where("first_name", 'Jhon Gerald');
          

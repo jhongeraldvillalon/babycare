@@ -2,9 +2,12 @@
 
 class Model extends Database
 {
-    protected $table = "users";
     public function __construct()
     {
+        if (!property_exists($this, "table")) {
+
+            $this->table = strtolower($this::class) . "s";
+        }
     }
 
     public function where($column, $value)
