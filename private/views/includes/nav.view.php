@@ -9,7 +9,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light p-2">
     <a class="navbar-brand" href="#">
-        <img src="assets/OLFU_logo.png" alt="logo" style="width:40px;">
+        <img src="<?=ASSETS?>/OLFU_logo.png" alt="logo" style="width:40px;">
 
         BabyCare</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

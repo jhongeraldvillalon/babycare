@@ -17,6 +17,4 @@
                         <p>No user data at this time because it is empty at the database</p>
                 <?php endif; ?>
         </div>
-
-
 </div>

@@ -1,12 +1,16 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
     <?= $this->view('includes/crumbs'); ?>
     <div class="card-group">
-        <table class="">
+        <table class="table table-striped table-hover">
             <tr>
-                <th>School</th>
+                <th>Hospital</th>
                 <th>Created by</th>
                 <th>Date</th>
-                <button class="btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
+                <th>
+                    <a href="<?= ROOT ?>/hospitals/add">
+                        <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
+                    </a>
+                </th>
             </tr>
         </table>
         <?php if ($rows) : ?>
