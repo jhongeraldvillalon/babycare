@@ -1,5 +1,8 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
         <?= $this->view('includes/crumbs'); ?>
+        <a href="<?= ROOT ?>/signup">
+                <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
+        </a>
         <div class="card-group">
                 <?php if ($rows) : ?>
 
@@ -14,7 +17,7 @@
                                 </div>
                         <?php endforeach; ?>
                 <?php else : ?>
-                        <p>No user data at this time because it is empty at the database</p>
+                        <p>No staff at this time</p>
                 <?php endif; ?>
         </div>
 </div>

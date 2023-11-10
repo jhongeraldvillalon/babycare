@@ -45,14 +45,18 @@
                 <option <?= get_select('user_role', 'reception') ?> value="reception">Reception</option>
                 <option <?= get_select('user_role', 'lecturer') ?> value="lecturer">Lecturer</option>
                 <option <?= get_select('user_role', 'admin') ?> value="admin">Admin</option>
-                <option <?= get_select('user_role', 'super_admin') ?> value="super_admin">Super Admin</option>
+                <?php if (Auth::getUser_role() == 'super_admin') : ?>
+                    <option <?= get_select('user_role', 'super_admin') ?> value="super_admin">Super Admin</option>
+                <?php endif; ?>
             </select>
 
             <input class="my-1 form-control" value="<?= get_var('password') ?>" type="password" name="password" id="" placeholder="Password">
             <input class="my-1 form-control" value="<?= get_var('password2') ?>" type="password" name="password2" id="" placeholder="Retype Password">
             <br>
             <button class="btn btn-primary float-end">Add User</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
+            <a href="<?= ROOT ?>/users">
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </a>
         </div>
     </form>
 </div>
