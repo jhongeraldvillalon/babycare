@@ -7,12 +7,15 @@
                 <?php if ($rows) : ?>
 
                         <?php foreach ($rows as $row) : ?>
+                                <?php
+                                $image = get_image($row->image, $row->gender);
+                                ?>
                                 <div class="card m-1" style="max-width: 14rem;min-width: 14rem;">
-                                        <img src="assets/user_female.png" class="card-img-top">
+                                        <img src="<?= $image ?>" class="card-img-top">
                                         <div class="card-body shadow">
                                                 <h5 class="card-title"><?= $row->first_name ?> <?= $row->last_name ?></h5>
                                                 <p class="card-text"><?= str_replace("_", " ", $row->user_role) ?></p>
-                                                <a href="#" class="btn btn-primary">Profile</a>
+                                                <a href="<?= ROOT ?>/profile/<?= $row->user_id ?>" class="btn btn-primary">Profile</a>
                                         </div>
                                 </div>
                         <?php endforeach; ?>

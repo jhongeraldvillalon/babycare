@@ -25,7 +25,7 @@ class User extends Model
             $this->errors['first_name'] = 'First Name: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (empty($DATA['middle_name']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['middle_name'])) {
+        if (!empty($DATA['middle_name']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['middle_name'])) {
             $this->errors['middle_name'] = 'Middle Name: Only letters are allowed in this field and no leading or trailing spaces';
         }
 

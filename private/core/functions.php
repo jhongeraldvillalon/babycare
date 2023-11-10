@@ -51,3 +51,19 @@ function show($data)
 {
     echo "<pre>" . print_r($data) . "</pre>";
 }
+
+
+function get_image($image, $gender = '')
+{
+    if (!file_exists($image)) {
+        if ($gender == "male") {
+            $image = ASSETS . "/user_male.png";
+        } elseif ($gender == "female") {
+            $image = ASSETS . "/user_female.png";
+        } else {
+            $image = ASSETS . "/user.png";
+        }
+    }
+
+    return $image;
+}

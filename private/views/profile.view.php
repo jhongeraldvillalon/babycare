@@ -1,31 +1,39 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-        <?= $this->view('includes/crumbs'); ?>
+    <?= $this->view('includes/crumbs'); ?>
+    <?php if ($row) : ?>
         <div class="row">
             <div class="col-sm-4 col-md-3">
-                <img src="assets/user_female.png" class="border border-secondary d-block mx-auto rounded-circle" style="width:100px;">
-                <h3 class="text-center">Jhon Gerald Villalon</h3>
+                <?php
+                $image = get_image($row->image, $row->gender);
+                ?>
+                <img src="<?= $image ?>" class="d-block mx-auto" style="width:100px;">
+                <h3 class="text-center"><?= esc($row->first_name) ?> <?= esc($row->last_name) ?></h3>
             </div>
             <div class="col-sm-8 col-md-9 bg-light p-2">
                 <table class="table table-hover table-striped table-bordered">
                     <tr>
                         <th>First Name</th>
-                        <td>Jhon Gerald</td>
-                    </tr>
-                    <tr>
-                        <th>Middle Name</th>
-                        <td>Israel</td>
+                        <td><?= esc($row->first_name) ?></td>
                     </tr>
                     <tr>
                         <th>Last Name</th>
-                        <td>Villalon</td>
+                        <td><?= esc($row->last_name) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><?= esc($row->email) ?></td>
                     </tr>
                     <tr>
                         <th>Gender</th>
-                        <td>Male</td>
+                        <td><?= esc(ucfirst($row->gender)) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Role</th>
+                        <td><?= esc(ucwords(str_replace("_", " ", $row->user_role))) ?></td>
                     </tr>
                     <tr>
                         <th>Date Created</th>
-                        <td>2023</td>
+                        <td><?= get_date($row->date) ?></td>
                     </tr>
                 </table>
             </div>
@@ -54,6 +62,12 @@
                 </form>
             </nav>
         </div>
+
+    <?php else : ?>
+        <center>
+            <p>This profile cant be found</p>
+        </center>
+    <?php endif; ?>
 
 
 </div>
