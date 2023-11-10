@@ -45,3 +45,9 @@ function  get_date($date)
 {
     return date("M j, Y", strtotime($date));
 }
+
+
+function show($data)
+{
+    echo "<pre>" . print_r($data) . "</pre>";
+}

@@ -48,9 +48,9 @@ class Auth
             if ($row = $hospital->where('id', $id)) {
                 $row = $row[0];
                 $arr['hospital_id'] = $row->hospital_id;
-                if ($user->update($_SESSION['USER']->id, $arr)) {
-                    $_SESSION['USER']->hospital_name =  $row->hospital;
-                }
+                $user->update($_SESSION['USER']->id, $arr);
+                $_SESSION['USER']->hospital_id =  $row->hospital_id;
+                $_SESSION['USER']->hospital_name =  $row->hospital;
             }
             return true;
         }

@@ -31,7 +31,7 @@ class Hospital extends Model
 
     public function make_user_id($data)
     {
-        if (isset($_SESSION['USER']->hospital_id)) {
+        if (isset($_SESSION['USER']->user_id)) {
             $data['user_id'] = $_SESSION['USER']->user_id;
         }
         return $data;

@@ -15,7 +15,7 @@ class Signup extends Controller
                 // $arr['email'] = $_POST['email'];
 
                 $user->insert($_POST);
-                $this->redirect('login');
+                $this->redirect('users');
             } else {
                 $errors = $user->errors;
             }
