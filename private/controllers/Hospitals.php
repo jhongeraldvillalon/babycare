@@ -72,9 +72,6 @@ class Hospitals extends Controller
         }
 
         $row = $hospital->where('id', $id);
-        // if($row) {
-        //     $row = $row[0];
-        // }
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
@@ -84,6 +81,33 @@ class Hospitals extends Controller
                 'row' => $row,
                 'errors' => $errors
 
+            ]
+        );
+        echo $this->view('includes/footer');
+    }
+
+    public function delete($id = null)
+    {
+        if (!Auth::logged_in()) {
+            $this->redirect("login");
+        }
+
+        $errors = [];
+        $hospital = new Hospital();
+
+        if (count($_POST) > 0) {
+            $hospital->delete($id);
+            $this->redirect('hospitals');
+        }
+
+        $row = $hospital->where('id', $id);
+
+        echo $this->view('includes/header');
+        echo $this->view('includes/nav');
+        echo $this->view(
+            'hospitals.delete',
+            [
+                'row' => $row,
             ]
         );
         echo $this->view('includes/footer');
