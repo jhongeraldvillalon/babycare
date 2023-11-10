@@ -1,5 +1,5 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?= $this->view('includes/crumbs'); ?>
+    <?php // $this->view('includes/crumbs', ['crumbs' => $crumbs]) ?>
     <?php if ($row) { ?>
         <div class="card-group justify-content-center">
             <form method="post">

@@ -1,5 +1,6 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?= $this->view('includes/crumbs'); ?>
+    <?php // $this->view('includes/crumbs', ['crumbs' => $crumbs]) 
+    ?>
     <div class="card-group">
         <table class="table table-striped table-hover">
             <tr>
@@ -25,6 +26,9 @@
                             </a>
                             <a href="<?= ROOT ?>/hospitals/delete/<?= $row->id ?>">
                                 <button class="btn-sm btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </a>
+                            <a href="<?= ROOT ?>/switch_hospital/<?= $row->id ?>">
+                                <button class="btn-sm btn btn-success">Switch<i class="fa fa-chevron-right"></i></button>
                             </a>
                         </td>
                     </tr>

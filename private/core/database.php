@@ -4,7 +4,7 @@ class Database
 {
     private function connect()
     {
-        $string = DBDRIVER . ":host=" . DBHOST . ";dbname=". DBNAME . ";";
+        $string = DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";";
         if (!$con = new PDO($string, DBUSER, DBPASS)) {
             // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             die("Can't connect to database");
@@ -29,6 +29,7 @@ class Database
                 if (is_array($data) && count($data) > 0) {
                     return $data;
                 }
+                return true;
             }
         }
 
