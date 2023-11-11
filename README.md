@@ -1,4 +1,19 @@
 # babycare
+
+students -> parents
+schools -> hospital
+classes -> children
+
+switch hospital
+create a controller
+create a function in auth 
+
+for children
+create a controller
+create a view
+create a model
+
+
 Create Database
 create database if not exists babycare
 
@@ -29,11 +44,13 @@ create table hospitals (
 create table children (
  	id INT AUTO_INCREMENT PRIMARY KEY,
  	first_name VARCHAR(30) NOT NULL,
-    	middle_name VARCHAR(30),
-    	last_name VARCHAR(30) NOT NULL,
+    middle_name VARCHAR(30),
+    last_name VARCHAR(30) NOT NULL,
+	gender VARCHAR(6) NOT NULL,
 	user_id VARCHAR(60) NOT NULL,
 	hospital_id VARCHAR(60) NOT NULL,
 	child_id VARCHAR(60) NOT NULL,
-	date DATETIME NOT NULL
+	date DATETIME NOT NULL,
+	image VARCHAR(500)
 )
 

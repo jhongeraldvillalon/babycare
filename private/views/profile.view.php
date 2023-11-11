@@ -1,5 +1,4 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?= $this->view('includes/crumbs'); ?>
     <?php if ($row) : ?>
         <div class="row">
             <div class="col-sm-4 col-md-3">

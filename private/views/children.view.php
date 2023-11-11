@@ -1,6 +1,4 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?php // $this->view('includes/crumbs', ['crumbs' => $crumbs]) 
-    ?>
     <h5>Children</h5> <br>
     <div class="card-group">
         <table class="table table-striped table-hover">
@@ -20,7 +18,7 @@
                 <?php foreach ($rows as $row) : ?>
                     <tr>
                         <td>
-                            <a href="<?= ROOT ?>/child/<?= $row->child_id ?>">
+                            <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>">
                                 <button class="btn btn-sm btn-primary">&nbsp;<i class="fa fa-circle-info"></i></button>
                             </a>
                         </td>

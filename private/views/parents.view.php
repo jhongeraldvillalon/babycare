@@ -1,6 +1,4 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?= $this->view('includes/crumbs'); ?>
-
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
             <div class="input-group">

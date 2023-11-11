@@ -13,8 +13,6 @@ class Signup extends Controller
 
                 $_POST['date'] = date("Y-m-d H:i:s");
 
-                // $arr['email'] = $_POST['email'];
-
                 $user->insert($_POST);
                 $redirect = $mode == 'parents' ? 'parents' : 'users';
                 $this->redirect($redirect);

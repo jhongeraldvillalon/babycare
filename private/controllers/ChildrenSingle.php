@@ -1,16 +1,17 @@
 <?php
 
-class Child extends Controller
+class ChildrenSingle extends Controller
 {
     public function index($id = '')
     {
-        $user = new User();
-        $row = $user->first('user_id', $id);
+        $children = new Child();
+
+        $row = $children->first('child_id', $id);
+
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
-        echo $this->view('child', [
+        echo $this->view('childrensingle', [
             'row' => $row,
-
         ]);
         echo $this->view('includes/footer');
     }

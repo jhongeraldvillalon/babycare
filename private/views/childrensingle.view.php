@@ -1,10 +1,9 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
-    <?= $this->view('includes/crumbs'); ?>
     <?php if ($row) : ?>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <?php
-                $image = get_image($row->image, $row->gender);
+                $image = get_image($row->user->image, $row->gender);
                 ?>
                 <img src="<?= $image ?>" class="d-block mx-auto" style="width:100px;">
                 <h3 class="text-center"><?= esc($row->first_name) ?> <?= esc($row->last_name) ?></h3>
@@ -20,16 +19,8 @@
                         <td><?= esc($row->last_name) ?></td>
                     </tr>
                     <tr>
-                        <th>Email</th>
-                        <td><?= esc($row->email) ?></td>
-                    </tr>
-                    <tr>
                         <th>Gender</th>
                         <td><?= esc(ucfirst($row->gender)) ?></td>
-                    </tr>
-                    <tr>
-                        <th>Role</th>
-                        <td><?= esc(ucwords(str_replace("_", " ", $row->user_role))) ?></td>
                     </tr>
                     <tr>
                         <th>Date Created</th>

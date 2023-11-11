@@ -12,9 +12,6 @@ class Hospitals extends Controller
 
         $data = $hospital->findAll();
 
-        // $crumbs[] = ['Dashboard', ''];
-        // $crumbs[] = ['Hospitals', 'hospitals'];
-
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view('hospitals', [
@@ -40,23 +37,17 @@ class Hospitals extends Controller
 
                 $_POST['date'] = date("Y-m-d H:i:s");
 
-                // $arr['email'] = $_POST['email'];
-
                 $hospital->insert($_POST);
                 $this->redirect('hospitals');
             } else {
                 $errors = $hospital->errors;
             }
         }
-        // $crumbs[] = ['Dashboard', ''];
-        // $crumbs[] = ['Hospitals', 'hospitals'];
-        // $crumbs[] = ['Add', 'hospitals/add'];
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view('hospitals.add', [
             'errors' => $errors,
-            // 'crumbs' => $crumbs
         ]);
         echo $this->view('includes/footer');
     }
@@ -83,9 +74,6 @@ class Hospitals extends Controller
         }
 
         $row = $hospital->where('id', $id);
-        // $crumbs[] = ['Dashboard', ''];
-        // $crumbs[] = ['Hospitals', 'hospitals'];
-        // $crumbs[] = ['Edit', 'hospitals/edit'];
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view(
@@ -93,8 +81,6 @@ class Hospitals extends Controller
             [
                 'row' => $row,
                 'errors' => $errors,
-                // 'crumbs' => $crumbs
-
             ]
         );
         echo $this->view('includes/footer');
@@ -116,17 +102,12 @@ class Hospitals extends Controller
 
         $row = $hospital->where('id', $id);
 
-        // $crumbs[] = ['Dashboard', ''];
-        // $crumbs[] = ['Hospitals', 'hospitals'];
-        // $crumbs[] = ['Delete', 'hospitals/delete'];
-
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view(
             'hospitals.delete',
             [
                 'row' => $row,
-                // 'crumbs' => $crumbs
             ]
         );
         echo $this->view('includes/footer');
