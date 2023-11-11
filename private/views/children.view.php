@@ -19,7 +19,11 @@
             <?php if ($rows) : ?>
                 <?php foreach ($rows as $row) : ?>
                     <tr>
-                        <td><button class="btn btn-sm btn-primary">&nbsp;<i class="fa fa-circle-info"></i></button></td>
+                        <td>
+                            <a href="<?= ROOT ?>/child/<?= $row->child_id ?>">
+                                <button class="btn btn-sm btn-primary">&nbsp;<i class="fa fa-circle-info"></i></button>
+                            </a>
+                        </td>
                         <td><?= $row->first_name ?> <?= $row->middle_name ?> <?= $row->last_name ?></td>
                         <td><?php echo $row->user->first_name . " " . $row->user->last_name; ?></td>
                         <td><?= get_date($row->date) ?></td>
@@ -37,7 +41,7 @@
                 <tr>
                     <td></td>
                 </tr>
-                <h5>No child data at this time maybe because you did not added any hospital in the database</h5>
+                <h5>No child data at this time</h5>
             <?php endif; ?>
 
         </table>
