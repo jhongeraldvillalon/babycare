@@ -32,7 +32,7 @@
                 <!-- parent -->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= ROOT ?>/classes">Classes</a>
+                <a class="nav-link" href="<?= ROOT ?>/children">Children</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= ROOT ?>/tests">Tests</a>

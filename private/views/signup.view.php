@@ -45,7 +45,6 @@
                 </select>
             <?php endif; ?>
 
-
             <input class="my-1 form-control" value="<?= get_var('password') ?>" type="password" name="password" id="" placeholder="Password">
             <input class="my-1 form-control" value="<?= get_var('password2') ?>" type="password" name="password2" id="" placeholder="Retype Password">
             <br>
