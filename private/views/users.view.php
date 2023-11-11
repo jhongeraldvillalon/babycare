@@ -1,8 +1,20 @@
 <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1000px;">
         <?= $this->view('includes/crumbs'); ?>
-        <a href="<?= ROOT ?>/signup">
-                <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
-        </a>
+
+        <nav class="navbar navbar-light bg-light">
+                <form class="form-inline">
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">&nbsp<i class="fa-solid fa-magnifying-glass"></i>&nbsp</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                        </div>
+                </form>
+                <a href="<?= ROOT ?>/signup">
+                        <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
+                </a>
+        </nav>
+
         <div class="card-group">
                 <?php if ($rows) : ?>
 

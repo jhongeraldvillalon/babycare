@@ -30,33 +30,36 @@
                 <option <?= get_select('gender', 'female') ?> value="female">Female</option>
             </select>
 
-            <!-- <select class="my-2 form-control" name="role">
-                <option value="">--Select a Role--</option>
-                <option value="parent">Parent</option>
-                <option value="pediatrician">Pediatrician</option>
-                <option value="obgyne">OB/Gyne</option>
-                <option value="dentist">Dentist</option>
-                <option value="admin">Admin</option>
-            </select> -->
+            <?php if ($mode == 'parents') : ?>
+                <input hidden type="text" value="parent" name="user_role">
+            <?php else : ?>
+                <select class="my-2 form-control" name="user_role">
+                    <option <?= get_select('user_role', '') ?> value="">--Select a Role--</option>
+                    <option <?= get_select('user_role', 'parent') ?> value="parent">Parent</option>
+                    <option <?= get_select('user_role', 'reception') ?> value="reception">Reception</option>
+                    <option <?= get_select('user_role', 'lecturer') ?> value="lecturer">Lecturer</option>
+                    <option <?= get_select('user_role', 'admin') ?> value="admin">Admin</option>
+                    <?php if (Auth::getUser_role() == 'super_admin') : ?>
+                        <option <?= get_select('user_role', 'super_admin') ?> value="super_admin">Super Admin</option>
+                    <?php endif; ?>
+                </select>
+            <?php endif; ?>
 
-            <select class="my-2 form-control" name="user_role">
-                <option <?= get_select('user_role', '') ?> value="">--Select a Role--</option>
-                <option <?= get_select('user_role', 'student') ?> value="student">Student</option>
-                <option <?= get_select('user_role', 'reception') ?> value="reception">Reception</option>
-                <option <?= get_select('user_role', 'lecturer') ?> value="lecturer">Lecturer</option>
-                <option <?= get_select('user_role', 'admin') ?> value="admin">Admin</option>
-                <?php if (Auth::getUser_role() == 'super_admin') : ?>
-                    <option <?= get_select('user_role', 'super_admin') ?> value="super_admin">Super Admin</option>
-                <?php endif; ?>
-            </select>
 
             <input class="my-1 form-control" value="<?= get_var('password') ?>" type="password" name="password" id="" placeholder="Password">
             <input class="my-1 form-control" value="<?= get_var('password2') ?>" type="password" name="password2" id="" placeholder="Retype Password">
             <br>
             <button class="btn btn-primary float-end">Add User</button>
-            <a href="<?= ROOT ?>/users">
-                <button type="button" class="btn btn-danger">Cancel</button>
-            </a>
+
+            <?php if ($mode == 'parents') : ?>
+                <a href="<?= ROOT ?>/parents">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            <?php else : ?>
+                <a href="<?= ROOT ?>/users">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            <?php endif; ?>
         </div>
     </form>
 </div>

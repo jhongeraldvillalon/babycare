@@ -55,7 +55,7 @@ class User extends Model
             $this->errors['gender'] = 'Gender is not valid';
         }
 
-        $user_roles = ['student', 'reception', 'lecturer', 'admin', 'super_admin'];
+        $user_roles = ['parent', 'reception', 'lecturer', 'admin', 'super_admin'];
 
         if (empty($DATA['user_role']) || !in_array($DATA['user_role'], $user_roles)) {
             $this->errors['user_role'] = 'role is not valid';

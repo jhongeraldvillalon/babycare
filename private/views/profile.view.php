@@ -64,9 +64,7 @@
         </div>
 
     <?php else : ?>
-        <center>
-            <p>This profile cant be found</p>
-        </center>
+        <p>This profile cant be found</p>
     <?php endif; ?>
 
 

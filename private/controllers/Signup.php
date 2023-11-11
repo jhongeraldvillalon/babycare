@@ -20,8 +20,12 @@ class Signup extends Controller
                 $errors = $user->errors;
             }
         }
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
         echo $this->view('includes/header');
-        echo $this->view('signup', ['errors' => $errors,]);
+        echo $this->view('signup', [
+            'errors' => $errors,
+            'mode' => $mode
+        ]);
         echo $this->view('includes/footer');
     }
 }
