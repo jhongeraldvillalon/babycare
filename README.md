@@ -1,5 +1,7 @@
 # babycare
 
+
+
 students -> parents
 schools -> hospital
 classes -> children
@@ -12,6 +14,20 @@ for children
 create a controller
 create a view
 create a model
+
+personal information
+doctors
+dental records
+teeth development
+first prints
+milestones
+anthropometrics
+contacts
+immunization
+growthchart
+health assessment
+summary
+
 
 
 Create Database
@@ -51,6 +67,6 @@ create table children (
 	hospital_id VARCHAR(60) NOT NULL,
 	child_id VARCHAR(60) NOT NULL,
 	date DATETIME NOT NULL,
-	image VARCHAR(500)
+	image VARCHAR(500),
+	
 )
-

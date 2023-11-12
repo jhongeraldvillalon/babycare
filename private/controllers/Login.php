@@ -16,7 +16,7 @@ class Login extends Controller
             }
             $errors['email'] = "Wrong email or password";
         }
-        echo $this->view('includes/header');
+        echo $this->view('includes/header.lr');
         echo $this->view('login', ['errors' => $errors,]);
         echo $this->view('includes/footer');
     }

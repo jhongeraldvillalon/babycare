@@ -1,12 +1,11 @@
 <div class="container-fluid">
     <form method="post">
         <div class="p-4 mx-auto shadow rounded" style="margin-top:50px;width:100%;max-width:340px;">
-            <h2 class="text-center">BabyCare</h2>
-            <img src="assets/OLFU_logo.png" alt="logo" class="d-block mx-auto rounded-circle" style="width:100px;">
-            <h3>Add User</h3>
+            <!-- <h2 class="text-center">BabyCare</h2> -->
+            <!-- <img src="assets/OLFU_logo.png" alt="logo" class="d-block mx-auto rounded-circle" style="width:100px;"> -->
+            <h3>Sign Up</h3>
 
             <?php if (count($errors) > 0) : ?>
-
                 <div class="alert alert-warning alert-dismissible fade show p-0" role="alert">
                     <strong>Oops</strong>
                     <?php foreach ($errors as $error) : ?>
@@ -16,9 +15,7 @@
                         <span aria-hidden="true">&times;</span>
                     </span>
                 </div>
-
             <?php endif; ?>
-
             <input class="my-2 form-control" value="<?= get_var('first_name') ?>" type="first_name" name="first_name" placeholder="First Name">
             <input class="my-2 form-control" value="<?= get_var('middle_name') ?>" type="middle_name" name="middle_name" placeholder="Middle Name">
             <input class="my-2 form-control" value="<?= get_var('last_name') ?>" type="last_name" name="last_name" placeholder="Last Name">

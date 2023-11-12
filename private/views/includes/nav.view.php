@@ -1,55 +1,68 @@
-<style>
-    nav ul li a:hover {
-        color: green !important;
-    }
+<div class="container">
+    <aside>
+        <div class="toggle">
+            <div class="logo">
+                <img src="<?= ASSETS ?>/logo.png">
+                <h2><span class="success">BabyCare</span></h2>
+            </div>
+            <div class="close" id="close-btn">
+                <span class="material-icons-sharp">
+                    close
+                </span>
+            </div>
+        </div>
+        <div class="sidebar">
+            <?php // Auth::getFirst_name()   
+            ?>
+            <a href="<?= ROOT ?>">
+                <span class="material-icons-sharp">
+                    dashboard
+                </span>
+                <h3>Dashboard </h3>
+            </a>
+            <a href="<?= ROOT ?>/hospitals">
+                <span class="material-icons-sharp">
+                    local_hospital
+                </span>
+                <h3>Hospital</h3>
+            </a>
+            <a href="<?= ROOT ?>/users">
+                <span class="material-icons-sharp">
+                    groups
+                </span>
+                <h3>Staff</h3>
+            </a>
+            <a href="<?= ROOT ?>/parents">
+                <span class="material-icons-sharp">
+                    family_restroom
+                </span>
+                <h3>Parents </h3>
+            </a>
+            <a href="<?= ROOT ?>/children">
+                <span class="material-icons-sharp">
+                    face
+                </span>
+                <h3>Children </h3>
+            </a>
+            <!-- <a href="<?php // ROOT 
+                            ?>/profile">
+                <span class="material-icons-sharp">
+                    person_outline
+                </span>
+                <h3>Profile</h3>
+            </a> -->
+            <!-- <a href="register.php">
+                <span class="material-icons-sharp">
+                    add
+                </span>
+                <h3>Register</h3>
+            </a> -->
 
-    nav ul li a {
-        color: green !important;
-    }
-</style>
-<nav class="navbar navbar-expand-lg navbar-light bg-light p-2">
-    <a class="navbar-brand" href="#">
-        <img src="<?= ASSETS ?>/OLFU_logo.png" alt="logo" style="width:40px;">
-
-        BabyCare: <?= Auth::getHospital_name()   ?> </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?= ROOT ?>">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= ROOT ?>/hospitals">Hospital</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= ROOT ?>/users">Staff</a>
-            </li>
-            <li class="nav-item">
-                <!-- parent -->
-                <a class="nav-link" href="<?= ROOT ?>/parents">Parent</a>
-                <!-- parent -->
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= ROOT ?>/children">Children</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= ROOT ?>/tests">Tests</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?= Auth::getFirst_name()   ?>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="<?= ROOT ?>/profile">Profile</a>
-                    <a class="dropdown-item" href="<?= ROOT ?>">Dashboard</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?= ROOT ?>/logout">Logout</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+            <a href="<?= ROOT ?>/logout">
+                <span class="material-icons-sharp">
+                    logout
+                </span>
+                <h3>Logout</h3>
+            </a>
+        </div>
+    </aside>

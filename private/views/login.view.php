@@ -1,13 +1,15 @@
 <form method="post">
     <div class="container-fluid">
         <div class="p-4 mx-auto shadow rounded" style="margin-top:50px;width:100%;max-width:340px;">
-            <h2 class="text-center">BabyCare</h2>
-            <img src="assets/OLFU_logo.png" alt="logo" class="d-block mx-auto rounded-circle" style="width:100px;">
-            <h3>Login</h3>
+            <!-- <h2 class="text-center">BabyCare</h2> -->
+            <!-- <img src="assets/OLFU_logo.png" alt="logo" class="d-block mx-auto rounded-circle" style="width:100px;"> -->
+            <center>
+                <h3>Login</h3>
+            </center>
             <?php if (count($errors) > 0) : ?>
 
-                <div class="alert alert-warning alert-dismissible fade show p-0" role="alert">
-                    <strong>Oops</strong>
+                <div class="p-3 alert alert-warning alert-dismissible fade show p-0" role="alert">
+                    <strong>Alert!</strong>
                     <?php foreach ($errors as $error) : ?>
                         <br> <?= $error ?>
                     <?php endforeach; ?>
@@ -15,13 +17,18 @@
                         <span aria-hidden="true">&times;</span>
                     </span>
                 </div>
-
             <?php endif; ?>
-            <input class="form-control" value="<?= get_var('email') ?>" type="email" name="email" id="" placeholder="Email" autofocus>
-            <br>
-            <input class="form-control" value="<?= get_var('password') ?>" type="password" name="password" id="" placeholder="Password">
-            <br>
-            <button class="btn btn-primary">Login</button>
+            <div class="form-floating mb-3">
+                <input name="email" value="<?= get_var('email') ?>" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" autofocus>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input name="password" value="<?= get_var('password') ?>" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="float-right">
+                <button style="margin-top: 10px;" class="btn btn-primary">Login</button>
+            </div>
         </div>
     </div>
 

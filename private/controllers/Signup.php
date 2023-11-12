@@ -8,7 +8,6 @@ class Signup extends Controller
         $errors = [];
         if (count($_POST) > 0) {
             $user = new User();
-
             if ($user->validate($_POST)) {
 
                 $_POST['date'] = date("Y-m-d H:i:s");
@@ -21,7 +20,7 @@ class Signup extends Controller
             }
         }
 
-        echo $this->view('includes/header');
+        echo $this->view('includes/header.lr');
         echo $this->view('signup', [
             'errors' => $errors,
             'mode' => $mode
