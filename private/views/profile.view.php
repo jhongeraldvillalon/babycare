@@ -1,7 +1,5 @@
 <main>
     <br>
-
-
     <div class="recent-orders">
         <?php if ($row) : ?>
             <div class="row">
@@ -81,19 +79,10 @@
                     </th>
                     </tr>
 
-
                 </tbody>
             </div>
+        <?php else : ?>
+            <p>This profile cant be found</p>
+        <?php endif; ?>
     </div>
-
-
-
-
-
-
-<?php else : ?>
-    <p>This profile cant be found</p>
-<?php endif; ?>
-
-
-</div>
+</main>

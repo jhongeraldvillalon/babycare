@@ -43,10 +43,10 @@ CREATE TABLE users (
     date DATETIME NOT NULL,
     user_id VARCHAR(60) NOT NULL,
     gender VARCHAR(6) NOT NULL,
-    hospital_id VARCHAR(60) NOT NULL,
     user_role VARCHAR(20) NOT NULL,
     password VARCHAR(255),
-	image VARCHAR(500)
+	image VARCHAR(500),
+	id_card VARCHAR(500)
 );
 
 create table hospitals (
@@ -64,9 +64,16 @@ create table children (
     last_name VARCHAR(30) NOT NULL,
 	gender VARCHAR(6) NOT NULL,
 	user_id VARCHAR(60) NOT NULL,
-	hospital_id VARCHAR(60) NOT NULL,
 	child_id VARCHAR(60) NOT NULL,
 	date DATETIME NOT NULL,
 	image VARCHAR(500),
-	
+	birth_date DATETIME,
+	blood_type VARCHAR(60),
+	birth_place VARCHAR(255),
+	birth_type VARCHAR(60),
+	multiple VARCHAR(60),
+	mother VARCHAR(255),
+	father VARCHAR(255),
+	delivery VARCHAR(60)
 )
+

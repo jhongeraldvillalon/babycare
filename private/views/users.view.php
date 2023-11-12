@@ -7,7 +7,7 @@
                                                 <input type="text" placeholder="Search">
                                         </th>
                                         <th style="padding-right: 20px;">
-                                                <a href="<?= ROOT ?>/signup?mode=parents">
+                                                <a href="<?= ROOT ?>/signup">
                                                         <button value="Add">Add</button>
                                                 </a>
                                         </th>
@@ -42,7 +42,7 @@
                                 </div>
                         <?php endforeach; ?>
                 <?php else : ?>
-                        <p>No staff at this time</p>
+                        <!-- <p>No staff at this time</p> -->
                 <?php endif; ?>
         </div>
 </main>

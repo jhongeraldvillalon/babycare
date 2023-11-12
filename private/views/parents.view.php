@@ -43,7 +43,7 @@
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <p>No parents at this time</p>
+            <!-- <p>No parents at this time</p> -->
         <?php endif; ?>
     </div>
 </main>

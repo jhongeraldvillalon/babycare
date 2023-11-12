@@ -20,12 +20,6 @@
                 </span>
                 <h3>Dashboard </h3>
             </a>
-            <a href="<?= ROOT ?>/hospitals">
-                <span class="material-icons-sharp">
-                    local_hospital
-                </span>
-                <h3>Hospital</h3>
-            </a>
             <a href="<?= ROOT ?>/users">
                 <span class="material-icons-sharp">
                     groups

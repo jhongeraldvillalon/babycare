@@ -10,11 +10,11 @@ class User extends Model
         'date',
         'gender',
         'password',
-        'user_role'
+        'user_role',
+        'id_card'
     ];
     protected $beforeInsert = [
         'make_user_id',
-        'make_hospital_id',
         'hash_password'
     ];
 
@@ -55,12 +55,18 @@ class User extends Model
             $this->errors['gender'] = 'Gender is not valid';
         }
 
-        $user_roles = ['parent', 'reception', 'lecturer', 'admin', 'super_admin'];
+        $user_roles = [
+            'parent', 'gynecologist', 'obstetrician', 'dentist',
+            'pediatrician', 'admin', 'super_admin'
+        ];
 
         if (empty($DATA['user_role']) || !in_array($DATA['user_role'], $user_roles)) {
             $this->errors['user_role'] = 'role is not valid';
         }
 
+        if (empty($DATA['id_card'])) {
+            $this->errors['id_card'] = 'Fill up the id';
+        }
 
         if (count($this->errors) == 0) {
             return true;
@@ -75,17 +81,14 @@ class User extends Model
         return $data;
     }
 
-    public function make_hospital_id($data)
-    {
-        if (isset($_SESSION['USER']->hospital_id)) {
-            $data['hospital_id'] = $_SESSION['USER']->hospital_id;
-        }
-        return $data;
-    }
-
     public function hash_password($data)
     {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         return $data;
+    }
+
+    public function isDentist()
+    {
+        return $this->user_role === 'dentist';
     }
 }

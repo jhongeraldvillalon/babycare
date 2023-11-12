@@ -9,10 +9,18 @@ class Child extends Model
         'first_name',
         'middle_name',
         'last_name',
-        'date'
+        'gender',
+        'date',
+        'birth_date',
+        'blood_type',
+        'birth_place',
+        'birth_type',
+        'multiple',
+        'mother',
+        'father',
+        'delivery',
     ];
     protected $beforeInsert = [
-        'make_hospital_id',
         'make_child_id',
         'make_user_id',
     ];
@@ -36,19 +44,38 @@ class Child extends Model
             $this->errors['last_name'] = 'Last Name: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
+        if (empty($DATA['blood_type']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['blood_type'])) {
+            $this->errors['blood_type'] = 'Blood Type: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['birth_place']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['birth_place'])) {
+            $this->errors['birth_place'] = 'Birth Place: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['multiple'])) {
+            $this->errors['multiple'] = 'Multiple: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (!empty($DATA['mother']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['mother'])) {
+            $this->errors['mother'] = 'Mother Name: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (!empty($DATA['father']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['father'])) {
+            $this->errors['father'] = 'Father Name: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['delivery']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['delivery'])) {
+            $this->errors['delivery'] = 'Delivery: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+        if (empty($DATA['birth_date'])) {
+            $this->errors['birth_date'] = 'Birth Date: Please fill this in';
+        }
+
         if (count($this->errors) == 0) {
             return true;
         }
 
         return false;
-    }
-
-    public function make_hospital_id($data)
-    {
-        if (isset($_SESSION['USER']->hospital_id)) {
-            $data['hospital_id'] = $_SESSION['USER']->hospital_id;
-        }
-        return $data;
     }
 
     public function make_user_id($data)

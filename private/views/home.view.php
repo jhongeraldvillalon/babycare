@@ -2,19 +2,6 @@
     <br><br><br>
     <div class="analyse">
         <div class="searches">
-            <a href="<?= ROOT ?>/hospitals">
-                <div class="status">
-                    <div class="info">
-                        <h1>Hospital</h1>
-                        <p>List of hospitals</p>
-                    </div>
-                    <div class="progress">
-                        <img src="<?= ASSETS ?>/hospital.png" alt="">
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="searches">
             <a href="<?= ROOT ?>/users">
                 <div class="status">
                     <div class="info">
