@@ -11,7 +11,8 @@ class User extends Model
         'gender',
         'password',
         'user_role',
-        'id_card'
+        'id_card',
+        'approve'
     ];
     protected $beforeInsert = [
         'make_user_id',
@@ -40,7 +41,6 @@ class User extends Model
         if ($this->where('email', $DATA['email'])) {
             $this->errors['email'] = 'Please try a different email';
         }
-     
 
         if (empty($DATA['password']) || $DATA['password'] != $DATA['password2']) {
             $this->errors['password'] = 'Password do not match';
@@ -65,8 +65,16 @@ class User extends Model
             $this->errors['user_role'] = 'role is not valid';
         }
 
-        if (empty($DATA['id_card'])) {
-            $this->errors['id_card'] = 'Fill up the id';
+        if (!empty($_FILES['id_card']['tmp_name'])) {
+            // Handle file upload
+            $imageData = $this->handleImageUpload('id_card');
+            if (!$imageData) {
+                $this->errors['id_card'] = 'Error uploading image';
+            } else {
+                $DATA['id_card'] = $imageData;
+            }
+        } else {
+            $this->errors['id_card'] = 'Please upload an image';
         }
 
         if (count($this->errors) == 0) {
@@ -74,6 +82,24 @@ class User extends Model
         }
 
         return false;
+    }
+
+    protected function handleImageUpload($fieldName)
+    {
+        $targetDir = ASSETS . "/id/";
+        $targetFile = $targetDir . basename($_FILES[$fieldName]["name"]);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Allow only specific file types (e.g., jpg, jpeg, png)
+        $allowedExtensions = array('jpg', 'jpeg', 'png');
+        if (!in_array($imageFileType, $allowedExtensions)) {
+            $this->errors['id_card'] = 'Invalid file type. Please upload a valid image file.';
+            return false;
+        }
+
+        $data = file_get_contents($_FILES[$fieldName]["tmp_name"]);
+        $base64 = 'data:image/' . $imageFileType . ';base64,' . base64_encode($data);
+        return $base64;
     }
 
     public function make_user_id($data)
@@ -87,5 +113,4 @@ class User extends Model
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         return $data;
     }
-
 }

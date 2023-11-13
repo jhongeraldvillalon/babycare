@@ -25,15 +25,19 @@
     <div class="recent-orders">
 
 
-        <h5>Children</h5> <br>
+        <h5>Unapprove Staffs</h5> <br>
         <div class="card-group">
             <table>
                 <tr>
                     <th>Name</th>
-                    <th>Created by</th>
+
                     <th>Created Date</th>
                     <th>Gender</th>
+                    <th>Occupation Applying</th>
                     <th>
+                        ID
+                    </th>
+                    <th>Approve
                     </th>
                 </tr>
 
@@ -41,27 +45,22 @@
                     <?php foreach ($rows as $row) : ?>
                         <tr>
                             <td><?= $row->first_name ?> <?= $row->middle_name ?> <?= $row->last_name ?></td>
-                            <td><?php echo $row->user->first_name . " " . $row->user->last_name; ?></td>
                             <td><?= get_date($row->date) ?></td>
                             <td><?= ucfirst(str_replace("_", " ", $row->gender)) ?></td>
+                            <td><?= ucfirst(str_replace("_", " ", $row->user_role)) ?></td>
                             <td>
-                                <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>">
+                                <?php if (!empty($row->id_card)) : ?>
+                                    <img src="data:image/png;base64,<?= $row->id_card ?>" alt="ID Card">
+                                <?php else : ?>
+                                    No ID Card
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <a href="<?= ROOT ?>/approve/edit/<?= $row->id ?>">
                                     <span class="material-icons-sharp">
-                                        info
+                                        check
                                     </span>
                                 </a>
-                                <?php if (Auth::isAdmin() || Auth::isParent()) : ?>
-                                    <a href="<?= ROOT ?>/children/edit/<?= $row->id ?>">
-                                        <span class="material-icons-sharp">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <a href="<?= ROOT ?>/children/delete/<?= $row->id ?>">
-                                        <span class="material-icons-sharp">
-                                            delete
-                                        </span>
-                                    </a>
-                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

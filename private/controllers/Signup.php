@@ -12,6 +12,10 @@ class Signup extends Controller
 
                 $_POST['date'] = date("Y-m-d H:i:s");
 
+                if ($_POST['user_role'] == 'parent') {
+                    $_POST['approve'] = '1';
+                }
+
                 $user->insert($_POST);
                 $redirect = $mode == 'parents' ? 'parents' : 'users';
                 $this->redirect($redirect);
@@ -25,6 +29,6 @@ class Signup extends Controller
             'errors' => $errors,
             'mode' => $mode
         ]);
-        echo $this->view('includes/footer');
+        // echo $this->view('includes/footer');
     }
 }

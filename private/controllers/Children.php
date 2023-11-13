@@ -104,8 +104,6 @@ class Children extends Controller
             $this->redirect("home");
         }
 
-
-
         $errors = [];
         $children = new Child();
 

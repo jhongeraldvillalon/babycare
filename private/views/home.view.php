@@ -31,6 +31,7 @@
                     </div>
                 </a>
             </div>
+
             <div class="searches">
                 <a href="<?= ROOT ?>/children">
                     <div class="status">
@@ -44,12 +45,13 @@
                     </div>
                 </a>
             </div>
+
             <div class="searches">
-                <a href="<?= ROOT ?>/management">
+                <a href="<?= ROOT ?>/approve">
                     <div class="status">
                         <div class="info">
-                            <h1>Management</h1>
-                            <p>Access level</p>
+                            <h1>Staff to Approve</h1>
+                            <p>To be approve</p>
                         </div>
                         <div class="progress">
                             <img src="<?= ASSETS ?>/management.png" alt="">
@@ -57,6 +59,7 @@
                     </div>
                 </a>
             </div>
+
             <div class="searches">
                 <a href="<?= ROOT ?>/management">
                     <div class="status">
@@ -139,5 +142,11 @@
         </div>
     </main>
 
-    
+
+<?php endif; ?>
+
+<?php if (Auth::isParent()) :  ?>
+
+    <main></main>
+
 <?php endif; ?>

@@ -40,6 +40,12 @@
                     </span>
                     <h3>Children </h3>
                 </a>
+                <a href="<?= ROOT ?>/approve">
+                    <span class="material-icons-sharp">
+                        face
+                    </span>
+                    <h3>Approvements</h3>
+                </a>
                 <!-- <a href="<?php // ROOT 
                                 ?>/profile">
                 <span class="material-icons-sharp">

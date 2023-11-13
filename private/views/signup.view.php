@@ -1,5 +1,5 @@
 <div class=" mw-50">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="p-4 mx-auto shadow rounded" style="margin-top:50px;width:100%;max-width:340px;">
             <!-- <h2 class="text-center">BabyCare</h2> -->
             <!-- <img src="assets/OLFU_logo.png" alt="logo" class="d-block mx-auto rounded-circle" style="width:100px;"> -->
@@ -23,7 +23,10 @@
 
             <input class="my-2 form-control" value="<?= get_var('email') ?>" type="email" name="email" placeholder="Email">
             <p>Identification Card</p>
-            <input class="my-2 form-control" value="" type="file" name="id_card" placeholder="Identification Card">
+            <label class="btn-sm btn btn-info text-white">
+                <input class="my-2 form-control" value="" type="file" name="id_card" style="display:none;" placeholder="Identification Card">
+                Identification Card
+            </label>
             <p>Gender</p>
             <select class="my-2 form-control" name="gender">
                 <option <?= get_select('gender', '') ?> value="">--Select a Gender--</option>
