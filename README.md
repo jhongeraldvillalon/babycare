@@ -77,3 +77,28 @@ create table children (
 	delivery VARCHAR(60)
 )
 
+CREATE TABLE access_requests (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id VARCHAR(60) NOT NULL,
+    action VARCHAR(255),
+    status VARCHAR(20) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+Access/Authorization {
+Verify medical professionals identity and allow them to enter the system
+Assing doctors to babies
+
+}
+
+Notification {
+	Immunization -> kung late na si baby
+	Growth Chart -> Kapag Obese na si Baby
+	Health Assessment -> possible illness ng baby
+}
+
+Security {
+	add otp for login
+	email pdf summary
+}

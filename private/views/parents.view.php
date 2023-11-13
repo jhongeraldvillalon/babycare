@@ -1,4 +1,5 @@
 <main>
+<?php if (Auth::isAdmin()) :  ?>
     <div class="add-form">
         <div class="form-section">
             <table style="margin-top: -20px;">
@@ -46,4 +47,5 @@
             <!-- <p>No parents at this time</p> -->
         <?php endif; ?>
     </div>
+    <?php endif; ?>
 </main>

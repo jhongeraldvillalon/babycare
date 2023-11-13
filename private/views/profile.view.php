@@ -45,41 +45,11 @@
             </div>
 
             <div class="add-form">
-                <table style="margin-top: -20px;">
-                    <thead>
-                        <th>
 
-                        </th>
-                    </thead>
-                </table>
-                <tbody>
-                    <tr>
-                        <th>
-                            <form>
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                            <a href="<?= ROOT ?>/parents">
+                            <a href="<?= ROOT ?>/">
                                 <button value="Cancel">Back</button>
                             </a>
-                        </th>
-                        <th>
 
-                        </th>
-                    </tr>
-
-                    </tr>
-                    <th>
-                        <a href="#">Basic Info</a>
-                    </th>
-                    <th>
-                        <a href="#">Classes</a>
-                    </th>
-                    <th>
-                        <a href="#">Tests</a>
-                    </th>
-                    </tr>
-
-                </tbody>
             </div>
         <?php else : ?>
             <p>This profile cant be found</p>

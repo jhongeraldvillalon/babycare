@@ -1,3 +1,19 @@
+<div class="right-section">
+    <div class="nav">
+        <button id="menu-btn">
+            <span class="material-icons-sharp">
+                menu
+            </span>
+        </button>
+
+        <div class="profile">
+            <div class="info">
+                <p>Hi, <b><?= Auth::getFirst_name() ?></b></p>
+                <small><?= ucwords(str_replace('_', ' ', Auth::getUser_role())) ?></small>
+            </div>
+
+        </div>
+    </div>
 </div>
 <script>
     const sideMenu = document.querySelector('aside');

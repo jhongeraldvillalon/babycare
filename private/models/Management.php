@@ -1,10 +1,8 @@
 <?php
 
-class Child extends Model
+class Management extends Model
 {
-
     protected $table = 'children';
-
     protected $allowedColumns = [
         'first_name',
         'middle_name',
@@ -103,5 +101,4 @@ class Child extends Model
         }
         return $data;
     }
-    
 }

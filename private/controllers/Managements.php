@@ -1,19 +1,19 @@
 <?php
 
-class Children extends Controller
+class Managements extends Controller
 {
     public function index()
     {
         if (!Auth::logged_in()) {
             $this->redirect("login");
         }
-        $children = new Child();
+        $management = new Management();
 
-        $data = $children->findAll();
+        $data = $management->findAll();
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
-        echo $this->view('children', [
+        echo $this->view('management', [
             // 'crumbs' => $crumbs,
             'rows' => $data
         ]);
@@ -34,21 +34,23 @@ class Children extends Controller
 
         if (count($_POST) > 0) {
 
-            $children = new Child();
+            $management = new Management();
 
-            if ($children->validate($_POST)) {
+            if ($management->validate($_POST)) {
 
                 $_POST['date'] = date("Y-m-d H:i:s");
-                $children->insert($_POST);
-                $this->redirect('children');
+
+
+                $management->insert($_POST);
+                $this->redirect('management');
             } else {
-                $errors = $children->errors;
+                $errors = $management->errors;
             }
         }
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
-        echo $this->view('children.add', [
+        echo $this->view('management.add', [
             'errors' => $errors,
         ]);
         echo $this->view('includes/footer');
@@ -65,26 +67,26 @@ class Children extends Controller
         }
 
         $errors = [];
-        $children = new Child();
+        $management = new Management();
 
         if (count($_POST) > 0) {
 
 
-            if ($children->validate($_POST)) {
+            if ($management->validate($_POST)) {
 
-                $children->update($id, $_POST);
-                $this->redirect('children');
+                $management->update($id, $_POST);
+                $this->redirect('management');
             } else {
-                $errors = $children->errors;
+                $errors = $management->errors;
             }
         }
 
-        $row = $children->where('id', $id);
+        $row = $management->where('id', $id);
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view(
-            'children.edit',
+            'management.edit',
             [
                 'row' => $row,
                 'errors' => $errors,
@@ -105,19 +107,19 @@ class Children extends Controller
         }
 
         $errors = [];
-        $children = new Child();
+        $management = new Management();
 
         if (count($_POST) > 0) {
-            $children->delete($id);
-            $this->redirect('children');
+            $management->delete($id);
+            $this->redirect('management');
         }
 
-        $row = $children->where('id', $id);
+        $row = $management->where('id', $id);
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view(
-            'children.delete',
+            'management.delete',
             [
                 'row' => $row,
             ]

@@ -41,4 +41,38 @@ class Auth
         return "Unknown";
     }
 
+    private static function hasRole($role)
+    {
+        return isset($_SESSION['USER']->user_role) && $_SESSION['USER']->user_role === $role;
+    }
+
+    public static function isSuperAdmin()
+    {
+        return self::hasRole('super_admin');
+    }
+
+    public static function isAdmin()
+    {
+        return self::hasRole('admin') || self::hasRole('super_admin');
+    }
+
+    public static function isParent()
+    {
+        return self::hasRole('parent');
+    }
+
+    public static function isDentist()
+    {
+        return self::hasRole('dentist');
+    }
+
+    public static function isCurrentUser($userId)
+    {
+        return self::user_id() === $userId;
+    }
+
+    public static function isLoggedIn()
+    {
+        return isset($_SESSION['USER']);
+    }
 }
