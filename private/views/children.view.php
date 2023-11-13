@@ -1,26 +1,27 @@
 <main>
-    <div class="add-form">
-        <div class="form-section">
-            <table style="margin-top: -20px;">
-                <thead>
-                    <th style="padding-right: 500px; width: 2000px;">
-                        <input type="text" placeholder="Search">
-                    </th>
-                    <th style="padding-right: 20px;">
-                        <a href="<?= ROOT ?>/children/add">
-                            <button value="Add">Add</button>
-                        </a>
-                    </th>
-                    <th>
-                        <a href="<?= ROOT ?>/hospitals">
-                            <button value="Cancel">Cancel</button>
-                        </a>
-                    </th>
-                </thead>
-            </table>
+    <?php if (Auth::isAdmin()) :  ?>
+        <div class="add-form">
+            <div class="form-section">
+                <table style="margin-top: -20px;">
+                    <thead>
+                        <th style="padding-right: 500px; width: 2000px;">
+                            <input type="text" placeholder="Search">
+                        </th>
+                        <th style="padding-right: 20px;">
+                            <a href="<?= ROOT ?>/children/add">
+                                <button value="Add">Add</button>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="<?= ROOT ?>/">
+                                <button value="Cancel">Cancel</button>
+                            </a>
+                        </th>
+                    </thead>
+                </table>
+            </div>
         </div>
-    </div>
-
+    <?php endif; ?>
     <div class="recent-orders">
 
 
@@ -49,16 +50,18 @@
                                         info
                                     </span>
                                 </a>
-                                <a href="<?= ROOT ?>/children/edit/<?= $row->id ?>">
-                                    <span class="material-icons-sharp">
-                                        edit
-                                    </span>
-                                </a>
-                                <a href="<?= ROOT ?>/children/delete/<?= $row->id ?>">
-                                    <span class="material-icons-sharp">
-                                        delete
-                                    </span>
-                                </a>
+                                <?php if (Auth::isAdmin() && Auth::isParent()) : ?>
+                                    <a href="<?= ROOT ?>/children/edit/<?= $row->id ?>">
+                                        <span class="material-icons-sharp">
+                                            edit
+                                        </span>
+                                    </a>
+                                    <a href="<?= ROOT ?>/children/delete/<?= $row->id ?>">
+                                        <span class="material-icons-sharp">
+                                            delete
+                                        </span>
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -6,6 +6,11 @@ class Home extends Controller
     {
         if (!Auth::logged_in()) {
             $this->redirect("login");
+        } 
+
+        if (!(Auth::isAdmin() || Auth::isParent()) && !Auth::isApprove('1')) {
+            
+            $this->redirect("login");
         }
 
         $user = new User();

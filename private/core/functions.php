@@ -52,6 +52,13 @@ function show($data)
     echo "<pre>" . print_r($data) . "</pre>";
 }
 
+function dd($data)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    die();
+}
 
 function get_image($image, $gender = '')
 {

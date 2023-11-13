@@ -33,19 +33,19 @@ class Children extends Controller
         $errors = [];
 
         if (count($_POST) > 0) {
-
             $children = new Child();
 
             if ($children->validate($_POST)) {
 
                 $_POST['date'] = date("Y-m-d H:i:s");
+
+
                 $children->insert($_POST);
                 $this->redirect('children');
             } else {
                 $errors = $children->errors;
             }
         }
-
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view('children.add', [
@@ -103,6 +103,8 @@ class Children extends Controller
         if (!Auth::isAdmin() && !Auth::isParent()) {
             $this->redirect("home");
         }
+
+
 
         $errors = [];
         $children = new Child();

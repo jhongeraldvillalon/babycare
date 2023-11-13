@@ -9,9 +9,9 @@
 
                         <br>
                         <input type="hidden" name="id">
-                        <input class="btn btn-danger float-end" type="submit" value="Delete">
+                        <button type="submit" value="Save">Save</button>
                         <a href="<?= ROOT ?>/children">
-                            <input class="btn btn-success text-white" type="button" value="Cancel">
+                            <input class="cancel" type="button" value="Cancel">
                         </a>
                     </form>
                 </div>
@@ -27,5 +27,4 @@
 
         </div>
     </div>
-
 </main>

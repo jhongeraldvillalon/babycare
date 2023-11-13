@@ -46,6 +46,11 @@ class Auth
         return isset($_SESSION['USER']->user_role) && $_SESSION['USER']->user_role === $role;
     }
 
+    public static function isApprove($approve)
+    {
+        return isset($_SESSION['USER']->approve) && $_SESSION['USER']->approve === $approve;
+    }
+
     public static function isSuperAdmin()
     {
         return self::hasRole('super_admin');

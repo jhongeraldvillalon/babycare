@@ -40,6 +40,7 @@ class User extends Model
         if ($this->where('email', $DATA['email'])) {
             $this->errors['email'] = 'Please try a different email';
         }
+     
 
         if (empty($DATA['password']) || $DATA['password'] != $DATA['password2']) {
             $this->errors['password'] = 'Password do not match';
@@ -87,8 +88,4 @@ class User extends Model
         return $data;
     }
 
-    public function isDentist()
-    {
-        return $this->user_role === 'dentist';
-    }
 }

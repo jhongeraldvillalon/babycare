@@ -117,12 +117,9 @@
 
                         <button type="submit" value="Save">Save</button>
                         <a href="<?= ROOT ?>/children">
-                            <button value="Cancel">Back</button>
+                            <input class="cancel" type="button" value="Cancel">
                         </a>
                     </form>
-
-
-
                 </div>
 
             <?php } else { ?>

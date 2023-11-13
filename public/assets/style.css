@@ -629,6 +629,22 @@ main .recent-orders a {
     background-color: var(--color-dark-variant);
 }
 
+.cancel {
+    padding: 0.8rem 1.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel:hover {
+    background-color: var(--color-dark-variant);
+}
+
 /* Checkbox */
 .milestone-form .form-row {
     display: flex;
