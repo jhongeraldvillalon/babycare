@@ -86,20 +86,20 @@
 
                 switch ($page_tab) {
                     case 'staffs':
-                        include(views_path('child-tab-staffs'));
+                        include(views_path('child_tab_staffs'));
                         break;
                     case 'parents':
-                        include(views_path('child-tab-parents'));
+                        include(views_path('child_tab_parents'));
                         break;
 
-                    case 'staffs-add':
-                        include(views_path('child-tab-staffs-add'));
+                    case 'staffs_add':
+                        include(views_path('child_tab_staffs_add'));
                         break;
-                    case 'staffs-remove':
-                        include(views_path('child-tab-staffs-remove'));
+                    case 'staffs_remove':
+                        include(views_path('child_tab_staffs_remove'));
                         break;
-                    case 'parents-add':
-                        include(views_path('child-tab-parents-add'));
+                    case 'parents_add':
+                        include(views_path('child_tab_parents_add'));
                         break;
                     default:
 

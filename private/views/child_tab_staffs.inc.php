@@ -4,13 +4,13 @@
             <input type="text" placeholder="Search">
         </th>
         <th style="padding-right: 20px; width: 1000px;">
-            <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs-add&select=true">
+            <a href="<?= ROOT ?>/childrensingle/staffs_add/<?= $row->child_id ?>?select=true">
                 <button value="Add">Add Staff</button>
             </a>
         </th>
 
         <th style="padding-right: 20px; width: 1000px;">
-            <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs-remove&select=true">
+            <a href="<?= ROOT ?>/childrensingle/staffs_remove/<?= $row->child_id ?>?select=true">
                 <button value="Add">Remove Staff</button>
             </a>
         </th>
