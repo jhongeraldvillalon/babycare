@@ -101,6 +101,9 @@
                     case 'parents_add':
                         include(views_path('child_tab_parents_add'));
                         break;
+                    case 'parents_remove':
+                        include(views_path('child_tab_parents_remove'));
+                        break;
                     default:
 
                         break;

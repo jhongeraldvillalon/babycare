@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: center;">
     <form autofocus method="post" style="width: 80%; max-width: 600px; margin-left: auto; margin-right: auto; margin-top: 20px;">
-        <h4>Add Parent</h4>
+        <h4>Remove Parent</h4>
         <?php if (count($errors) > 0) : ?>
             <div class="alert alert-warning alert-dismissible fade show p-0" role="alert">
                 <strong>OOPS!</strong>
@@ -14,7 +14,6 @@
         <?php endif; ?>
         <input type="text" name="name" placeholder="Parent name" class="form-control">
         <button name="search">Search</button>
-
     </form>
 </div>
 
