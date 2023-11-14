@@ -49,7 +49,7 @@ function  get_date($date)
 
 function show($data)
 {
-    echo "<pre>" . print_r($data) . "</pre>";
+    echo "<pre>" . var_dump($data) . "</pre>";
 }
 
 function dd($data)

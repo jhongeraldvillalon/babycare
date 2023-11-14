@@ -22,20 +22,16 @@
                             <td><?= esc($row->first_name) ?></td>
                         </tr>
                         <tr>
+                            <th>Middle Name</th>
+                            <td><?= esc($row->middle_name) ?></td>
+                        </tr>
+                        <tr>
                             <th>Last Name</th>
                             <td><?= esc($row->last_name) ?></td>
                         </tr>
                         <tr>
                             <th>Blood Type</th>
                             <td><?= esc($row->blood_type) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Mother</th>
-                            <td><?= esc($row->mother) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Father</th>
-                            <td><?= esc($row->father) ?></td>
                         </tr>
                         <tr>
                             <th>Gender</th>
@@ -50,9 +46,6 @@
                             <td><?= get_date($row->date) ?></td>
                         </tr>
                     </table>
-
-
-
                 </div>
             </div>
 
@@ -101,6 +94,9 @@
 
                     case 'staffs-add':
                         include(views_path('child-tab-staffs-add'));
+                        break;
+                    case 'staffs-remove':
+                        include(views_path('child-tab-staffs-remove'));
                         break;
                     case 'parents-add':
                         include(views_path('child-tab-parents-add'));

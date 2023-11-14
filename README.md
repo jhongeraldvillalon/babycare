@@ -6,27 +6,43 @@ students -> parents
 schools -> hospital
 classes -> children
 
-switch hospital
-create a controller
-create a function in auth 
-
-for children
 create a controller
 create a view
 create a model
 
-personal information
-doctors
-dental records
-teeth development
-first prints
+for children{
+
+columns = user_id, child_id, date, disabled
+
+child_staffs -> summary
+
+child_parents
+
+child_dental_records -> summary
+
+child_first_prints
+
+child_milestones
+
+child_anthropometrics -> summary
+
+child_contacts 
+
+child_health_assessments -> summary
+
+child_immunization
+}
+
+
+<!-- personal information -->
+doctors -> staff
+dental records -> tooth development
+first prints -> unchangeable
 milestones
-anthropometrics
-contacts
-immunization
-growthchart
-health assessment
-summary
+anthropometrics -> have growth chart
+emergency contacts -> automatic by having the staffs details 
+health logs ->  health assessment, immunization, summary
+
 
 
 
@@ -49,14 +65,6 @@ CREATE TABLE users (
 	id_card VARCHAR(500)
 );
 
-create table hospitals (
- 	id INT AUTO_INCREMENT PRIMARY KEY,
- 	hospital VARCHAR(30) NOT NULL,
-	hospital_id VARCHAR(60) NOT NULL,
-	date DATETIME NOT NULL,
-	user_id VARCHAR(60) NOT NULL
-)
-
 create table children (
  	id INT AUTO_INCREMENT PRIMARY KEY,
  	first_name VARCHAR(30) NOT NULL,
@@ -77,14 +85,21 @@ create table children (
 	delivery VARCHAR(60)
 )
 
-CREATE TABLE access_requests (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id VARCHAR(60) NOT NULL,
-    action VARCHAR(255),
-    status VARCHAR(20) DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+create table child_staffs (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id VARCHAR(60) NOT NULL,
+	child_id VARCHAR(60) NOT NULL,
+	disabled tinyint(1) NOT NULL,
+	date DATETIME NOT NULL
+)
 
+create table child_parents (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id VARCHAR(60) NOT NULL,
+	child_id VARCHAR(60) NOT NULL,
+	disabled tinyint(1) NOT NULL,
+	date DATETIME NOT NULL
+)
 
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system

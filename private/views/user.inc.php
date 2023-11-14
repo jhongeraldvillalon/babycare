@@ -11,6 +11,9 @@
                 ?>
                 <img src="<?= $image ?>" alt="">
             </div>
+            <?php if (isset($_GET['select'])) : ?>
+                <button name="selected" value="<?= $row->user_id ?>">Select</button>
+            <?php endif; ?>
         </div>
     </a>
 </div>
