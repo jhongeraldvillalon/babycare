@@ -8,9 +8,7 @@
                             <input type="text" placeholder="Search">
                         </th>
                         <th style="padding-right: 20px;">
-                            <a href="<?= ROOT ?>/children/add">
-                                <button value="Add">Add</button>
-                            </a>
+                     
                         </th>
                         <th>
                             <a href="<?= ROOT ?>/">

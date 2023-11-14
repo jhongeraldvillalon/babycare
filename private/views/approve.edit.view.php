@@ -27,7 +27,7 @@
                         </div>
 
                         <button type="submit" value="Save">Approve</button>
-                        <a href="<?= ROOT ?>/children">
+                        <a href="<?= ROOT ?>/approve">
                             <input class="cancel" type="button" value="Cancel">
                         </a>
                     </form>
@@ -36,7 +36,7 @@
             <?php } else { ?>
                 <div style="text-align:center;">
                     <p>That child can't be found</p>
-                    <a href="<?= ROOT ?>/children">
+                    <a href="<?= ROOT ?>/approve">
                         <input class="btn btn-danger text-white" type="button" value="Cancel">
                     </a>
                 </div>

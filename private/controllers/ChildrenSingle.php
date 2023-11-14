@@ -6,7 +6,7 @@ class ChildrenSingle extends Controller
     {
         $children = new Child();
 
-        $row = $children->first('child_id', $id);
+        $row = $children->first('child_id', $id); 
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
