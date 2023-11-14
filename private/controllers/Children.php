@@ -80,18 +80,20 @@ class Children extends Controller
         }
 
         $row = $children->where('id', $id);
+        if (Auth::access('parent') || Auth::i_own_content($row)) {
 
-        echo $this->view('includes/header');
-        echo $this->view('includes/nav');
-        echo $this->view(
-            'children.edit',
-            [
-                'row' => $row,
-                'errors' => $errors,
+            echo $this->view('includes/header');
+            echo $this->view('includes/nav');
+            echo $this->view(
+                'children.edit',
+                [
+                    'row' => $row,
+                    'errors' => $errors,
 
-            ]
-        );
-        echo $this->view('includes/footer');
+                ]
+            );
+            echo $this->view('includes/footer');
+        }
     }
 
     public function delete($id = null)

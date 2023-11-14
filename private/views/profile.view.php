@@ -45,12 +45,69 @@
             </div>
 
             <div class="add-form">
-
-                            <a href="<?= ROOT ?>/">
-                                <button value="Cancel">Back</button>
-                            </a>
-
+                <a href="<?= ROOT ?>/">
+                    <button value="Cancel">Return Home</button>
+                </a>
             </div>
+
+
+            <div class="recent-orders">
+
+
+                <h5>Managing Children</h5> <br>
+                <div class="card-group">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Created by</th>
+                            <th>Created Date</th>
+                            <th>Gender</th>
+                            <th>
+                            </th>
+                        </tr>
+
+                        <?php $rows = $data['child_parents'];
+
+                        if (isset($rows) && $rows) : ?>
+                            <?php foreach ($rows as $row) : ?>
+                                <tr>
+                                    <td><?= $row->first_name ?> <?= $row->middle_name ?> <?= $row->last_name ?></td>
+                                    <td><?php echo $row->user->first_name . " " . $row->user->last_name; ?></td>
+                                    <td><?= get_date($row->date) ?></td>
+                                    <td><?= ucfirst(str_replace("_", " ", $row->gender)) ?></td>
+                                    <td>
+                                        <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>">
+                                            <span class="material-icons-sharp">
+                                                info
+                                            </span>
+                                        </a>
+                                        <?php if (Auth::isAdmin() || Auth::isParent()) : ?>
+                                            <a href="<?= ROOT ?>/children/edit/<?= $row->id ?>">
+                                                <span class="material-icons-sharp">
+                                                    edit
+                                                </span>
+                                            </a>
+                                            <a href="<?= ROOT ?>/children/delete/<?= $row->id ?>">
+                                                <span class="material-icons-sharp">
+                                                    delete
+                                                </span>
+                                            </a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <!-- <h5>No child data at this time</h5> -->
+                        <?php endif; ?>
+
+                    </table>
+                </div>
+            </div>
+
+
         <?php else : ?>
             <p>This profile cant be found</p>
         <?php endif; ?>
