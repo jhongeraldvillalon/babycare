@@ -94,7 +94,14 @@ class User extends Model
 
     public function make_user_id($data)
     {
-        $data['user_id'] = random_string(60);
+        // $data['user_id'] = random_string(60);
+        $data['user_id'] = strtolower(str_replace(" ", "_", $data['first_name']))
+            . "." .
+            strtolower(str_replace(" ", "_", $data['last_name']));
+
+        while ($this->where('user_id', $data['user_id'])) {
+            $data['user_id'] .= rand(10, 9999);
+        }
         return $data;
     }
 

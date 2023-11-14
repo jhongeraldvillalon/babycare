@@ -50,13 +50,47 @@
                             <td><?= get_date($row->date) ?></td>
                         </tr>
                     </table>
+
+      
+
                 </div>
             </div>
 
+
             <div class="add-form">
-                <a href="<?= ROOT ?>/children">
-                    <button value="Cancel">Back</button>
-                </a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <a 
+                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs">
+                                    <button value="staff">Assigned Staff</button>
+                                </a>
+                            </th>
+                            <th>
+                                <a 
+                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=parents">
+                                    <button value="parents">Parents</button>
+                                </a>
+                            </th>
+                            <th>
+                                <a 
+                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=healthrecord">
+                                    <button value="health_record"> Health Record</button>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="<?= ROOT ?>/children">
+                                    <button value="Cancel">Back</button>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
             </div>
         <?php else : ?>
             <p>This profile cant be found</p>
