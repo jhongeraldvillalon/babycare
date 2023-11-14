@@ -51,7 +51,7 @@
                         </tr>
                     </table>
 
-      
+
 
                 </div>
             </div>
@@ -62,34 +62,55 @@
                     <thead>
                         <tr>
                             <th>
-                                <a 
-                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs">
+                                <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs">
                                     <button value="staff">Assigned Staff</button>
                                 </a>
                             </th>
                             <th>
-                                <a 
-                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=parents">
+                                <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=parents">
                                     <button value="parents">Parents</button>
                                 </a>
                             </th>
                             <th>
-                                <a 
-                                href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=healthrecord">
+                                <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
                                     <button value="health_record"> Health Record</button>
                                 </a>
                             </th>
-                            <th>
+                            <th style="padding-right: 20px;">
                                 <a href="<?= ROOT ?>/children">
-                                    <button value="Cancel">Back</button>
+                                    <button value="Cancel">Return</button>
                                 </a>
                             </th>
                         </tr>
                     </thead>
+                    <br>
                     <tbody>
 
                     </tbody>
                 </table>
+
+                <?php
+
+                switch ($page_tab) {
+                    case 'staffs':
+                        include(views_path('child-tab-staffs'));
+                        break;
+                    case 'parents':
+                        include(views_path('child-tab-parents'));
+                        break;
+
+                    case 'staffs-add':
+                        include(views_path('child-tab-staffs-add'));
+                        break;
+                    case 'parents-add':
+                        include(views_path('child-tab-parents-add'));
+                        break;
+                    default:
+
+                        break;
+                }
+
+                ?>
 
             </div>
         <?php else : ?>
