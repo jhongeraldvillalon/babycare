@@ -16,7 +16,7 @@ class ChildrenSingle extends Controller
         $page_tab = isset($_GET['tab']) ? $_GET['tab'] : 'staffs';
         $child_staff = new ChildStaff();
         $results = false;
-        if ($page_tab == 'staffs-add' && count($_POST) > 0) {
+        if (($page_tab == 'staffs-add' || $page_tab == 'staffs-remove') && count($_POST) > 0) {
             if (isset($_POST['search'])) {
 
                 if (trim($_POST['name']) != "") {
@@ -36,27 +36,44 @@ class ChildrenSingle extends Controller
                 }
             } else if (isset($_POST["selected"])) {
                 // Add Staff
-                $query = "select id from child_staffs where user_id = :user_id && child_id = :child_id limit 1";
-                if (!$child_staff->query($query, [
-                    'user_id' => $_POST['selected'],
-                    'child_id' => $id,
+                $query = "select id from child_staffs where user_id = :user_id && child_id = :child_id && disabled = 0 limit 1";
 
+                if ($page_tab == 'staffs-add') {
 
-                ])) {
-                    $arr = [];
-                    $arr['user_id'] = $_POST['selected'];
-                    $arr['child_id'] = $id;
-                    $arr['disabled'] = 0;
-                    $arr['date'] = date("Y-m-d H:i:s");
+                    if (!$child_staff->query($query, [
+                        'user_id' => $_POST['selected'],
+                        'child_id' => $id,
+                    ])) {
+                        $arr = [];
+                        $arr['user_id'] = $_POST['selected'];
+                        $arr['child_id'] = $id;
+                        $arr['disabled'] = 0;
+                        $arr['date'] = date("Y-m-d H:i:s");
 
-                    $child_staff->insert($arr);
-                    $this->redirect("childrensingle/" . $id . "?tab=staffs");
-                } else {
-                    $errors[] = "That staff was already assigned to this child.";
+                        $child_staff->insert($arr);
+                        $this->redirect("childrensingle/" . $id . "?tab=staffs");
+                    } else {
+                        $errors[] = "That staff was already assigned to this child.";
+                    }
+                } else if ($page_tab == 'staffs-remove') {
+                    if ($row = $child_staff->query($query, [
+                        'user_id' => $_POST['selected'],
+                        'child_id' => $id,
+                    ])) {
+                        $arr = [];
+
+                        $arr['disabled'] = 1;
+
+                        $child_staff->update($row[0]->id, $arr);
+                        $this->redirect("childrensingle/" . $id . "?tab=staffs");
+                    } else {
+                        $errors[] = "That staff might not be assigned at this child thus you cant remove the staff";
+                    }
                 }
             }
         } else if ($page_tab == 'staffs') {
-            $staffs = $child_staff->where('child_id', $id);
+            $query = "select * from child_staffs where child_id = :child_id && disabled = 0";
+            $staffs = $child_staff->query($query, ['child_id' => $id]);
             $data['staffs'] = $staffs;
         }
         echo $this->view('includes/header');

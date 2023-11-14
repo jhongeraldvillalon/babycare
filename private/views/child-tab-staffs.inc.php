@@ -28,7 +28,7 @@
 
             ?>
         <?php endforeach; ?>
-
-
+    <?php else : ?>
+        <p>No staff were found in this child</p>
     <?php endif; ?>
 </div>
