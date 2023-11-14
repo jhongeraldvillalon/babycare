@@ -116,7 +116,7 @@
                         </div>
 
                         <button type="submit" value="Save">Save</button>
-                        <a href="<?= ROOT ?>/children">
+                        <a href="<?= ROOT ?>/childrensingle/<?= $row[0]->child_id ?>">
                             <input class="cancel" type="button" value="Cancel">
                         </a>
                     </form>

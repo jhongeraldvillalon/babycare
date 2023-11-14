@@ -106,8 +106,6 @@
                     </table>
                 </div>
             </div>
-
-
         <?php else : ?>
             <p>This profile cant be found</p>
         <?php endif; ?>

@@ -12,12 +12,12 @@ class Profile extends Controller
         $id = trim($id == '') ? Auth::getUser_id() : $id;
 
         $row = $user->first('user_id', $id);
-       
+
         if ($row) {
-            
+
             $child = new Child();
             $parent = new ChildParent();
-            $mytable = 'child_parents';
+            $mytable = 'child_staffs';
             $query = "select * from $mytable where user_id = :user_id && disabled = 0";
 
             $data['child_parent'] = $child->query($query, ['user_id' => $id]);
@@ -31,7 +31,6 @@ class Profile extends Controller
                     }
                 }
             }
-          
         }
         $data['row'] = $row;
 

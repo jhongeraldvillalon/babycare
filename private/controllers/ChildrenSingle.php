@@ -13,7 +13,7 @@ class ChildrenSingle extends Controller
 
         $row = $children->first('child_id', $id);
 
-        $page_tab = isset($_GET['tab']) ? $_GET['tab'] : 'staffs';
+        $page_tab = isset($_GET['tab']) ? $_GET['tab'] : '';
         $child_staff = new ChildStaff();
         $child_parent = new ChildStaff();
         $results = false;

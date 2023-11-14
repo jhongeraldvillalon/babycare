@@ -10,7 +10,7 @@
                         <br>
                         <input type="hidden" name="id">
                         <button type="submit" value="Save">Save</button>
-                        <a href="<?= ROOT ?>/children">
+                        <a href="<?= ROOT ?>/childrensingle/<?= $row[0]->child_id ?>">
                             <input class="cancel" type="button" value="Cancel">
                         </a>
                     </form>
@@ -18,9 +18,8 @@
             <?php } else { ?>
                 <div style="text-align:center;">
                     <p>That child can't be found</p>
-                    <a href="<?= ROOT ?>/children">
-
-                        <input class="btn btn-danger text-white" type="button" value="Cancel">
+                    <a href="<?= ROOT ?>/childrensingle/<?= $row[0]->child_id ?>">
+                        <input class="cancel" type="button" value="Cancel">
                     </a>
                 </div>
             <?php } ?>

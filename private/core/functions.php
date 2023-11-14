@@ -64,11 +64,11 @@ function get_image($image, $gender = '')
 {
     if (!file_exists($image)) {
         if ($gender == "male") {
-            $image = ASSETS . "/user_male.png";
+            $image = ASSETS . "/parent.png";
         } elseif ($gender == "female") {
-            $image = ASSETS . "/user_female.png";
+            $image = ASSETS . "/parent.png";
         } else {
-            $image = ASSETS . "/user.png";
+            $image = ASSETS . "/parent.png";
         }
     } else {
         $image = ROOT . "/" . $image;

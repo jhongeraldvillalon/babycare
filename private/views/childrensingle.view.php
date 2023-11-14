@@ -10,110 +10,210 @@
                 </div>
                 <div>
                     <table>
-
-                        <tr>
-                            <th></th>
-                            <td>
-                                <img src="<?= $image ?>" style="width:100px;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>First Name</th>
-                            <td><?= esc($row->first_name) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Middle Name</th>
-                            <td><?= esc($row->middle_name) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Last Name</th>
-                            <td><?= esc($row->last_name) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Blood Type</th>
-                            <td><?= esc($row->blood_type) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Gender</th>
-                            <td><?= esc(ucfirst($row->gender)) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Birth Date</th>
-                            <td><?= esc(get_date($row->birth_date)) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Date Created</th>
-                            <td><?= get_date($row->date) ?></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Blood Type</th>
+                                <th>Gender</th>
+                                <th>Birth Date</th>
+                                <th>Date Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center; ">
+                                    <img src="<?= $image ?>" style="height: 150px;">
+                                </td>
+                                <td><?= esc($row->first_name) ?></td>
+                                <td><?= esc($row->middle_name) ?></td>
+                                <td><?= esc($row->last_name) ?></td>
+                                <td><?= esc($row->blood_type) ?></td>
+                                <td><?= esc(ucfirst($row->gender)) ?></td>
+                                <td><?= esc(get_date($row->birth_date)) ?></td>
+                                <td><?= get_date($row->date) ?></td>
+                                <td>
+                                    <a href="<?= ROOT ?>/children/edit/<?= $row->id ?>">
+                                        <span class="material-icons-sharp">
+                                            edit
+                                        </span>
+                                    </a>
+                                    <a href="<?= ROOT ?>/children/delete/<?= $row->id ?>">
+                                        <span class="material-icons-sharp">
+                                            delete
+                                        </span>
+                                    </a>
+                                    <a href="<?= ROOT ?>/children">
+                                        <span class="material-icons-sharp">
+                                            keyboard_return
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
-
-
-            <div class="add-form">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs">
-                                    <button value="staff">Assigned Staff</button>
-                                </a>
-                            </th>
-                            <th>
-                                <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=parents">
-                                    <button value="parents">Parents</button>
-                                </a>
-                            </th>
-                            <th>
-                                <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
-                                    <button value="health_record"> Health Record</button>
-                                </a>
-                            </th>
-                            <th style="padding-right: 20px;">
-                                <a href="<?= ROOT ?>/children">
-                                    <button value="Cancel">Return</button>
-                                </a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <br>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-                <?php
-
-                switch ($page_tab) {
-                    case 'staffs':
-                        include(views_path('child_tab_staffs'));
-                        break;
-                    case 'parents':
-                        include(views_path('child_tab_parents'));
-                        break;
-
-                    case 'staffs_add':
-                        include(views_path('child_tab_staffs_add'));
-                        break;
-                    case 'staffs_remove':
-                        include(views_path('child_tab_staffs_remove'));
-                        break;
-                    case 'parents_add':
-                        include(views_path('child_tab_parents_add'));
-                        break;
-                    case 'parents_remove':
-                        include(views_path('child_tab_parents_remove'));
-                        break;
-                    default:
-
-                        break;
-                }
-
-                ?>
-
-            </div>
-        <?php else : ?>
-            <p>This profile cant be found</p>
-        <?php endif; ?>
     </div>
+    <div class="analyse">
+    <div class="searches">
+            <a href="../contact.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>First Prints</h1>
+                        <p>Baby's first prints!</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>CONTACT.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="searches">
+            <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>?tab=staffs">
+                <div class="status">
+                    <div class="info">
+                        <h1>Doctors</h1>
+                        <p>Baby's healthcare providers</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>PERSONALS.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="searches">
+            <a href="../milestone.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Milestones</h1>
+                        <p>Baby's developmental milestones</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>MILESTONES.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="searches">
+            <a href="../anthropometric.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Anthropometrics</h1>
+                        <p>Baby's physical measurements</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>ANTHROPOMETRICS.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="searches">
+            <a href="../contact.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Contacts</h1>
+                        <p>Contact Details or Emergency Contact</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>CONTACT.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+
+        <div class="searches">
+            <a href="../health_assessment.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Health Records</h1>
+                        <p>Health assessments, immunization, summary, logs</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>HEALTH_ASSESSMENT.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="searches">
+            <a href="../immunization.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Appointment Scheduling</h1>
+                        <p>Records</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>IMMUNIZATION.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="searches">
+            <a href="../immunization.php?id=<?= $baby_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Appointment Scheduling</h1>
+                        <p>Records</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>IMMUNIZATION.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="add-form">
+        <?php
+
+            switch ($page_tab) {
+                case 'staffs':
+                    include(views_path('child_tab_staffs'));
+                    break;
+
+                case 'staffs_add':
+                    include(views_path('child_tab_staffs_add'));
+                    break;
+
+                case 'staffs_remove':
+                    include(views_path('child_tab_staffs_remove'));
+                    break;
+
+
+                case 'parents':
+                    include(views_path('child_tab_parents'));
+                    break;
+
+                case 'parents_add':
+                    include(views_path('child_tab_parents_add'));
+                    break;
+
+                case 'parents_remove':
+                    include(views_path('child_tab_parents_remove'));
+                    break;
+
+                case 'health_records':
+                    include(views_path('child_tab_health_records'));
+                    break;
+
+
+                default:
+                    break;
+            }
+        ?>
+    </div>
+<?php else : ?>
+    <p>This profile cant be found</p>
+<?php endif; ?>
+
+
+
 </main>
