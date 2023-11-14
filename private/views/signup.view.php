@@ -22,11 +22,16 @@
             <input class="my-2 form-control" value="<?= get_var('last_name') ?>" type="last_name" name="last_name" placeholder="Last Name">
 
             <input class="my-2 form-control" value="<?= get_var('email') ?>" type="email" name="email" placeholder="Email">
+
             <p>Identification Card</p>
-            <label class="btn-sm btn btn-info text-white">
-                <input class="my-2 form-control" value="" type="file" name="id_card" style="display:none;" placeholder="Identification Card">
-                Identification Card
-            </label>
+            <div class="text-center">
+                <label class="btn-sm btn btn-info text-white" for="image_browser">
+                    <input id="image_browser" onchange="display_image_name(this.files[0].name)" class="my-2 form-control" value="" type="file" name="id_card" style="display:none;" placeholder="Identification Card">
+                    Identification Card
+                </label>
+                <small class="file_info text-muted"></small>
+            </div>
+
             <p>Gender</p>
             <select class="my-2 form-control" name="gender">
                 <option <?= get_select('gender', '') ?> value="">--Select a Gender--</option>
@@ -41,8 +46,7 @@
                 <select class="my-2 form-control" name="user_role">
                     <option <?= get_select('user_role', '') ?> value="">--Select a Type--</option>
                     <option <?= get_select('user_role', 'parent') ?> value="parent">Parent</option>
-                    <option <?= get_select('user_role', 'obstetrician') ?> value="obstetrician">Obstetrician</option>
-                    <option <?= get_select('user_role', 'gynecologist') ?> value="gynecologist">Gynecologist</option>
+                    <option <?= get_select('user_role', 'obgyne') ?> value="obgyne">Ob/Gyne</option>
                     <option <?= get_select('user_role', 'dentist') ?> value="dentist">Dentist</option>
                     <option <?= get_select('user_role', 'pediatrician') ?> value="pediatrician">Pediatrician</option>
                     <?php if (Auth::getUser_role() == 'super_admin') :
@@ -72,3 +76,8 @@
         </div>
     </form>
 </div>
+<script>
+    function display_image_name(file_name) {
+        document.querySelector(".file_info").innerHTML = file_name;
+    }
+</script>

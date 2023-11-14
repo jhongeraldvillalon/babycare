@@ -70,6 +70,8 @@ function get_image($image, $gender = '')
         } else {
             $image = ASSETS . "/user.png";
         }
+    } else {
+        $image = ROOT . "/" . $image;
     }
 
     return $image;

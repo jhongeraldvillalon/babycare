@@ -50,7 +50,7 @@
                             <td><?= ucfirst(str_replace("_", " ", $row->user_role)) ?></td>
                             <td>
                                 <?php if (!empty($row->id_card)) : ?>
-                                    <img src="data:image/png;base64,<?= $row->id_card ?>" alt="ID Card">
+                                    <img src="<?= get_image($row->id_card, $row->gender); ?>" height="150 em" width="auto" alt="ID Card">
                                 <?php else : ?>
                                     No ID Card
                                 <?php endif; ?>

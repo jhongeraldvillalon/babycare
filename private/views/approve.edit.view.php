@@ -17,13 +17,13 @@
                             </div>
                         <?php endif; ?>
 
-                    
+
                         <div class="form-row">
                             <div class="form-column">
                                 <label for="approve">Are you sure?</label>
                                 <input type="hidden" id="approve" name="approve" value="1" />
                             </div>
-                           
+
                         </div>
 
                         <button type="submit" value="Save">Approve</button>

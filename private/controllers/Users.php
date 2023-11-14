@@ -9,7 +9,7 @@ class Users extends Controller
         }
 
         $user = new User();
-        $data = $user->query("select * from users where user_role not in ('parent') or approve not in ('1')");
+        $data = $user->query("select * from users where user_role != 'parent' and (approve = '1' OR user_role = 'admin')");
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');

@@ -38,6 +38,17 @@ class Approve extends Controller
             if ($approve->validate($_POST)) {
 
                 $approve->update($id, $_POST);
+                $user = $approve->where('id', $id);
+
+                $user_email = $user[0]->email;
+
+                $subject = 'Account Approval';
+                $body = 'Congratulations! Your account has been approved. You can now access your BabyCare account. <br> You can login on this link ' . LOGIN . ' .';
+              
+                // Sending email notification
+                EmailService::sendMail($user_email, $subject, $body);
+
+
                 $this->redirect('approve');
             } else {
                 $errors = $approve->errors;

@@ -6,11 +6,10 @@ class Approved extends Model
     protected $table = 'users';
 
     protected $allowedColumns = [
+        'email',
         'approve',
     ];
-    protected $beforeInsert = [
-     
-    ];
+    protected $beforeInsert = [];
 
     public function validate($DATA)
     {

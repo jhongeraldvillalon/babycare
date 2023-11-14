@@ -21,6 +21,22 @@ class User extends Model
 
     public function validate($DATA)
     {
+        $has_image = false;
+        if (count($_FILES) > 0) {
+            $allowed[] = "image/jpeg";
+            $allowed[] = "image/png";
+
+            if ($_FILES['id_card']['error'] == 0 && in_array($_FILES['id_card']['type'], $allowed)) {
+                $folder = "uploads/";
+                if (!file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+                $destination = $folder . $_FILES['id_card']['name'];
+                move_uploaded_file($_FILES["id_card"]["tmp_name"], $destination);
+                $_POST['id_card'] = $destination;
+            }
+        }
+
         $this->errors = [];
         if (empty($DATA['first_name']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['first_name'])) {
             $this->errors['first_name'] = 'First Name: Only letters are allowed in this field and no leading or trailing spaces';
@@ -57,7 +73,7 @@ class User extends Model
         }
 
         $user_roles = [
-            'parent', 'gynecologist', 'obstetrician', 'dentist',
+            'parent', 'obgyne', 'dentist',
             'pediatrician', 'admin', 'super_admin'
         ];
 
@@ -65,18 +81,9 @@ class User extends Model
             $this->errors['user_role'] = 'role is not valid';
         }
 
-        if (!empty($_FILES['id_card']['tmp_name'])) {
-            // Handle file upload
-            $imageData = $this->handleImageUpload('id_card');
-            if (!$imageData) {
-                $this->errors['id_card'] = 'Error uploading image';
-            } else {
-                $DATA['id_card'] = $imageData;
-            }
-        } else {
+        if (empty($_FILES['id_card'])) {
             $this->errors['id_card'] = 'Please upload an image';
         }
-
         if (count($this->errors) == 0) {
             return true;
         }
@@ -84,23 +91,6 @@ class User extends Model
         return false;
     }
 
-    protected function handleImageUpload($fieldName)
-    {
-        $targetDir = ASSETS . "/id/";
-        $targetFile = $targetDir . basename($_FILES[$fieldName]["name"]);
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-        // Allow only specific file types (e.g., jpg, jpeg, png)
-        $allowedExtensions = array('jpg', 'jpeg', 'png');
-        if (!in_array($imageFileType, $allowedExtensions)) {
-            $this->errors['id_card'] = 'Invalid file type. Please upload a valid image file.';
-            return false;
-        }
-
-        $data = file_get_contents($_FILES[$fieldName]["tmp_name"]);
-        $base64 = 'data:image/' . $imageFileType . ';base64,' . base64_encode($data);
-        return $base64;
-    }
 
     public function make_user_id($data)
     {
