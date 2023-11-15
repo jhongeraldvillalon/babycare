@@ -103,5 +103,22 @@ class Child extends Model
         }
         return $data;
     }
-    
+
+    public function insertAndGetId($data)
+    {
+        $data = $this->make_user_id($data);
+        $data = $this->make_child_id($data);
+
+        // Perform the insertion
+        $keys = array_keys($data);
+        $columns = implode(",", $keys);
+        $values = implode(",:", $keys);
+        $query = "insert into $this->table ($columns) values (:$values)";
+        
+        // Perform the insertion
+        $this->query($query, $data);
+
+        // Return the child_id after insertion
+        return $data['child_id'];
+    }
 }

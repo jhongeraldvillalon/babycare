@@ -4,9 +4,14 @@
             <div class="form-section">
                 <table style="margin-top: -20px;">
                     <thead>
-                        <th style="padding-right: 500px; width: 2000px;">
-                            <input type="text" placeholder="Search">
-                        </th>
+                        <form>
+                            <th>
+                                <button name="submit"><i class="fa fa-search"></i></button>
+                            </th>
+                            <th style="padding-right: 500px; width: 2000px;">
+                                <input value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" type="text" name="find" placeholder="Search">
+                            </th>
+                        </form>
                         <th style="padding-right: 20px;">
                             <a href="<?= ROOT ?>/children/add">
                                 <button value="Add">Add</button>
@@ -22,10 +27,13 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php $pager->display(); ?>
 
     <div class="new-users">
         <div class="user-list">
-            <?php if ($rows) : ?>
+            <?php
+
+            if ($rows) : ?>
                 <?php foreach ($rows as $row) : ?>
                     <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>">
                         <div class="user">
@@ -41,7 +49,7 @@
                     </a>
                 <?php endforeach; ?>
             <?php else : ?>
-                <!-- <p>No staff at this time</p> -->
+
             <?php endif; ?>
             <a href="<?= ROOT ?>/children/add">
                 <div class="user">

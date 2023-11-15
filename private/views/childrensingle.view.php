@@ -59,7 +59,7 @@
             </div>
     </div>
     <div class="analyse">
-    <div class="searches">
+        <div class="searches">
             <a href="../contact.php?id=<?= $baby_id ?>">
                 <div class="status">
                     <div class="info">

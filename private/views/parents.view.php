@@ -4,9 +4,14 @@
             <div class="form-section">
                 <table style="margin-top: -20px;">
                     <thead>
-                        <th style="padding-right: 500px; width: 2000px;">
-                            <input type="text" placeholder="Search">
-                        </th>
+                        <form>
+                            <th>
+                                <button name="submit"><i class="fa fa-search"></i></button>
+                            </th>
+                            <th style="padding-right: 500px; width: 2000px;">
+                                <input value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" type="text" name="find" placeholder="Search">
+                            </th>
+                        </form>
                         <th style="padding-right: 20px;">
                             <a href="<?= ROOT ?>/signup?mode=parents">
                                 <button value="Add">Add</button>
@@ -20,8 +25,8 @@
                     </thead>
                 </table>
             </div>
-
         </div>
+        <?php $pager->display(); ?>
         <br>
         <div class="analyse">
             <?php if ($rows) : ?>
@@ -43,8 +48,10 @@
                         </a>
                     </div>
                 <?php endforeach; ?>
+
+
             <?php else : ?>
-                <!-- <p>No parents at this time</p> -->
+                <p>No results</p>
             <?php endif; ?>
         </div>
     <?php endif; ?>
