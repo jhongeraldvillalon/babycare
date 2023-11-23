@@ -13,7 +13,6 @@ class Parents extends Controller
 
 
         $limit = 9;
-
         $pager = new Pager($limit);
         $offset =   $pager->offset;
 

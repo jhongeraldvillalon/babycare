@@ -13,17 +13,21 @@ class ChildrenSingle extends Controller
 
         $row = $children->first('child_id', $id);
 
+        $limit = 9;
+        $pager = new Pager($limit);
+        $offset =   $pager->offset;
+
         $page_tab = isset($_GET['tab']) ? $_GET['tab'] : '';
         $child_staff = new ChildStaff();
         $child_parent = new ChildStaff();
         $results = false;
 
         if ($page_tab == 'staffs') {
-            $query = "select * from child_staffs where child_id = :child_id && disabled = 0 order by id desc";
+            $query = "select * from child_staffs where child_id = :child_id && disabled = 0 order by id desc limit $limit offset $offset";
             $staffs = $child_staff->query($query, ['child_id' => $id]);
             $data['staffs'] = $staffs;
         } else if ($page_tab == 'parents') {
-            $query = "select * from child_parents where child_id = :child_id && disabled = 0 order by id desc";
+            $query = "select * from child_parents where child_id = :child_id && disabled = 0 order by id desc limit $limit offset $offset";
             $parents = $child_parent->query($query, ['child_id' => $id]);
             $data['parents'] = $parents;
         }
@@ -34,6 +38,7 @@ class ChildrenSingle extends Controller
         $data['page_tab'] = $page_tab;
         $data['results'] = $results;
         $data['errors'] = $errors;
+        $data['pager'] = $pager;
 
 
         echo $this->view('childrensingle', $data);
@@ -75,9 +80,9 @@ class ChildrenSingle extends Controller
                 }
             } else if (isset($_POST["selected"])) {
                 // Add Staff
-                $query = "select id from child_staffs where user_id = :user_id && child_id = :child_id && disabled = 0 limit 1";
+                $query = "select disabled, id from child_staffs where user_id = :user_id && child_id = :child_id limit 1";
 
-                if (!$child_staff->query($query, [
+                if (!$check = $child_staff->query($query, [
                     'user_id' => $_POST['selected'],
                     'child_id' => $id,
                 ])) {
@@ -90,7 +95,23 @@ class ChildrenSingle extends Controller
                     $child_staff->insert($arr);
                     $this->redirect("childrensingle/" . $id . "?tab=staffs");
                 } else {
-                    $errors[] = "That staff was already assigned to this child.";
+                    if (isset($check[0]->disabled)) {
+
+                        if ($check[0]->disabled) {
+
+
+                            $arr = [];
+                            $arr['disabled'] = 0;
+
+                            $child_staff->update($check[0]->id, $arr);
+                            $this->redirect("childrensingle/" . $id . "?tab=staffs");
+                        } else {
+                            $errors[] = "That staff was already assigned to this child.";
+                        }
+                    } else {
+
+                        $errors[] = "That staff was already assigned to this child.";
+                    }
                 }
             }
         }
@@ -211,9 +232,10 @@ class ChildrenSingle extends Controller
                 }
             } else if (isset($_POST["selected"])) {
                 // Add parent
-                $query = "select id from child_parents where user_id = :user_id && child_id = :child_id && disabled = 0 limit 1";
+                $query = "select id, disabled from child_parents where user_id = :user_id && child_id = :child_id limit 1";
 
-                if (!$child_parent->query($query, [
+                if (!$check = $child_parent->query($query, [
+        
                     'user_id' => $_POST['selected'],
                     'child_id' => $id,
                 ])) {
@@ -226,6 +248,25 @@ class ChildrenSingle extends Controller
                     $child_parent->insert($arr);
                     $this->redirect("childrensingle/" . $id . "?tab=parents");
                 } else {
+
+
+                    if (isset($check[0]->disabled)) {
+
+                        if ($check[0]->disabled) {
+
+
+                            $arr = [];
+                            $arr['disabled'] = 0;
+
+                            $child_parent->update($check[0]->id, $arr);
+                            $this->redirect("childrensingle/" . $id . "?tab=parents");
+                        } else {
+                            $errors[] = "That parent was already assigned to this child.";
+                        }
+                    } else {
+
+                        $errors[] = "That parent was already assigned to this child.";
+                    }
                     $errors[] = "That parent was already assigned to this child.";
                 }
             }

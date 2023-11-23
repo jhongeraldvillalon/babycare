@@ -56,11 +56,11 @@ class Child extends Model
             $this->errors['multiple'] = 'Multiple: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['mother']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['mother'])) {
+        if (empty($DATA['mother']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['mother'])) {
             $this->errors['mother'] = 'Mother Name: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['father']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['father'])) {
+        if (empty($DATA['father']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['father'])) {
             $this->errors['father'] = 'Father Name: Only letters are allowed in this field and no leading or trailing spaces';
         }
 

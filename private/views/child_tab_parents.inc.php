@@ -17,6 +17,7 @@
 
     </thead>
 </table>
+<?php $pager->display(); ?>
 <div class="analyse">
     <?php if (is_array($parents)) : ?>
 
