@@ -14,6 +14,8 @@ class Signup extends Controller
 
                 if ($_POST['user_role'] == 'parent') {
                     $_POST['approve'] = '1';
+                } else {
+                    $_POST['approve'] = '0';
                 }
 
                 $user->insert($_POST);

@@ -62,7 +62,9 @@ CREATE TABLE users (
     user_role VARCHAR(20) NOT NULL,
     password VARCHAR(255),
 	image VARCHAR(500),
-	id_card VARCHAR(500)
+	id_card VARCHAR(500), 
+	email VARCHAR(500),
+	approve tinyint
 );
 
 create table children (

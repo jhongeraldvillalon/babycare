@@ -60,21 +60,16 @@ function dd($data)
     die();
 }
 
-function get_image($image, $gender = '')
-{
-    if (!file_exists($image)) {
-        if ($gender == "male") {
-            $image = ASSETS . "/parent.png";
-        } elseif ($gender == "female") {
-            $image = ASSETS . "/parent.png";
-        } else {
-            $image = ASSETS . "/parent.png";
-        }
+function get_image($image, $gender = '') {
+    if ($image && is_string($image) && file_exists($image)) {
+        return ROOT . "/" . $image;
     } else {
-        $image = ROOT . "/" . $image;
+        if ($gender == "male" || $gender == "female") {
+            return ASSETS . "/parent.png";
+        } else {
+            return ASSETS . "/parent.png";
+        }
     }
-
-    return $image;
 }
 
 function views_path($view)
@@ -84,4 +79,14 @@ function views_path($view)
     } else {
         return ("../private/views/404.view.php");
     }
+}
+
+function getCurrentURL() {
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = $_SERVER['REQUEST_URI'];
+
+    $currentURL = $protocol . "://" . $host . $uri;
+
+    return $currentURL;
 }
