@@ -82,8 +82,6 @@ class Children extends Controller
 
                 $_POST['date'] = date("Y-m-d H:i:s");
 
-                // $children->insert($_POST);
-
                 $children = new Child();
                 $childId = $children->insertAndGetId($_POST);
 

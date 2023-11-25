@@ -64,7 +64,8 @@ CREATE TABLE users (
 	image VARCHAR(500),
 	id_card VARCHAR(500), 
 	email VARCHAR(500),
-	approve tinyint
+	approve tinyint,
+	contact varchar(20)
 );
 
 create table children (

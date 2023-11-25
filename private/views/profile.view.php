@@ -41,6 +41,10 @@
                             <td><?= get_date($row->date) ?></td>
                         </tr>
                         <tr>
+                            <th>Contact</th>
+                            <td><?= esc($row->contact) ?></td>
+                        </tr>
+                        <tr>
                             <th>
                                 Actions
                             </th>

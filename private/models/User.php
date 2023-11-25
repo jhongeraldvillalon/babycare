@@ -12,7 +12,8 @@ class User extends Model
         'password',
         'user_role',
         'id_card',
-        'approve'
+        'approve',
+        'contact'
     ];
     protected $beforeInsert = [
         'make_user_id',
@@ -72,6 +73,10 @@ class User extends Model
             $this->errors['gender'] = 'Gender is not valid';
         }
 
+        if (empty($DATA['contact']) || !preg_match("/^\d+$/", $DATA['contact'])) {
+            $this->errors['contact'] = 'Contact Number: Please use a proper contact number.';
+        }
+
         $user_roles = [
             'parent', 'obgyne', 'dentist',
             'pediatrician', 'admin', 'super_admin'
@@ -81,7 +86,7 @@ class User extends Model
             $this->errors['user_role'] = 'role is not valid';
         }
 
-        if (empty($_FILES['id_card'])) {
+        if (isset($_GET['mode']) && $_GET['mode'] !== 'parents' && empty($_FILES['id_card'])) {
             $this->errors['id_card'] = 'Please upload an image';
         }
         if (count($this->errors) == 0) {

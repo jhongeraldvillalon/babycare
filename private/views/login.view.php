@@ -31,5 +31,20 @@
             </div>
         </div>
     </div>
-
 </form>
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+        <div class="p-4 shadow rounded" style="margin-top: 1%; max-width: 340px;">
+            <!-- Row for Sign up buttons -->
+            <div class="row">
+                <div class="col-sm">
+                    <a href="<?= ROOT ?>/signup?mode=parents" class="btn btn-success mb-2">Parent Sign up</a>
+                </div>
+                <div class="col-sm">
+                    <a href="<?= ROOT ?>/signup" class="btn btn-success mb-2">Staff Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
