@@ -40,20 +40,51 @@
                             <th>Date Created</th>
                             <td><?= get_date($row->date) ?></td>
                         </tr>
+                        <tr>
+                            <th>
+                                Actions
+                            </th>
+                            <td>
+                                <a href="<?= ROOT ?>/">
+                                    <button style="padding: 0.8rem 1.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;" value="Cancel">Home</button>
+                                </a>
+                                <a href="<?= ROOT ?>/profile/edit/<?= $row->user_id ?>">
+                                    <button style="padding: 0.8rem 1.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;" value="Cancel">Edit</button>
+                                </a>
+                                <a href="<?= ROOT ?>/profile/delete/<?= $row->user_id ?>">
+                                    <button style="padding: 0.8rem 1.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;" value="Cancel">Delete</button>
+                                </a>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
 
-            <div class="add-form">
-                <a href="<?= ROOT ?>/">
-                    <button value="Cancel">Return Home</button>
-                </a>
-            </div>
-
-
             <div class="recent-orders">
-
-
                 <h5>Managing Children</h5> <br>
                 <div class="card-group">
                     <table>

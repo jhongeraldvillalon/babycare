@@ -39,4 +39,23 @@ class Profile extends Controller
         echo $this->view('profile', $data);
         echo $this->view('includes/footer');
     }
+
+    public function edit($id = '')
+    {
+        if (!Auth::logged_in()) {
+            $this->redirect("login");
+        }
+
+        $user = new User();
+        $id = trim($id == '') ? Auth::getUser_id() : $id;
+
+        $row = $user->first('user_id', $id);
+
+        $data['row'] = $row;
+
+        echo $this->view('includes/header');
+        echo $this->view('includes/nav');
+        echo $this->view('profile_edit', $data);
+        echo $this->view('includes/footer');
+    }
 }
