@@ -8,7 +8,7 @@ class Home extends Controller
             $this->redirect("login");
         } 
 
-        if (!(Auth::isAdmin() || Auth::isParent()) && !Auth::isApprove('1')) {
+        if (!(Auth::isAdmin() || Auth::isParent()) && !Auth::isApprove(1)) {
             
             $this->redirect("login");
         }

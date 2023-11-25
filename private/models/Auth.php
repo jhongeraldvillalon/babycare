@@ -120,6 +120,10 @@ class Auth
 
         $allowed[] = 'super_admin';
         $allowed[] = 'admin';
+        $allowed[] = 'dentist';
+        $allowed[] = 'obgyne';
+        $allowed[] = 'pediatrician';
+
 
         if (in_array($_SESSION['USER']->user_role, $allowed)) {
             return true;
@@ -128,11 +132,5 @@ class Auth
         return false;
     }
 
-    public static function isUserInChildTable($user_id, $table_name)
-    {
-        $child_table = new ChildParent(); // Initialize ChildParent or ChildStaff model
-        // Check if the user exists in the specified table
-        $result = $child_table->first('user_id', $user_id, 'AND', 'child_id', $table_name);
-        return ($result !== false);
-    }
+
 }

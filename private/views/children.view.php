@@ -32,9 +32,13 @@
     <div class="new-users">
         <div class="user-list">
             <?php
-
+ 
             if ($rows) : ?>
-                <?php foreach ($rows as $row) : ?>
+                <?php foreach ($rows as $row) :
+                    
+                    if(Auth::isAdmin()  || Auth::i_own_content($row)) :
+                    ?>
+                    
                     <a href="<?= ROOT ?>/childrensingle/<?= $row->child_id ?>">
                         <div class="user">
                             <?php if (!empty($row->id_card)) : ?>
@@ -47,7 +51,7 @@
                             <p><?= ucfirst(str_replace("_", " ", $row->gender)) ?></p>
                         </div>
                     </a>
-                <?php endforeach; ?>
+                <?php endif;  endforeach; ?>
             <?php else : ?>
 
             <?php endif; ?>

@@ -1,3 +1,10 @@
+<?php 
+if (Auth::isLoggedIn() && !Auth::isAdmin()) {
+    $this->redirect("home");
+}
+
+?>
+
 <div class=" mw-50">
     <form method="post" enctype="multipart/form-data">
         <div class="p-4 mx-auto shadow rounded" style="margin-top:50px;width:100%;max-width:340px;">
