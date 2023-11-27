@@ -13,8 +13,8 @@ if ($existing_print) :
                         <th style="padding-right: 500px; width: 2000px;">
                         </th>
                         <th>
-                            <a href="<?= ROOT ?>/childrensingle/<?= $current_child_id ?>">
-                                <button value="Cancel">Cancel</button>
+                            <a href="<?= ROOT ?>/childrensingle/<?= child_id_URL() ?>">
+                                <button value="Cancel">Return</button>
                             </a>
                         </th>
                     </thead>
