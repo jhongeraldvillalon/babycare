@@ -1,37 +1,40 @@
-<table style="margin-top: 20px;">
-    <thead>
-        <th style="padding-right: 500px; width: 2000px;">
-            <input type="text" placeholder="Search">
-        </th>
-        <th style="padding-right: 20px; width: 1000px;">
-            <a href="<?= ROOT ?>/childrensingle/staffs_add/<?= $row->child_id ?>?select=true">
-                <button value="Add">Add Staff</button>
-            </a>
-        </th>
+<div class="add-form">
 
-        <th style="padding-right: 20px; width: 1000px;">
-            <a href="<?= ROOT ?>/childrensingle/staffs_remove/<?= $row->child_id ?>?select=true">
-                <button value="Add">Remove Staff</button>
-            </a>
-        </th>
+    <table style="margin-top: 20px;">
+        <thead>
+            <th style="padding-right: 500px; width: 2000px;">
+                <input type="text" placeholder="Search">
+            </th>
+            <th style="padding-right: 20px; width: 1000px;">
+                <a href="<?= ROOT ?>/childrensingle/staffs_add/<?= $row->child_id ?>?select=true">
+                    <button value="Add">Add Staff</button>
+                </a>
+            </th>
 
-    </thead>
-</table>
-<?php $pager->display(); ?>
-<div class="analyse">
-    <?php if (is_array($staffs)) : ?>
+            <th style="padding-right: 20px; width: 1000px;">
+                <a href="<?= ROOT ?>/childrensingle/staffs_remove/<?= $row->child_id ?>?select=true">
+                    <button value="Add">Remove Staff</button>
+                </a>
+            </th>
 
-        <?php foreach ($staffs as $staff) : ?>
-            <?php
+        </thead>
+    </table>
+    <?php $pager->display(); ?>
+    <div class="analyse">
+        <?php if (is_array($staffs)) : ?>
 
-            $row = $staff->user;
-            include(views_path("user"));
+            <?php foreach ($staffs as $staff) : ?>
+                <?php
 
-            ?>
-        <?php endforeach; ?>
-   
-    <?php else : ?>
-        <p>No staff were found in this child</p>
-    <?php endif; ?>
-    
+                $row = $staff->user;
+                include(views_path("user"));
+
+                ?>
+            <?php endforeach; ?>
+
+        <?php else : ?>
+            <p>No staff were found in this child</p>
+        <?php endif; ?>
+
+    </div>
 </div>

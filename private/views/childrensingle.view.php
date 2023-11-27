@@ -170,10 +170,7 @@
             </a>
         </div>
     </div>
-
-    <div class="add-form">
-        <?php
-
+    <?php
             switch ($page_tab) {
                 case 'staffs':
                     include(views_path('child_tab_staffs'));
@@ -203,8 +200,7 @@
                 default:
                     break;
             }
-        ?>
-    </div>
+    ?>
 <?php else : ?>
     <p>This profile cant be found</p>
 <?php endif; ?>
