@@ -60,7 +60,7 @@
     </div>
     <div class="analyse">
         <div class="searches">
-        <a href="<?= ROOT ?>/childprints/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/childprints/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>First Prints</h1>
@@ -175,19 +175,6 @@
         <?php
 
             switch ($page_tab) {
-                case 'prints':
-                    include(views_path('child_tab_prints'));
-                    break;
-
-                case 'prints_add':
-                    include(views_path('child_tab_prints_add'));
-                    break;
-
-                case 'prints_remove':
-                    include(views_path('child_tab_prints_remove'));
-                    break;
-
-
                 case 'staffs':
                     include(views_path('child_tab_staffs'));
                     break;
@@ -200,23 +187,18 @@
                     include(views_path('child_tab_staffs_remove'));
                     break;
 
+                    // Uncommenting this code will make the feature of adding parents working
+                    // case 'parents':
+                    //     include(views_path('child_tab_parents'));
+                    //     break;
 
-                case 'parents':
-                    include(views_path('child_tab_parents'));
-                    break;
+                    // case 'parents_add':
+                    //     include(views_path('child_tab_parents_add'));
+                    //     break;
 
-                case 'parents_add':
-                    include(views_path('child_tab_parents_add'));
-                    break;
-
-                case 'parents_remove':
-                    include(views_path('child_tab_parents_remove'));
-                    break;
-
-                case 'health_records':
-                    include(views_path('child_tab_health_records'));
-                    break;
-
+                    // case 'parents_remove':
+                    //     include(views_path('child_tab_parents_remove'));
+                    //     break;
 
                 default:
                     break;
