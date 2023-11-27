@@ -60,7 +60,8 @@ function dd($data)
     die();
 }
 
-function get_image($image, $gender = '') {
+function get_image($image, $gender = '')
+{
     if ($image && is_string($image) && file_exists($image)) {
         return ROOT . "/" . $image;
     } else {
@@ -81,7 +82,8 @@ function views_path($view)
     }
 }
 
-function getCurrentURL() {
+function getCurrentURL()
+{
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $host = $_SERVER['HTTP_HOST'];
     $uri = $_SERVER['REQUEST_URI'];
@@ -89,4 +91,18 @@ function getCurrentURL() {
     $currentURL = $protocol . "://" . $host . $uri;
 
     return $currentURL;
+}
+
+
+function child_id_URL()
+{
+    // Check if there's a record in the database for the current child ID
+    // Get the current URL path
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    // Split the URL path by '/'
+    $url_parts = explode('/', $current_url);
+
+    // The child_id will be the last part of the URL
+    return end($url_parts);
 }

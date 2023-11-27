@@ -1,22 +1,26 @@
 <?php
 
-// Check if there's a record in the database for the current child ID
-// Get the current URL path
-$current_url = $_SERVER['REQUEST_URI'];
-
-// Split the URL path by '/'
-$url_parts = explode('/', $current_url);
-
-// The child_id will be the last part of the URL
-$current_child_id = end($url_parts);
-
 $child_print_model = new ChildPrint();
-$existing_print = $child_print_model->first('child_id', $current_child_id);
-
+$existing_print = $child_print_model->first('child_id', child_id_URL());
 
 if ($existing_print) :
 ?>
     <main>
+        <div class="add-form">
+            <div class="form-section">
+                <table style="margin-top: -20px;">
+                    <thead>
+                        <th style="padding-right: 500px; width: 2000px;">
+                        </th>
+                        <th>
+                            <a href="<?= ROOT ?>/childrensingle/<?= $current_child_id ?>">
+                                <button value="Cancel">Cancel</button>
+                            </a>
+                        </th>
+                    </thead>
+                </table>
+            </div>
+        </div>
         <div class="add-form milestone-form">
             <h2>First Prints</h2>
             <div class="form-section">
