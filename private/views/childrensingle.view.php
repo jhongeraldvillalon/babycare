@@ -86,7 +86,7 @@
             </a>
         </div>
         <div class="searches">
-            <a href="../milestone.php?id=<?= $baby_id ?>">
+            <a href="<?= ROOT ?>/milestones/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Milestones</h1>
@@ -100,7 +100,7 @@
         </div>
 
         <div class="searches">
-            <a href="../anthropometric.php?id=<?= $baby_id ?>">
+            <a href="<?= ROOT ?>/anthropometrics/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Anthropometrics</h1>
@@ -113,7 +113,7 @@
             </a>
         </div>
         <div class="searches">
-            <a href="../contact.php?id=<?= $baby_id ?>">
+            <a href="<?= ROOT ?>/contacts/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Contacts</h1>
@@ -126,11 +126,8 @@
             </a>
         </div>
 
-
-
-
         <div class="searches">
-            <a href="../health_assessment.php?id=<?= $baby_id ?>">
+            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Health Records</h1>
@@ -144,11 +141,11 @@
         </div>
 
         <div class="searches">
-            <a href="../immunization.php?id=<?= $baby_id ?>">
+            <a href="<?= ROOT ?>/dental_records/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
-                        <h1>Appointment Scheduling</h1>
-                        <p>Records</p>
+                        <h1>Dental Records</h1>
+                        <p>Teeth Data</p>
                     </div>
                     <div class="progress">
                         <img src="<?= ASSETS . '/' ?>IMMUNIZATION.png" alt="">
@@ -161,7 +158,7 @@
                 <div class="status">
                     <div class="info">
                         <h1>Appointment Scheduling</h1>
-                        <p>Records</p>
+                        <p>Appointment</p>
                     </div>
                     <div class="progress">
                         <img src="<?= ASSETS . '/' ?>IMMUNIZATION.png" alt="">
