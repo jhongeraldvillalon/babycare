@@ -32,7 +32,7 @@ class ChildPrints extends Controller
                     'left_hand' => $_POST['left_hand'], // Adjust this to store the file path or name
                     'right_hand' => $_POST['right_hand'], // Adjust this to store the file path or name
                     'left_foot' => $_POST['left_foot'], // Adjust this to store the file path or name
-                    'right_foot' =>$_POST['right_foot'], // Adjust this to store the file path or name
+                    'right_foot' => $_POST['right_foot'], // Adjust this to store the file path or name
                 ];
                 $data['child_id'];
                 $child_prints->insert($data);
