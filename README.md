@@ -104,6 +104,16 @@ create table child_parents (
 	date DATETIME NOT NULL
 )
 
+create table child_prints (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+	date DATETIME NOT NULL,
+	left_hand VARCHAR(500),
+	right_hand VARCHAR(500),
+	left_foot VARCHAR(500),
+	right_foot VARCHAR(500)
+)
+
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system
 Assing doctors to babies

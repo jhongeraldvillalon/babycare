@@ -17,8 +17,6 @@ class ChildStaff extends Model
         'get_user'
     ];
 
-
-
     public function get_user($data)
     {
         $user = new User();

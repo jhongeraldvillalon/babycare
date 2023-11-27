@@ -18,8 +18,8 @@
                         <?php endif; ?>
 
                         <input autofocus class="form-control" value="<?= get_var('first_name', $row[0]->first_name) ?>" type="text" name="first_name" placeholder="First Name">
-                        <input autofocus class="form-control" value="<?= get_var('middle_name', $row[0]->middle_name) ?>" type="text" name="middle_name" placeholder="First Name">
-                        <input autofocus class="form-control" value="<?= get_var('last_name', $row[0]->last_name) ?>" type="text" name="last_name" placeholder="First Name">
+                        <input autofocus class="form-control" value="<?= get_var('middle_name', $row[0]->middle_name) ?>" type="text" name="middle_name" placeholder="Middle Name">
+                        <input autofocus class="form-control" value="<?= get_var('last_name', $row[0]->last_name) ?>" type="text" name="last_name" placeholder="Last Name">
                         <br>
                         <div class="form-row">
                             <div class="form-column">

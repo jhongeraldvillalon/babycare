@@ -31,6 +31,15 @@ class ChildrenSingle extends Controller
             $parents = $child_parent->query($query, ['child_id' => $id]);
             $data['parents'] = $parents;
         }
+
+
+        $childPrint = new ChildPrint();
+        $image = $childPrint->first('child_id', $id); // Fetching the first record based on 'child_id'
+
+        // If you want an array instead of an object
+        $images = ($image !== false) ? [$image] : [];
+        $data['images'] = $images; // Pass the fetched images to the view
+
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
 
@@ -235,7 +244,7 @@ class ChildrenSingle extends Controller
                 $query = "select id, disabled from child_parents where user_id = :user_id && child_id = :child_id limit 1";
 
                 if (!$check = $child_parent->query($query, [
-        
+
                     'user_id' => $_POST['selected'],
                     'child_id' => $id,
                 ])) {

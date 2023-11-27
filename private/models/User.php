@@ -95,8 +95,6 @@ class User extends Model
 
         return false;
     }
-
-
     public function make_user_id($data)
     {
         // $data['user_id'] = random_string(60);

@@ -4,12 +4,15 @@
             <div class="form-section">
                 <table style="margin-top: -20px;">
                     <thead>
-                        <th style="padding-right: 500px; width: 2000px;">
-                            <input type="text" placeholder="Search">
-                        </th>
-                        <th style="padding-right: 20px;">
-                     
-                        </th>
+                        <form>
+                            <th>
+                                <button name="submit"><i class="fa fa-search"></i></button>
+                            </th>
+                            <th style="padding-right: 500px; width: 2000px;">
+                                <input value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" type="text" name="find" placeholder="Search">
+                            </th>
+                        </form>
+
                         <th>
                             <a href="<?= ROOT ?>/">
                                 <button value="Cancel">Cancel</button>
@@ -20,6 +23,7 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php $pager->display(); ?>
     <div class="recent-orders">
 
 

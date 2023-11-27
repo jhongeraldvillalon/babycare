@@ -9,12 +9,26 @@ class Approve extends Controller
         }
         $approve = new Approved();
 
-        $data = $approve->query("select * from users where approve not in ('1') and user_role not in ('admin')");
+        $limit = 5;
+        $pager = new Pager($limit);
+        $offset =   $pager->offset;
+
+        $query = "select * from users where approve not in ('1') and user_role not in ('admin') order by id desc limit $limit offset $offset";
+        $arr = [];
+
+        if (isset($_GET['find'])) {
+            $find = '%' . $_GET['find'] . '%';
+            $query = "select * from users where approve not in ('1') and user_role not in ('admin') && (first_name like :find || middle_name like :find || last_name like :find) order by id desc limit $limit offset $offset";
+            $arr['find'] = $find;
+        }
+
+        $data = $approve->query($query, $arr);
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
         echo $this->view('approve', [
-            'rows' => $data
+            'rows' => $data,
+            'pager' => $pager
         ]);
         echo $this->view('includes/footer');
     }
@@ -44,7 +58,7 @@ class Approve extends Controller
 
                 $subject = 'Account Approval';
                 $body = 'Congratulations! Your account has been approved. You can now access your BabyCare account. <br> You can login on this link ' . LOGIN . ' .';
-              
+
                 // Sending email notification
                 EmailService::sendMail($user_email, $subject, $body);
 
