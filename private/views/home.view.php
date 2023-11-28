@@ -59,6 +59,20 @@
                     </div>
                 </a>
             </div>
+
+            <div class="searches">
+                <a href="<?= ROOT ?>/milestones">
+                    <div class="status">
+                        <div class="info">
+                            <h1>Milestone Interface</h1>
+                            <p>All about milestones</p>
+                        </div>
+                        <div class="progress">
+                            <img src="<?= ASSETS ?>/management.png" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </main>
 

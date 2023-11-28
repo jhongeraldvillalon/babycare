@@ -114,6 +114,25 @@ create table child_prints (
 	right_foot VARCHAR(500)
 )
 
+create table child_prints (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+	date DATETIME NOT NULL,
+	left_hand VARCHAR(500),
+	right_hand VARCHAR(500),
+	left_foot VARCHAR(500),
+	right_foot VARCHAR(500)
+)
+
+CREATE TABLE milestones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	milestone_id VARCHAR(60) NOT NULL,
+    name varchar(30),
+    description TEXT,
+	age_range varchar(60),
+	disabled tinyint
+);
+
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system
 Assing doctors to babies

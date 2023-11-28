@@ -46,20 +46,16 @@
                     </span>
                     <h3>Approvements</h3>
                 </a>
-                <!-- <a href="<?php // ROOT 
-                                ?>/profile">
-                <span class="material-icons-sharp">
-                    person_outline
-                </span>
-                <h3>Profile</h3>
-            </a> -->
-                <!-- <a href="register.php">
-                <span class="material-icons-sharp">
-                    add
-                </span>
-                <h3>Register</h3>
-            </a> -->
+                <a href="<?= ROOT ?>/milestones">
+                    <span class="material-icons-sharp">
+                        face
+                    </span>
+                    <h3>Milestones</h3>
+                </a>
 
+
+
+                
                 <a href="<?= ROOT ?>/logout">
                     <span class="material-icons-sharp">
                         logout

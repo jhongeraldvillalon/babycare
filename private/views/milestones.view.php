@@ -12,7 +12,11 @@
                                 <input value="<?= isset($_GET['find']) ? $_GET['find'] : '' ?>" type="text" name="find" placeholder="Search">
                             </th>
                         </form>
-
+                        <th style="padding-right: 20px;">
+                            <a href="<?= ROOT ?>/milestones/add">
+                                <button value="Add">Add</button>
+                            </a>
+                        </th>
                         <th>
                             <a href="<?= ROOT ?>/">
                                 <button value="Cancel">Cancel</button>
@@ -24,41 +28,35 @@
         </div>
     <?php endif; ?>
     <?php $pager->display(); ?>
+
     <div class="recent-orders">
-        <h5>Unapprove Staffs</h5> <br>
+        <h5>Milestones</h5> <br>
         <div class="card-group">
             <table>
                 <tr>
                     <th>Name</th>
-
-                    <th>Created Date</th>
-                    <th>Gender</th>
-                    <th>Occupation Applying</th>
-                    <th>
-                        ID
-                    </th>
-                    <th>Approve
-                    </th>
+                    <th>Description</th>
+                    <th>Age Range</th>
+                    <th>Disabled</th>
+                    <th>Actions</th>
                 </tr>
 
                 <?php if ($rows) : ?>
                     <?php foreach ($rows as $row) : ?>
                         <tr>
-                            <td><?= $row->first_name ?> <?= $row->middle_name ?> <?= $row->last_name ?></td>
-                            <td><?= get_date($row->date) ?></td>
-                            <td><?= ucfirst(str_replace("_", " ", $row->gender)) ?></td>
-                            <td><?= ucfirst(str_replace("_", " ", $row->user_role)) ?></td>
+                            <td><?= $row->name ?></td>
+                            <td><?= $row->description ?></td>
+                            <td><?= ucfirst(str_replace("_", " ", $row->age_range)) ?></td>
+                            <td><?= ucfirst(str_replace("_", " ", $row->disabled)) ?></td>
                             <td>
-                                <?php if (!empty($row->id_card)) : ?>
-                                    <img src="<?= get_image($row->id_card, $row->gender); ?>" height="150 em" width="auto" alt="ID Card">
-                                <?php else : ?>
-                                    No ID Card
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <a href="<?= ROOT ?>/approve/edit/<?= $row->id ?>">
+                                <a href="<?= ROOT ?>/milestones/edit/<?= $row->id ?>">
                                     <span class="material-icons-sharp">
-                                        check
+                                        edit
+                                    </span>
+                                </a>
+                                <a href="<?= ROOT ?>/milestones/delete/<?= $row->id ?>">
+                                    <span class="material-icons-sharp">
+                                        delete
                                     </span>
                                 </a>
                             </td>
@@ -68,7 +66,7 @@
                     <tr>
                         <td></td>
                     </tr>
-                    <!-- <h5>No child data at this time</h5> -->
+                    <!-- <h5>No milestone data at this time</h5> -->
                 <?php endif; ?>
 
             </table>
