@@ -42,8 +42,8 @@
                         <div class="select-wrapper">
                             <select id="age_range" name="age_range" <?= get_var('age_range') ?>>
                                 <option value="" disabled selected>Select</option>
-                                <option <?= get_var('age_range') == '1' ? 'selected' : '' ?> value="6">1 month</option>
-                                <option <?= get_var('age_range') == '2' ? 'selected' : '' ?> value="6">2 months</option>
+                                <option <?= get_var('age_range') == '1' ? 'selected' : '' ?> value="1">1 month</option>
+                                <option <?= get_var('age_range') == '2' ? 'selected' : '' ?> value="2">2 months</option>
                                 <option <?= get_var('age_range') == '4' ? 'selected' : '' ?> value="4">3-4 months</option>
                                 <option <?= get_var('age_range') == '6' ? 'selected' : '' ?> value="6">5-6 months</option>
                                 <option <?= get_var('age_range') == '8' ? 'selected' : '' ?> value="8">7-8 months</option>

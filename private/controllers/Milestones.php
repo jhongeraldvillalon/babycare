@@ -10,7 +10,7 @@ class Milestones extends Controller
 
         $milestones = new Milestone();
 
-        $limit = 3;
+        $limit = 5;
         $pager = new Pager($limit);
         $offset = $pager->offset;
 

@@ -134,10 +134,10 @@ CREATE TABLE milestones (
 	disabled tinyint
 );
 
-CREATE TABLE milestones_achieved (
+CREATE TABLE milestones_tracker (
     id INT AUTO_INCREMENT PRIMARY KEY,
     child_id VARCHAR(60) NOT NULL,
-    milestone_id INT NOT NULL,
+    milestone_id varchar(60) NOT NULL,
     accomplished_date DATE,
 	accomplished tinyint
 );

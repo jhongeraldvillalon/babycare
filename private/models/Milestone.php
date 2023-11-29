@@ -20,8 +20,8 @@ class Milestone extends Model
     public function validate($DATA)
     {
         $this->errors = [];
-        if (empty($DATA['name']) || !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['name'])) {
-            $this->errors['name'] = 'Name: Only letters are allowed in this field and no leading or trailing spaces';
+        if (empty($DATA['name']) || !preg_match("/^[a-zA-Z,.\\s'-]+$/", $DATA['name'])) {
+            $this->errors['name'] = 'Name: Only letters, commas, periods, hyphens, apostrophes, and spaces are allowed in this field with no leading or trailing spaces';
         }
 
         if (!empty($DATA['description']) && !preg_match("/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/", $DATA['description'])) {

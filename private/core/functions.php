@@ -60,6 +60,17 @@ function dd($data)
     die();
 }
 
+function dd2($data, $data2)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    echo "<pre>";
+    var_dump($data2);
+    echo "</pre>";
+    die();
+}
+
 function get_image($image, $gender = '')
 {
     if ($image && is_string($image) && file_exists($image)) {
