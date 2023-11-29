@@ -1,15 +1,15 @@
 <?php
 
-class Milestone extends Model
+class MilestoneTracker extends Model
 {
 
-    protected $table = 'milestones_achieved';
+    protected $table = 'milestones_tracker';
 
     protected $allowedColumns = [
-        'name',
-        'description',
-        'age_range',
-        'disabled',
+        'child_id',
+        'milestone_id',
+        'accomplished_date',
+        'accomplished'
     ];
     protected $beforeInsert = [
         'make_milestone_id',
@@ -41,30 +41,5 @@ class Milestone extends Model
         }
 
         return false;
-    }
-
-    public function make_milestone_id($data)
-    {
-
-        $data['milestone_id'] = random_string(60);
-        return $data;
-    }
-
-
-    public function insertAndGetId($data)
-    {
-        $data = $this->make_milestone_id($data);
-
-        // Perform the insertion
-        $keys = array_keys($data);
-        $columns = implode(",", $keys);
-        $values = implode(",:", $keys);
-        $query = "insert into $this->table ($columns) values (:$values)";
-
-        // Perform the insertion
-        $this->query($query, $data);
-
-        // Return the milestone_id after insertion
-        return $data['milestone_id'];
     }
 }

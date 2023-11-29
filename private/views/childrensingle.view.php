@@ -86,10 +86,10 @@
             </a>
         </div>
         <div class="searches">
-            <a href="<?= ROOT ?>/milestones/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/milestonestracker/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
-                        <h1>Milestones</h1>
+                        <h1>Milestones Tracker</h1>
                         <p>Baby's developmental milestones</p>
                     </div>
                     <div class="progress">

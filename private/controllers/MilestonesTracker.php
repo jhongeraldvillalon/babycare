@@ -1,42 +1,52 @@
 <?php
 
-class MilestonesAchieved extends Controller
+class MilestonesTracker extends Controller
 {
-    public function index()
+    public function index($id = '')
     {
         if (!Auth::logged_in()) {
             $this->redirect("login");
         }
-
-        $milestones = new Milestone();
-
-        $limit = 3;
-        $pager = new Pager($limit);
-        $offset = $pager->offset;
-
-        if (Auth::access('admin')) {
-            $query = "select * from milestones order by id desc limit $limit offset $offset";
-            $arr = [];
-
-            if (isset($_GET['find'])) {
-                $find = '%' . $_GET['find'] . '%';
-                $query = "select * from milestones where (name like :find) order by id desc limit $limit offset $offset";
-                $arr['find'] = $find;
-            }
-
-            $data = $milestones->query($query, $arr);
+        if (empty($id)) {
+            $this->redirect('children');
         }
+        $errors = [];
+        $page_tab = isset($_GET['tab']) ? $_GET['tab'] : '';
+
+        // Check if the ID exists in the children table
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+
+        if (!$child_row) {
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('childrensingle/' . $id);
+        }
+        $arr = [];
+
+
+
+        $milestones = new MilestoneTracker();
+        $query = "select * from milestones_tracker";
+        if ($page_tab == '6') {
+            $milestones = new Milestone();
+            $query = "select * from milestones where disabled = 0 && age_range = '6'";
+        } else if ($page_tab == '6') {
+            $milestones = new Milestone();
+            $query = "select * from milestones where disabled = 0 && age_range = '6'";
+        }
+        $data = $milestones->query($query, $arr);
 
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
-        echo $this->view('milestones', [
+        echo $this->view('milestonestracker', [
             'rows' => $data,
-            'pager' => $pager,
+            'errors' => $errors,
+            'page_tab' => $page_tab,
         ]);
         echo $this->view('includes/footer');
     }
 
-    public function add()
+    public function add($id = '')
     {
         if (!Auth::logged_in()) {
             $this->redirect("login");
@@ -53,7 +63,7 @@ class MilestonesAchieved extends Controller
 
             if ($milestones->validate($_POST)) {
 
-                $_POST['disabled'] = '1';
+                $_POST['accomplished'] = '1';
 
                 $milestones = new Milestone();
                 $milestoneId = $milestones->insertAndGetId($_POST);
