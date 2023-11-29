@@ -42,12 +42,12 @@
                         <div class="select-wrapper">
                             <select id="age_range" name="age_range" <?= get_var('age_range') ?>>
                                 <option value="" disabled selected>Select</option>
-                                <option <?= get_var('age_range') == '1-6 months' ? 'selected' : '' ?> value="1-6 months">1-6 months</option>
-                                <option <?= get_var('age_range') == '7-12 months' ? 'selected' : '' ?> value="7-12 months">7-12 months</option>
-                                <option <?= get_var('age_range') == '13-18 months' ? 'selected' : '' ?> value="13-18 months">13-18 months</option>
-                                <option <?= get_var('age_range') == '19-24 months' ? 'selected' : '' ?> value="19-24 months">19-24 months</option>
-                                <option <?= get_var('age_range') == '25-36 months' ? 'selected' : '' ?> value="25-36 months">25-36 months</option>
-                                <option <?= get_var('age_range') == '37-48 months' ? 'selected' : '' ?> value="37-48 months">37-48 months</option>
+                                <option <?= get_var('age_range') == '6' ? 'selected' : '' ?> value="6">1-6 months</option>
+                                <option <?= get_var('age_range') == '12' ? 'selected' : '' ?> value="12">7-12 months</option>
+                                <option <?= get_var('age_range') == '18' ? 'selected' : '' ?> value="18">13-18 months</option>
+                                <option <?= get_var('age_range') == '24' ? 'selected' : '' ?> value="24">19-24 months</option>
+                                <option <?= get_var('age_range') == '36' ? 'selected' : '' ?> value="36">25-36 months</option>
+                                <option <?= get_var('age_range') == '48' ? 'selected' : '' ?> value="48">37-48 months</option>
                             </select>
                         </div>
                     </div>

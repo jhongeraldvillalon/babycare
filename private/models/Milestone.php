@@ -28,8 +28,8 @@ class Milestone extends Model
         }
 
         $age_range = [
-            '1-6 months', '7-12 months', '13-18 months',
-            '19-24 months', '25-36 months', '37-48 months'
+            '6', '12', '18',
+            '24', '36', '48'
         ];
 
         if (empty($DATA['age_range']) || !in_array($DATA['age_range'], $age_range)) {

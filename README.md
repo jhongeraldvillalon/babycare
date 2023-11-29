@@ -127,7 +127,7 @@ create table child_prints (
 CREATE TABLE milestones (
     id INT AUTO_INCREMENT PRIMARY KEY,
 	milestone_id VARCHAR(60) NOT NULL,
-    name varchar(30),
+    name varchar(500),
     description TEXT,
 	age_range varchar(60),
 	disabled tinyint
