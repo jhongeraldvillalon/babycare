@@ -3,13 +3,12 @@
 class Milestone extends Model
 {
 
-    protected $table = 'milestones';
+    protected $table = 'milestones_achieved';
 
     protected $allowedColumns = [
         'name',
         'description',
         'age_range',
-        'category',
         'disabled',
     ];
     protected $beforeInsert = [
@@ -29,25 +28,12 @@ class Milestone extends Model
         }
 
         $age_range = [
-            '1', '2', '4', '6', '8', '10', '12',
-            '18', '24',
-            '36',
-            '48',
-            '60'
+            '6', '12', '18',
+            '24', '36', '48'
         ];
 
         if (empty($DATA['age_range']) || !in_array($DATA['age_range'], $age_range)) {
             $this->errors['age_range'] = 'Range is not valid';
-        }
-
-        $category = [
-            'mental', 'lingual', 'social',
-            'physical', 'breastfeeding', 'play', 'baby vaccine',
-            'wellness visit'
-        ];
-
-        if (empty($DATA['category']) || !in_array($DATA['category'], $category)) {
-            $this->errors['category'] = 'category is not valid';
         }
 
         if (count($this->errors) == 0) {

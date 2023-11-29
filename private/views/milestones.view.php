@@ -37,6 +37,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Age Range</th>
+                    <th>Category</th>
                     <th>Disabled</th>
                     <th>Actions</th>
                 </tr>
@@ -47,6 +48,7 @@
                             <td><?= $row->name ?></td>
                             <td><?= $row->description ?></td>
                             <td><?= ucfirst(str_replace("_", " ", $row->age_range)) . ' Months' ?></td>
+                            <td><?= ucfirst(str_replace("_", " ", $row->category))?></td>
                             <td><?= ucfirst(str_replace("_", " ", $row->disabled)) ?></td>
                             <td>
                                 <a href="<?= ROOT ?>/milestones/edit/<?= $row->id ?>">

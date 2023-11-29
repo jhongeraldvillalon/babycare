@@ -130,7 +130,16 @@ CREATE TABLE milestones (
     name varchar(500),
     description TEXT,
 	age_range varchar(60),
+	category varchar (60),
 	disabled tinyint
+);
+
+CREATE TABLE milestones_achieved (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    child_id VARCHAR(60) NOT NULL,
+    milestone_id INT NOT NULL,
+    accomplished_date DATE,
+	accomplished tinyint
 );
 
 Access/Authorization {
