@@ -41,8 +41,4 @@ class Database
         }
         return false;
     }
-
-    // public function query()
-    // {
-    // }
 }

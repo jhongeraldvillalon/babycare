@@ -22,57 +22,25 @@ class MilestonesTracker extends Controller
             $this->redirect('childrensingle/' . $id);
         }
 
-        $milestones = new Milestone();
-        $query = "SELECT * FROM milestones 
-                  INNER JOIN milestones_tracker ON milestones.milestone_id = milestones_tracker.milestone_id 
-                  WHERE milestones.disabled = 0 
-                  AND milestones_tracker.accomplished = 1";
-
-        if ($page_tab == '1') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '1'";
-        } else if ($page_tab == '2') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '2'";
-        } else if ($page_tab == '4') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '4'";
-        } else if ($page_tab == '6') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '6'";
-        } else if ($page_tab == '8') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '8'";
-        } else if ($page_tab == '10') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '10'";
-        } else if ($page_tab == '12') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '12'";
-        } else if ($page_tab == '18') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '18'";
-        } else if ($page_tab == '24') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '24'";
-        } else if ($page_tab == '36') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '36'";
-        } else if ($page_tab == '48') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '48'";
-        } else if ($page_tab == '60') {
-            $milestones = new Milestone();
-            $query = "select * from milestones where disabled = 0 && age_range = '60'";
-        } else {
-            $milestones = new Milestone();
-            $query = "SELECT * FROM milestones 
-                      INNER JOIN milestones_tracker ON milestones.milestone_id = milestones_tracker.milestone_id 
-                      WHERE milestones.disabled = 0 
-                      AND milestones_tracker.accomplished = 1";
+        // Calculate the age of the child in months
+        if ($child_row) {
+            $birthDate = new DateTime($child_row->birth_date);
+            $currentDate = new DateTime();
+            $interval = $birthDate->diff($currentDate);
+            $ageInMonths = $interval->y * 12 + $interval->m;
         }
-
-        if ($page_tab == "completed") {
+        
+        
+        
+        if ($page_tab == "goals") {
+            if ($ageInMonths < 12) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12')";
+            }
+        }
+       else  {
+            $query = "SELECT * FROM milestones 
+            JOIN milestones_tracker ON milestones.milestone_id = milestones_tracker.milestone_id 
+            WHERE milestones.disabled = 0 && milestones_tracker.accomplished = '1' && milestones_tracker.child_id = '$id'";
         }
         $milestoneTracker = new MilestoneTracker();
         $milestoneTrackerRow = $milestoneTracker->where('child_id', $id);

@@ -117,3 +117,12 @@ function child_id_URL()
     // The child_id will be the last part of the URL
     return end($url_parts);
 }
+
+function calculateBabyAgeInMonths($birthday)
+{
+    $birthdayTimestamp = strtotime($birthday);
+    $currentTimestamp = time();
+    $diff = $currentTimestamp - $birthdayTimestamp;
+    $ageInMonths = floor($diff / (30 * 24 * 60 * 60));
+    return $ageInMonths;
+}

@@ -5,70 +5,13 @@
                 <thead>
                     <tr>
                         <th>
-                            <a href="?tab=1">
-                                <button>1 Month</button>
+                            <a href="?tab=completed">
+                                <button>Completed</button>
                             </a>
                         </th>
                         <th>
-                            <a href="?tab=2">
-                                <button>2 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=4">
-                                <button>3-4 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=6">
-                                <button>5-6 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=8">
-                                <button>7-8 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=10">
-                                <button>9-10 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=12">
-                                <button>11-12 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=18">
-                                <button>18 Months</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=24">
-                                <button>2 Years</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=36">
-                                <button>3 Years</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=48">
-                                <button>4 Years</button>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="?tab=60">
-                                <button>5 Years</button>
-                            </a>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <a href="?">
-                                <button>Default</button>
+                            <a href="?tab=goals">
+                                <button>Goals</button>
                             </a>
                         </th>
                         <th>
@@ -93,7 +36,7 @@
                         <th>Age Range</th>
                         <th>Category</th>
                         <th>Actions</th>
-                        <th>mid</th>
+
                     </tr>
 
                     <?php if ($rows) : ?>
@@ -105,7 +48,7 @@
                                     <td><?= $row->name ?></td>
                                     <td><?= ucfirst(str_replace("_", " ", $row->age_range)) . ' Months' ?></td>
                                     <td><?= ucfirst(str_replace("_", " ", $row->category)) ?></td>
-                                    <td><?= $row->milestone_id ?></td>
+
 
                                     <td>
                                         <input type="hidden" value="<?= child_id_URL() ?>" name="child_id">
