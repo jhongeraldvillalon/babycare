@@ -26,21 +26,23 @@
             <div class="milestone_errors" style="margin-top: 10px;">
                 <?php
                 $errorCount = count($milestone_errors);
-                $errorText = "goal";
-                if ($errorCount !== 1) {
-                    $errorText = "goals";
+                $errorText = ($errorCount !== 1) ? "goals" : "goal";
+                $showLimit = 2;
+
+                for ($i = 0; $i < min($errorCount, $showLimit); $i++) {
+                    echo '<div class="notifications deactive">';
+                    echo '<div class="icon">';
+                    echo '<span class="material-icons-sharp">warning</span>';
+                    echo '</div>';
+                    echo '<p>Your child has an important issue in the milestones tracker: ' . $milestone_errors[$i] . '</p>';
+                    echo '</div>';
+                }
+
+                if ($errorCount > $showLimit) {
+                    
+                    echo '<a href="?tab=goals">Show more...</a>';
                 }
                 ?>
-                <a href="<?= ROOT ?>/milestonestracker/<?= $row->child_id ?>">
-                    <div class="notifications deactive">
-                        <div class="icon">
-                            <span class="material-icons-sharp">
-                                warning
-                            </span>
-                        </div>
-                        <p>Your child have <?php echo $errorCount; ?> important <?php echo $errorText; ?> issue in the milestones tracker</p>
-                    </div>
-                </a>
             </div>
         <?php endif; ?>
     </div>

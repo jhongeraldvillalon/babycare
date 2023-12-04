@@ -14,6 +14,9 @@ class MilestonesTracker extends Controller
         $arr = [];
         $page_tab = isset($_GET['tab']) ? $_GET['tab'] : '';
         $milestones = new Milestone();
+        // for Milestone Tracker
+        $milestoneTracker = new MilestoneTracker();
+        $milestoneTrackerRow = $milestoneTracker->where('child_id', $id);
 
         // Check if the ID exists in the children table
         $children = new Child();
@@ -29,21 +32,86 @@ class MilestonesTracker extends Controller
             $interval = $birthDate->diff($currentDate);
             $ageInMonths = $interval->y * 12 + $interval->m;
         }
-        
-        
-        
+
         if ($page_tab == "goals") {
-            if ($ageInMonths < 12) {
+
+            if ($ageInMonths <= 1) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1')";
+            } else if ($ageInMonths < 2) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2')";
+            } else if ($ageInMonths < 4) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4')";
+            } else if ($ageInMonths < 6) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6')";
+            } else if ($ageInMonths < 8) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8')";
+            } else if ($ageInMonths < 10) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10')";
+            } else if ($ageInMonths < 12) {
                 $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12')";
+            } else if ($ageInMonths < 18) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12', '18')";
+            } else if ($ageInMonths < 24) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24')";
+            } else if ($ageInMonths < 36) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', '36')";
+            } else if ($ageInMonths < 48) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48')";
+            } else if ($ageInMonths < 60) {
+                $query = "select * from milestones where disabled = 0 && age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48', '60')";
             }
-        }
-       else  {
+        } else {
             $query = "SELECT * FROM milestones 
             JOIN milestones_tracker ON milestones.milestone_id = milestones_tracker.milestone_id 
             WHERE milestones.disabled = 0 && milestones_tracker.accomplished = '1' && milestones_tracker.child_id = '$id'";
         }
-        $milestoneTracker = new MilestoneTracker();
-        $milestoneTrackerRow = $milestoneTracker->where('child_id', $id);
+
+        if ($child_row) {
+            $queryError = "SELECT * FROM milestones WHERE disabled = 0 ";
+
+            if ($ageInMonths <= 1) {
+                $queryError .= "AND age_range in ('1')";
+            } else if ($ageInMonths < 2) {
+                $queryError .= "AND age_range in ('1', '2')";
+            } else if ($ageInMonths < 4) {
+                $queryError .= "AND age_range in ('1', '2', '4')";
+            } else if ($ageInMonths < 6) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6')";
+            } else if ($ageInMonths < 8) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8')";
+            } else if ($ageInMonths < 10) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10')";
+            } else if ($ageInMonths < 12) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12')";
+            } else if ($ageInMonths < 18) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18')";
+            } else if ($ageInMonths < 24) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24')";
+            } else if ($ageInMonths < 36) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', '36')";
+            } else if ($ageInMonths < 48) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48')";
+            } else if ($ageInMonths < 60) {
+                $queryError .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48', '60')";
+            }
+
+            $requiredMilestones = $milestones->query($queryError);
+
+            if (is_iterable($requiredMilestones)) {
+                foreach ($requiredMilestones as $milestone) {
+                    // Check if the milestone has been accomplished
+                    $milestoneCheck = $milestoneTracker->query("SELECT * FROM milestones_tracker WHERE child_id = :child_id AND milestone_id = :milestone_id AND accomplished = 1", [
+                        'child_id' => $id,
+                        'milestone_id' => $milestone->milestone_id
+                    ]);
+
+                    // If not accomplished, add an error message
+                    if (!$milestoneCheck) {
+                        $errors[] = "You haven't accomplished the milestone: <b>" . $milestone->name . "</b> for this child.";
+                    }
+                }
+            }
+        }
 
         $data = $milestones->query($query, $arr);
 
@@ -56,7 +124,7 @@ class MilestonesTracker extends Controller
             'page_tab' => $page_tab,
             'child_id' => $id
         ]);
-        echo $this->view('includes/footer');
+        echo $this->view('includes/footerMilestone', ['milestone_errors' => $errors]);
     }
 
     public function add($id = '')

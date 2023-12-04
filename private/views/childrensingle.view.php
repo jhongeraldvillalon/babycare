@@ -58,6 +58,13 @@
                 </div>
             </div>
     </div>
+    <?php if (!empty($errors)) : ?>
+        <div class="errors" style="margin-top: 10px;">
+            <?php foreach ($errors as $error) : ?>
+                <p><?php echo $error; ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     <div class="analyse">
         <div class="searches">
             <a href="<?= ROOT ?>/childprints/<?= $row->child_id ?>">

@@ -5,7 +5,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <a href="?tab=completed">
+                            <a href="?">
                                 <button>Completed</button>
                             </a>
                         </th>

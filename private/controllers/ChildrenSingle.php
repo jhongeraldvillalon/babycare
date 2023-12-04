@@ -40,18 +40,91 @@ class ChildrenSingle extends Controller
         $images = ($image !== false) ? [$image] : [];
         $data['images'] = $images; // Pass the fetched images to the view
 
+        // errors from milestones tracker
+
+        $milestones = new Milestone();
+        // for Milestone Tracker
+        $milestoneTracker = new MilestoneTracker();
+        $milestoneTrackerRow = $milestoneTracker->where('child_id', $id);
+
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+        if (!$child_row) {
+            $this->redirect('childrensingle/' . $id);
+        }
+
+        // Calculate the age of the child in months
+        if ($child_row) {
+            $birthDate = new DateTime($child_row->birth_date);
+            $currentDate = new DateTime();
+            $interval = $birthDate->diff($currentDate);
+            $ageInMonths = $interval->y * 12 + $interval->m;
+        }
+
+        if ($child_row) {
+            $query = "SELECT * FROM milestones WHERE disabled = 0 ";
+
+            if ($ageInMonths <= 1) {
+                $query .= "AND age_range in ('1')";
+            } else if ($ageInMonths < 2) {
+                $query .= "AND age_range in ('1', '2')";
+            } else if ($ageInMonths < 4) {
+                $query .= "AND age_range in ('1', '2', '4')";
+            } else if ($ageInMonths < 6) {
+                $query .= "AND age_range in ('1', '2', '4', '6')";
+            } else if ($ageInMonths < 8) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8')";
+            } else if ($ageInMonths < 10) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10')";
+         
+            } else if ($ageInMonths < 12) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12')";
+         
+            } else if ($ageInMonths < 18) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18')";
+            
+            } else if ($ageInMonths < 24) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24')";
+            } else if ($ageInMonths < 36) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', '36')";
+            } else if ($ageInMonths < 48) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48')";
+            } else if ($ageInMonths < 60) {
+                $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24', 36', '48', '60')";
+            }
+
+            $requiredMilestones = $milestones->query($query);
+
+            if (is_iterable($requiredMilestones)) {
+                foreach ($requiredMilestones as $milestone) {
+                    // Check if the milestone has been accomplished
+                    $milestoneCheck = $milestoneTracker->query("SELECT * FROM milestones_tracker WHERE child_id = :child_id AND milestone_id = :milestone_id AND accomplished = 1", [
+                        'child_id' => $id,
+                        'milestone_id' => $milestone->milestone_id
+                    ]);
+                  
+                    // If not accomplished, add an error message
+                    if (!$milestoneCheck) {
+                        $errors[] = "You haven't accomplished the milestone: " . $milestone->name . " for this child.";
+                    }
+                }
+            }
+        }
+
+        // END OF ERRORS IN MILESTONE TRACKER
+
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
 
         $data['row'] = $row;
         $data['page_tab'] = $page_tab;
         $data['results'] = $results;
-        $data['errors'] = $errors;
+        $data['milestone_errors'] = $errors;
         $data['pager'] = $pager;
 
 
         echo $this->view('childrensingle', $data);
-        echo $this->view('includes/footer');
+        echo $this->view('includes/footerChildren', $data);
     }
 
     public function staffs_add($id = '')
