@@ -22,7 +22,8 @@ class MilestonesTracker extends Controller
         $children = new Child();
         $child_row = $children->first('child_id', $id);
         if (!$child_row) {
-            $this->redirect('childrensingle/' . $id);
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('children'); // Redirect to an error page
         }
 
         // Calculate the age of the child in months

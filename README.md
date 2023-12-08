@@ -142,6 +142,37 @@ CREATE TABLE milestones_tracker (
 	accomplished tinyint
 );
 
+-- Table for Anthropometric Data
+CREATE TABLE anthropometrics (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	anthropometric_id varchar(60) NOT NULL,
+    child_id VARCHAR(60) NOT NULL,
+    date_recorded DATE,
+    head FLOAT,
+    head_metrics VARCHAR(20),
+    chest FLOAT,
+    chest_metrics VARCHAR(20),
+    length FLOAT,
+    length_metrics VARCHAR(20),
+    weight FLOAT,
+    weight_metrics VARCHAR(20),
+    abdomen FLOAT,
+    abdomen_metrics VARCHAR(20)
+);
+
+-- Table for Growth Chart Data
+CREATE TABLE growth_chart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	growth_chart_id varchar(60) NOT NULL,
+    child_id VARCHAR(60) NOT NULL,
+    anthropometric_id INT,
+    date_recorded DATE,
+    length FLOAT,
+    length_metrics VARCHAR(20),
+    weight FLOAT,
+    weight_metrics VARCHAR(20)
+);
+
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system
 Assing doctors to babies

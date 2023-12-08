@@ -20,7 +20,7 @@ class ChildPrints extends Controller
 
         if (!$child_row) {
             // If the ID doesn't exist in the database, redirect or show an error message
-            $this->redirect('childrensingle/' . $id); // Redirect to an error page
+            $this->redirect('children'); // Redirect to an error page
         }
 
         if (count($_FILES) > 0) {
