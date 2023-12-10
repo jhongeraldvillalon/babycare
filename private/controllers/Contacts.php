@@ -92,7 +92,6 @@ class Contacts extends Controller
         }
 
         $errors = [];
-        $feedback = [];
         $contacts = new Contact();
 
         if (count($_POST) > 0) {
@@ -100,7 +99,7 @@ class Contacts extends Controller
             if ($contacts->validate($_POST)) {
                 $row = $contacts->where('child_id', $id);
 
-                $contacts->updateContact($id, $row[0]->Contact_id, $_POST);
+                $contacts->updateContact($id, $row[0]->contact_id, $_POST);
 
                 $this->redirect('childrensingle/' . $id);
             } else {
