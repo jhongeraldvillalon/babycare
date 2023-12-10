@@ -186,7 +186,7 @@ CREATE TABLE contacts (
 	poison_control_center varchar(60) NOT NULL,
 	poison_control_center_contact varchar(60) NOT NULL,
 	burn_center varchar(60) NOT NULL,
-	burn_center_center varchar(60) NOT NULL,
+	burn_center_center varchar(60) NOT NULL
 )
 
 Access/Authorization {
