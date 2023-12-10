@@ -1,24 +1,29 @@
 <?php
 
-class Anthropometric extends Model
+class Contact extends Model
 {
 
-    protected $table = 'anthropometrics';
+    protected $table = 'contacts';
     public $feedback = [];
     protected $allowedColumns = [
         'hospital',
         'hospital_contact',
+        'hospital_address',
         'pharmacy',
         'pharmacy_contact',
+        'pharmacy_address',
         'ambulance',
         'ambulance_contact',
-        'length_metric',
-        'head_metric',
-        'chest_metric',
-        'abdomen_metric',
+        'ambulance_address',
+        'poison_control_center',
+        'poison_control_center_contact',
+        'poison_control_center_address',
+        'burn_center',
+        'burn_center_contact',
+        'burn_center_address'
     ];
     protected $beforeInsert = [
-        'make_anthropometric_id',
+        'make_contact_id',
     ];
 
 
@@ -27,79 +32,68 @@ class Anthropometric extends Model
 
 
         $this->errors = [];
-        $this->feedback = [];
 
-        $weight_metric = [
-            'kilograms', 'pounds'
-        ];
-
-
-        if (empty($DATA['weight_metric']) || !in_array($DATA['weight_metric'], $weight_metric)) {
-            $this->errors['weight_metric'] = 'Weight Metric is not valid:';
+        if (empty($DATA['hospital']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['hospital'])) {
+            $this->errors['hospital'] = 'Hospital: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['weight']) && !preg_match("/^[+-]?\d*\.?\d+$/", $DATA['weight'])) {
-            $this->errors['weight'] = 'Weight: Only floating point or integer values are allowed in this field, no leading/trailing spaces or special characters';
+        if (empty($DATA['hospital_contact']) || !preg_match("/^[0-9\-+]+$/", $DATA['hospital_contact'])) {
+            $this->errors['hospital_contact'] = 'Hospital Contact Number: Only numbers, -, +, are allowed in this field and no leading or trailing spaces';
         }
 
-        $length_metric = [
-            'cm', 'inches'
-        ];
-
-        if (empty($DATA['length_metric']) || !in_array($DATA['length_metric'], $length_metric)) {
-            $this->errors['length_metric'] = 'Length Metric is not valid';
+        if (empty($DATA['hospital_address']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['hospital_address'])) {
+            $this->errors['hospital_address'] = 'Hospital Address: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['length']) && !preg_match("/^[+-]?\d*\.?\d+$/", $DATA['length'])) {
-            $this->errors['length'] = 'Length: Only floating point or integer values are allowed in this field, no leading/trailing spaces or special characters';
+        if (empty($DATA['pharmacy']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['pharmacy'])) {
+            $this->errors['pharmacy'] = 'Pharmacy: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        $head_metric = [
-            'cm', 'inches'
-        ];
-
-        if (empty($DATA['head_metric']) || !in_array($DATA['head_metric'], $head_metric)) {
-            $this->errors['head_metric'] = 'Head Metric is not valid';
+        if (empty($DATA['pharmacy_contact']) || !preg_match("/^[0-9\-+]+$/", $DATA['pharmacy_contact'])) {
+            $this->errors['pharmacy_contact'] = 'Pharmacy Contact Number: Only numbers, -, +, are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['head']) && !preg_match("/^[+-]?\d*\.?\d+$/", $DATA['head'])) {
-            $this->errors['head'] = 'Head: Only floating point or integer values are allowed in this field, no leading/trailing spaces or special characters';
+        if (empty($DATA['pharmacy_address']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['pharmacy_address'])) {
+            $this->errors['pharmacy_address'] = 'Pharmacy Address: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-
-        $chest_metric = [
-            'cm', 'inches'
-        ];
-
-
-
-        if (empty($DATA['chest_metric']) || !in_array($DATA['chest_metric'], $chest_metric)) {
-            $this->errors['chest_metric'] = 'Chest Metric is not valid';
+        if (empty($DATA['ambulance']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['ambulance'])) {
+            $this->errors['ambulance'] = 'Ambulance: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['chest']) && !preg_match("/^[+-]?\d*\.?\d+$/", $DATA['chest'])) {
-            $this->errors['chest'] = 'Chest: Only floating point or integer values are allowed in this field, no leading/trailing spaces or special characters';
+        if (empty($DATA['ambulance_contact']) || !preg_match("/^[0-9\-+]+$/", $DATA['ambulance_contact'])) {
+            $this->errors['ambulance_contact'] = 'Ambulance Contact Number: Only numbers, -, +, are allowed in this field and no leading or trailing spaces';
         }
 
-
-        $abdomen_metric = [
-            'cm', 'inches'
-        ];
-
-        if (empty($DATA['abdomen_metric']) && !in_array($DATA['abdomen_metric'], $abdomen_metric)) {
-            $this->errors['abdomen_metric'] = 'Abdomen Metric is not valid';
+        if (empty($DATA['ambulance_address']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['ambulance_address'])) {
+            $this->errors['ambulance_address'] = 'Ambulance Address: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
-        if (!empty($DATA['abdomen']) && !preg_match("/^[+-]?\d*\.?\d+$/", $DATA['abdomen'])) {
-            $this->errors['abdomen'] = 'Abdomen: Only floating point or integer values are allowed in this field, no leading/trailing spaces or special characters';
+        if (empty($DATA['poison_contron_center']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['poison_contron_center'])) {
+            $this->errors['poison_contron_center'] = 'Poison Control Center: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['poison_contron_center_contact']) || !preg_match("/^[0-9\-+]+$/", $DATA['poison_contron_center_contact'])) {
+            $this->errors['poison_contron_center_contact'] = 'Poison Control Center Contact Number: Only numbers, -, +, are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['poison_contron_center_address']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['poison_contron_center_address'])) {
+            $this->errors['poison_contron_center_address'] = 'Poison Control Center Address: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['burn']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['burn'])) {
+            $this->errors['burn'] = 'Burn: Only letters are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['burn_contact']) || !preg_match("/^[0-9\-+]+$/", $DATA['burn_contact'])) {
+            $this->errors['burn_contact'] = 'Burn Contact Number: Only numbers, -, +, are allowed in this field and no leading or trailing spaces';
+        }
+
+        if (empty($DATA['burn_address']) || !preg_match("/^[a-zA-Z0-9]+$/", $DATA['burn_address'])) {
+            $this->errors['burn_address'] = 'Burn Address: Only letters are allowed in this field and no leading or trailing spaces';
         }
 
         if (count($this->errors) == 0) {
-            return true;
-        }
-
-        if (count($this->feedback) == 0) {
-            $this->feedback['feedback'] = "Task executed successfully";
             return true;
         }
 
@@ -107,17 +101,17 @@ class Anthropometric extends Model
     }
 
 
-    public function make_anthropometric_id($data)
+    public function make_contact_id($data)
     {
 
-        $data['anthropometric_id'] = random_string(60);
+        $data['contact_id'] = random_string(60);
         return $data;
     }
 
 
     public function insertAndGetId($data)
     {
-        $data = $this->make_anthropometric_id($data);
+        $data = $this->make_contact_id($data);
 
         // Perform the insertion
         $keys = array_keys($data);
@@ -128,11 +122,11 @@ class Anthropometric extends Model
         // Perform the insertion
         $this->query($query, $data);
 
-        // Return the anthropometric_id after insertion
-        return $data['anthropometric_id'];
+        // Return the contact_id after insertion
+        return $data['contact_id'];
     }
 
-    public function updateAnthropometric($id, $anthropometric_id, $data)
+    public function updatecontact($id, $contact_id, $data)
     {
         $str = "";
         foreach ($data as $key => $value) {
@@ -140,8 +134,8 @@ class Anthropometric extends Model
         }
         $str = trim($str, ",");
         $data['child_id'] = $id;
-        $data['anthropometric_id'] = $anthropometric_id;
-        $query = "update $this->table set $str where anthropometric_id = :anthropometric_id AND child_id = :child_id";
+        $data['contact_id'] = $contact_id;
+        $query = "update $this->table set $str where contact_id = :contact_id AND child_id = :child_id";
         // dd2($data, $query);
         return $this->query($query, $data);
     }
