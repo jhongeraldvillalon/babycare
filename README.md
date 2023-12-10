@@ -165,13 +165,29 @@ CREATE TABLE growth_chart (
     id INT AUTO_INCREMENT PRIMARY KEY,
 	growth_chart_id varchar(60) NOT NULL,
     child_id VARCHAR(60) NOT NULL,
-    anthropometric_id INT,
+  	anthropometric_id varchar(60) NOT NULL,
     date_recorded DATE,
     length FLOAT,
     length_metrics VARCHAR(20),
     weight FLOAT,
     weight_metrics VARCHAR(20)
 );
+
+CREATE TABLE contacts ( 
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+	contact_id varchar(60) NOT NULL,
+	hospital varchar(60) NOT NULL,
+	hospital_contact varchar(60) NOT NULL,
+	pharmacy varchar(60) NOT NULL,
+	pharmacy_contact varchar(60) NOT NULL,
+	ambulance varchar(60) NOT NULL,
+	ambulance_ambulance varchar(60) NOT NULL,
+	poison_control_center varchar(60) NOT NULL,
+	poison_control_center_contact varchar(60) NOT NULL,
+	burn_center varchar(60) NOT NULL,
+	burn_center_center varchar(60) NOT NULL,
+)
 
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system
