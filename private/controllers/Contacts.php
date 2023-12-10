@@ -58,7 +58,7 @@ class Contacts extends Controller
                 $contacts = new Contact();
                 $contacts->insertAndGetId($_POST);
 
-                $this->redirect('contacts');
+                $this->redirect('childrensingle/' . $id);
             } else {
                 $errors = $contacts->errors;
             }

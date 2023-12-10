@@ -59,7 +59,7 @@ class Anthropometrics extends Controller
                 $anthropometrics = new Anthropometric();
                 $anthropometrics->insertAndGetId($_POST);
 
-                $this->redirect('anthropometrics');
+                $this->redirect('childrensingle/' . $id);
             } else {
                 $errors = $anthropometrics->errors;
             }
@@ -140,7 +140,7 @@ class Anthropometrics extends Controller
 
         if (count($_POST) > 0) {
             $anthropometrics->delete($id);
-            $this->redirect('anthropometrics');
+            $this->redirect('childrensingle/' . $id);
         }
 
         $row = $anthropometrics->where('id', $id);

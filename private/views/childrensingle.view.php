@@ -119,6 +119,30 @@
                 </div>
             </a>
         </div>
+
+        <?php
+
+            $child = new Anthropometric();
+            $exists = $child->first('child_id', $row->child_id);
+
+            if ($exists) : ?>
+            <div class="searches">
+                <a href="<?= ROOT ?>/anthropometrics/<?= $row->child_id ?>">
+                    <div class="status">
+                        <div class="info">
+                            <h1>Growth Chart</h1>
+                            <p>Baby's physical measurements</p>
+                        </div>
+                        <div class="progress">
+                            <img src="<?= ASSETS . '/' ?>ANTHROPOMETRICS.png" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <?php else : ?>
+        <?php endif; ?>
+
+
         <div class="searches">
             <a href="<?= ROOT ?>/contacts/<?= $row->child_id ?>">
                 <div class="status">
@@ -137,8 +161,36 @@
             <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
-                        <h1>Health Records</h1>
-                        <p>Health assessments, immunization, summary, logs</p>
+                        <h1>Immunization Records</h1>
+                        <p>Your baby's immunization</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>HEALTH_ASSESSMENT.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="searches">
+            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Health Assessment</h1>
+                        <p>Baby's health assessments</p>
+                    </div>
+                    <div class="progress">
+                        <img src="<?= ASSETS . '/' ?>HEALTH_ASSESSMENT.png" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="searches">
+            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
+                <div class="status">
+                    <div class="info">
+                        <h1>Health Logs</h1>
+                        <p>Health logs of your baby</p>
                     </div>
                     <div class="progress">
                         <img src="<?= ASSETS . '/' ?>HEALTH_ASSESSMENT.png" alt="">
