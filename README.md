@@ -179,14 +179,19 @@ CREATE TABLE contacts (
 	contact_id varchar(60) NOT NULL,
 	hospital varchar(60) NOT NULL,
 	hospital_contact varchar(60) NOT NULL,
+	hospital_address varchar(60) NOT NULL,
 	pharmacy varchar(60) NOT NULL,
 	pharmacy_contact varchar(60) NOT NULL,
+	pharmacy_address varchar(60) NOT NULL,
 	ambulance varchar(60) NOT NULL,
-	ambulance_ambulance varchar(60) NOT NULL,
+	ambulance_contact varchar(60) NOT NULL,
+	ambulance_address varchar(60) NOT NULL,
 	poison_control_center varchar(60) NOT NULL,
 	poison_control_center_contact varchar(60) NOT NULL,
+	poison_control_center_address varchar(60) NOT NULL,
 	burn_center varchar(60) NOT NULL,
-	burn_center_center varchar(60) NOT NULL
+	burn_center_contact varchar(60) NOT NULL,
+	burn_center_address varchar(60) NOT NULL
 )
 
 Access/Authorization {
