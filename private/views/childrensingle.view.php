@@ -127,7 +127,7 @@
 
             if ($exists) : ?>
             <div class="searches">
-                <a href="<?= ROOT ?>/anthropometrics/<?= $row->child_id ?>">
+                <a href="<?= ROOT ?>/growthcharts/<?= $row->child_id ?>">
                     <div class="status">
                         <div class="info">
                             <h1>Growth Chart</h1>
