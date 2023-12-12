@@ -126,3 +126,11 @@ function calculateBabyAgeInMonths($birthday)
     $ageInMonths = floor($diff / (30 * 24 * 60 * 60));
     return $ageInMonths;
 }
+
+function sanitize_input($input)
+{
+    $input = trim($input);
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return $input;
+}
