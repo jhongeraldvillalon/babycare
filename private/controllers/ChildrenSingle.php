@@ -9,6 +9,20 @@ class ChildrenSingle extends Controller
             $this->redirect("login");
         }
 
+        if (empty($id)) {
+            // Redirect or show an error message indicating an invalid ID
+            $this->redirect('children'); // Redirect to an error page
+        }
+
+        // Check if the ID exists in the children table
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+
+        if (!$child_row) {
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('children'); // Redirect to an error page
+        }
+
         $children = new Child();
 
         $row = $children->first('child_id', $id);

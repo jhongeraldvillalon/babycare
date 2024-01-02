@@ -53,8 +53,6 @@
                     <h3>Milestones</h3>
                 </a>
 
-
-
                 
                 <a href="<?= ROOT ?>/logout">
                     <span class="material-icons-sharp">

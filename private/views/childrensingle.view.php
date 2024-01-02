@@ -158,7 +158,7 @@
         </div>
 
         <div class="searches">
-            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/immunizations/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Immunization Records</h1>
@@ -172,7 +172,7 @@
         </div>
 
         <div class="searches">
-            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/healthAssessments/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Health Assessment</h1>
@@ -186,7 +186,7 @@
         </div>
 
         <div class="searches">
-            <a href="<?= ROOT ?>/health_records/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/healthLogs/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Health Logs</h1>
@@ -213,7 +213,7 @@
             </a>
         </div>
         <div class="searches">
-            <a href="../immunization.php?id=<?= $baby_id ?>">
+        <a href="<?= ROOT ?>/appointments/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Appointment Scheduling</h1>

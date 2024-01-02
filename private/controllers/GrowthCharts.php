@@ -8,6 +8,20 @@ class GrowthCharts extends Controller
             $this->redirect("login");
         }
 
+        if (empty($id)) {
+            // Redirect or show an error message indicating an invalid ID
+            $this->redirect('children'); // Redirect to an error page
+        }
+
+        // Check if the ID exists in the children table
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+
+        if (!$child_row) {
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('children'); // Redirect to an error page
+        }
+
         $growthcharts = new GrowthChart();
         $errors = [];
 
@@ -72,6 +86,20 @@ class GrowthCharts extends Controller
             $this->redirect("home");
         }
 
+        if (empty($id)) {
+            // Redirect or show an error message indicating an invalid ID
+            $this->redirect('children'); // Redirect to an error page
+        }
+
+        // Check if the ID exists in the children table
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+
+        if (!$child_row) {
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('children'); // Redirect to an error page
+        }
+
         $errors = [];
         $growthcharts = new GrowthChart();
         $growth_chart = new GrowthChart();
@@ -115,6 +143,20 @@ class GrowthCharts extends Controller
 
         if (!Auth::isAdmin() && !Auth::isParent()) {
             $this->redirect("home");
+        }
+
+        if (empty($id)) {
+            // Redirect or show an error message indicating an invalid ID
+            $this->redirect('children'); // Redirect to an error page
+        }
+
+        // Check if the ID exists in the children table
+        $children = new Child();
+        $child_row = $children->first('child_id', $id);
+
+        if (!$child_row) {
+            // If the ID doesn't exist in the database, redirect or show an error message
+            $this->redirect('children'); // Redirect to an error page
         }
 
         $errors = [];

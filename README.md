@@ -160,18 +160,6 @@ CREATE TABLE anthropometrics (
     abdomen_metrics VARCHAR(20)
 );
 
--- Table for Growth Chart Data
-CREATE TABLE growth_chart (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-	growth_chart_id varchar(60) NOT NULL,
-    child_id VARCHAR(60) NOT NULL,
-  	anthropometric_id varchar(60) NOT NULL,
-    date_recorded DATE,
-    length FLOAT,
-    length_metrics VARCHAR(20),
-    weight FLOAT,
-    weight_metrics VARCHAR(20)
-);
 
 CREATE TABLE contacts ( 
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -194,10 +182,60 @@ CREATE TABLE contacts (
 	burn_center_address varchar(60) NOT NULL
 )
 
+CREATE TABLE growth_charts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    child_id VARCHAR(60) NOT NULL,
+	growth_chart_id varchar(60) NOT NULL,
+    date DATE,
+	year VARCHAR(255),
+    months VARCHAR(255),
+    week VARCHAR(255),
+    days VARCHAR(255),
+ length FLOAT,
+    length_metrics VARCHAR(20),
+    weight FLOAT,
+    weight_metrics VARCHAR(20),
+    body_mass_index double,
+    notes_observation VARCHAR(255)
+)
+
+CREATE TABLE immunizations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+	immunization_id varchar(60) NOT NULL,
+    vaccine VARCHAR(50),
+    dose VARCHAR(50),
+    type VARCHAR(50),
+    lot VARCHAR(50),
+    expiration VARCHAR(50),
+    date_administered DATE,
+    administered_by VARCHAR(50),
+    route_site_note VARCHAR(255)
+)
+
+CREATE TABLE health_assessments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+	health_assessment_id varchar(60) NOT NULL,
+    newborn_hearing_date DATE,
+    newborn_screening_date DATE
+)
+
+CREATE TABLE health_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    child_id VARCHAR(60) NOT NULL,
+    health_log_id varchar(60) NOT NULL,
+    date DATE,
+    type VARCHAR(255),
+    `condition` VARCHAR(255),
+    is_consult VARCHAR(255),
+    result VARCHAR(255)
+);
+
+
 Access/Authorization {
 Verify medical professionals identity and allow them to enter the system
 Assing doctors to babies
-
 }
 
 Notification {

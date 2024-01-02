@@ -134,3 +134,100 @@ function sanitize_input($input)
     $input = htmlspecialchars($input);
     return $input;
 }
+
+function checkOverdueImmunizations($child_id)
+{
+    $immunization = new Immunization();
+
+    // Define the immunization schedule with specific doses
+    $immunizationSchedule = [
+        'BCG' => [
+            '1' => 0  // BCG is usually given at birth (0 months)
+        ],
+        'Hepatitis B' => [
+            '1' => 0,  // First dose at birth
+            '2' => 1,  // Second dose at 1 month
+            '3' => 6   // Third dose at 6 months
+        ],
+        'Ditheria, Tetanus, Pertussis (DTP)' => [
+            '1' => 2,  // First dose at 2 months
+            '2' => 4,  // Second dose at 4 months
+            '3' => 6   // Third dose at 6 months
+        ],
+        'Haemophius Influenzae Type B (Hib)' => [
+            '1' => 2,  // First dose at 2 months
+            '2' => 4,  // Second dose at 4 months
+            '3' => 6,  // Third dose at 6 months
+            'Booster' => 12  // Booster dose at 12 months
+        ],
+        'Polio (IPV/OPV)' => [
+            '1' => 2,  // First dose at 2 months
+            '2' => 4,  // Second dose at 4 months
+            '3' => 6,  // Third dose at 6 months
+            'Booster' => 15  // Booster dose at 15-18 months
+        ],
+        'Measles' => [
+            '1' => 12  // First dose at 12 months
+        ],
+        'Measles, Mumps, Rubella (MMR)' => [
+            '1' => 12,  // First dose at 12 months
+            '2' => 48   // Second dose at 4 years (48 months)
+        ],
+        'Varicella' => [
+            '1' => 12,  // First dose at 12 months
+            '2' => 48   // Second dose at 4 years (48 months)
+        ],
+        'Hepatitis A' => [
+            '1' => 12,  // First dose at 12 months
+            '2' => 18   // Second dose at 18 months
+        ],
+        'Pneumococcal (PCV/PPV)' => [
+            '1' => 2,   // First dose at 2 months
+            '2' => 4,   // Second dose at 4 months
+            '3' => 6,   // Third dose at 6 months
+            'Booster' => 12  // Booster dose at 12 months
+        ],
+        'Meningocal A+C' => [
+            '1' => 9  // First dose at 9 months
+        ],
+        'Rotavirus' => [
+            '1' => 2,  // First dose at 2 months
+            '2' => 4,  // Second dose at 4 months
+            '3' => 6   // Third dose at 6 months
+        ],
+        'Typhoid Fever' => [
+            '1' => 24  // First dose at 2 years (24 months)
+        ],
+        'Human Papillomavirus (HPV)' => [
+            '1' => 132,  // First dose starting from 11 years (132 months)
+            '2' => 144   // Second dose 6-12 months after the first dose (e.g., at 12 years or 144 months)
+        ],
+        'Influenza' => [
+            // Annual vaccination, starting from 6 months old
+            // The specific doses will depend on the child's age and previous vaccination history
+        ],
+        // 'Other' vaccine schedules can be added based on specific requirements
+    ];
+
+    // Calculate the child's age in months
+    $child = new Child();
+    $child_row = $child->first('child_id', $child_id);
+    $birthDate = new DateTime($child_row->birth_date);
+    $currentDate = new DateTime();
+    $interval = $birthDate->diff($currentDate);
+    $ageInMonths = $interval->y * 12 + $interval->m;
+
+    $overdueImmunizations = [];
+    foreach ($immunizationSchedule as $vaccine => $doses) {
+        // Iterate through each dose for the vaccine
+        foreach ($doses as $dose => $dueMonth) {
+            // Check if the dose is overdue and not administered
+            if ($ageInMonths >= $dueMonth && !$immunization->isVaccineAdministered($child_id, $vaccine, $dose)) {
+                // Add the overdue dose to the notification list
+                $overdueImmunizations[] = $vaccine . " - " . $dose . " (Dose due at " . $dueMonth . " months)";
+            }
+        }
+    }
+
+    return $overdueImmunizations;
+}
