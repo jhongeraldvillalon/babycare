@@ -200,7 +200,7 @@
         </div>
 
         <div class="searches">
-            <a href="<?= ROOT ?>/dental_records/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/dentals/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Dental Records</h1>
@@ -213,7 +213,7 @@
             </a>
         </div>
         <div class="searches">
-        <a href="<?= ROOT ?>/appointments/<?= $row->child_id ?>">
+            <a href="<?= ROOT ?>/appointments/<?= $row->child_id ?>">
                 <div class="status">
                     <div class="info">
                         <h1>Appointment Scheduling</h1>

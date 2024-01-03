@@ -232,7 +232,21 @@ CREATE TABLE health_logs (
     result VARCHAR(255)
 );
 
-
+CREATE TABLE dentals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+	child_id VARCHAR(60) NOT NULL,
+    dental_id varchar(60) NOT NULL,
+    date DATE,
+    tooth_number INT NOT NULL,
+    observations TEXT,
+    fillings VARCHAR(100),
+    crowns VARCHAR(100),
+    bridges VARCHAR(100),
+    root_canal_therapy BOOLEAN DEFAULT FALSE,
+    tooth_removal BOOLEAN DEFAULT FALSE,
+    dental_implants VARCHAR(100),
+    last_checkup_date DATE
+);
 
 
 

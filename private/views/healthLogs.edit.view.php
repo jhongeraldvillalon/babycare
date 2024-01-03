@@ -38,7 +38,7 @@ $health_log_row = $health_log->first('health_log_id', child_id_URL());
                                 <option value="sickness" <?= get_var('type', $health_log_row->type) == 'sickness' ? 'selected' : '' ?>>Sickness</option>
                             </select>
                         </div>
-                    </div>>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-column">
@@ -54,7 +54,7 @@ $health_log_row = $health_log->first('health_log_id', child_id_URL());
                 <div class="form-row">
                     <div class="form-column" id="resultField">
                         <label for="result">Then what is the result</label>
-                        <input type="text" id="result" name="result" value="<?= get_var('result',$health_log_row->result) ?>" />
+                        <input type="text" id="result" name="result" value="<?= get_var('result', $health_log_row->result) ?>" />
                     </div>
                 </div>
                 <div class="center-button">
