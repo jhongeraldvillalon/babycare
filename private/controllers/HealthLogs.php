@@ -23,26 +23,14 @@ class HealthLogs extends Controller
         }
 
         $child = new HealthLog();
-        $exists = $child->first('child_id', $id);
+        $health_logs = new HealthLog();
+        $errors = [];
 
-        if ($exists) {
-            $this->edit($id);
-            return; // Exit the method to prevent further execution
-        } else {
-            $this->add($id);
-            return; // Exit the method to prevent further execution
-        }
-    }
+        $query = "select * from health_logs order by id asc";
+        $arr = [];
 
-    public function add($id = null)
-    {
-        if (!Auth::logged_in()) {
-            $this->redirect("login");
-        }
+        $data = $health_logs->query($query, $arr);
 
-        if (!Auth::isAdmin() && !Auth::isParent()) {
-            $this->redirect("home");
-        }
 
         $errors = [];
         $health_logs = new HealthLog();
@@ -52,31 +40,28 @@ class HealthLogs extends Controller
 
             if ($health_logs->validate($_POST)) {
                 $_POST['child_id'] = $id;
+                $_POST['is_consult'] = isset($_POST['is_consult']) ? 1 : 0;
+                if ($_POST['is_consult'] == 0) {
+                    $_POST['result'] = 'N/A'; // Set result to null if not consulted
+                }
                 $health_logs = new HealthLog();
                 $health_logs->insertAndGetId($_POST);
 
-                $this->redirect('childrensingle/' . $id);
+                $this->redirect('healthLogs/' . $id);
             } else {
                 $errors = $health_logs->errors;
             }
         }
 
-        $row = $health_logs->where('child_id', $id);
-        if (Auth::access('parent') || Auth::i_own_content($row)) {
-
-            echo $this->view('includes/header');
-            echo $this->view('includes/nav');
-            echo $this->view(
-                'healthLogs.add',
-                [
-                    'row' => $row,
-                    'errors' => $errors,
-
-                ]
-            );
-            echo $this->view('includes/footer');
-        }
+        echo $this->view('includes/header');
+        echo $this->view('includes/nav');
+        echo $this->view('healthLogs', [
+            'errors' => $errors,
+            'rows' => $data,
+        ]);
+        echo $this->view('includes/footer');
     }
+
     public function edit($id = null)
     {
         if (!Auth::logged_in()) {
@@ -89,21 +74,28 @@ class HealthLogs extends Controller
 
         $errors = [];
         $healthLog = new HealthLog();
+        $healthLog_row = $healthLog->first('health_log_id', child_id_URL());
 
+        $children = new Child();
+        $child_row = $children->first('child_id', $healthLog_row->child_id);
         if (count($_POST) > 0) {
 
             if ($healthLog->validate($_POST)) {
-                $row = $healthLog->where('child_id', $id);
 
-                $healthLog->updateHealthLogs($id, $row[0]->health_assessment_id, $_POST);
+                $_POST['child_id'] = $id;
+                $_POST['is_consult'] = isset($_POST['is_consult']) ? 1 : 0;
+                if ($_POST['is_consult'] == 0) {
+                    $_POST['result'] = 'N/A'; // Set result to null if not consulted
+                }
 
-                // $this->redirect('childrensingle/' . $id);
+                $healthLog->updateHealthLogs($child_row->child_id, $healthLog_row->health_log_id, $_POST);
+                $this->redirect('healthLogs/' . $child_row->child_id);
             } else {
                 $errors = $healthLog->errors;
             }
         }
 
-        $row = $healthLog->where('child_id', $id);
+        $row = $healthLog->where('child_id', $child_row->child_id);
         if (Auth::access('parent') || Auth::i_own_content($row)) {
 
             echo $this->view('includes/header');
@@ -113,6 +105,7 @@ class HealthLogs extends Controller
                 [
                     'row' => $row,
                     'errors' => $errors,
+
                 ]
             );
             echo $this->view('includes/footer');

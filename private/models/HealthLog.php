@@ -22,12 +22,29 @@ class HealthLog extends Model
     {
         $this->errors = [];
 
-        if (empty($DATA['newborn_hearing_date'])) {
-            $this->errors['newborn_hearing_date'] = 'Newborn hearing date is required.';
+        if (empty($DATA['date']) || !$this->isValidDate($DATA['date'])) {
+            $this->errors['date'] = 'Date: Invalid date format or date is not valid.';
         }
 
-        if (empty($DATA['newborn_screening_date'])) {
-            $this->errors['newborn_screening_date'] = 'Newborn screening date is required.';
+        $typeOptions = [
+            "sickness", "accident"
+        ];
+
+        if (empty($DATA['type']) || !in_array($DATA['type'], $typeOptions)) {
+            $this->errors['type'] = 'Type is not valid.';
+        }
+
+        if (empty($DATA['condition']) || !preg_match("/^[a-zA-Z0-9.\\/&,\\\\@()]+(?:\\s[a-zA-Z0-9.\\/&,\\\\@()]+)*$/", $DATA['condition'])) {
+            $this->errors['condition'] = 'Condition: Only letters, numbers, and special characters (./&,\\@()) are allowed in this field, with no leading or trailing spaces';
+        }
+
+
+        $consultedChecked = isset($DATA['is_consult']) && $DATA['is_consult'] == '1';
+
+        if ($consultedChecked) {
+            if (empty($DATA['result']) || !preg_match("/^[a-zA-Z0-9.\\/&,\\\\@()]+(?:\\s[a-zA-Z0-9.\\/&,\\\\@()]+)*$/", $DATA['result'])) {
+                $this->errors['result'] = 'Result: Required field and must contain only letters, numbers, and special characters (./&,\\@()).';
+            }
         }
 
         if (count($this->errors) == 0) {
@@ -35,6 +52,12 @@ class HealthLog extends Model
         }
 
         return false;
+    }
+
+    private function isValidDate($date, $format = 'Y-m-d')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
     }
 
     public function make_health_log_id($data)
@@ -48,11 +71,14 @@ class HealthLog extends Model
     {
         $data = $this->make_health_log_id($data);
 
-        // Perform the insertion
+
+        // Encapsulate column names with backticks
         $keys = array_keys($data);
-        $columns = implode(",", $keys);
-        $values = implode(",:", $keys);
-        $query = "insert into $this->table ($columns) values (:$values)";
+        $columns = '`' . implode("`,`", $keys) . '`';
+        $values = ':' . implode(",:", $keys);
+
+
+        $query = "INSERT INTO `$this->table` ($columns) VALUES ($values)";
 
         // Perform the insertion
         $this->query($query, $data);
@@ -83,13 +109,14 @@ class HealthLog extends Model
     {
         $str = "";
         foreach ($data as $key => $value) {
-            $str .= $key . "=:" . $key . ",";
+            // Enclose the column name in backticks
+            $str .= "`" . $key . "`=:" . $key . ",";
         }
         $str = trim($str, ",");
         $data['child_id'] = $id;
         $data['health_log_id'] = $health_log_id;
-        $query = "update $this->table set $str where health_log_id = :health_log_id AND child_id = :child_id";
-        // dd2($data, $query);
+
+        $query = "UPDATE `$this->table` SET $str WHERE `health_log_id` = :health_log_id AND `child_id` = :child_id";
         return $this->query($query, $data);
     }
 }

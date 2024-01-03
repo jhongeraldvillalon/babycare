@@ -228,15 +228,14 @@ CREATE TABLE health_logs (
     date DATE,
     type VARCHAR(255),
     `condition` VARCHAR(255),
-    is_consult VARCHAR(255),
+    is_consult tinyint,
     result VARCHAR(255)
 );
 
 
-Access/Authorization {
-Verify medical professionals identity and allow them to enter the system
-Assing doctors to babies
-}
+
+
+
 
 Notification {
 	Immunization -> kung late na si baby
