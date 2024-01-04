@@ -243,6 +243,7 @@ CREATE TABLE dentals (
     crowns VARCHAR(100),
     bridges VARCHAR(100),
     root_canal_therapy BOOLEAN DEFAULT FALSE,
+	is_erupt BOOLEAN DEFAULT FALSE,
     tooth_removal BOOLEAN DEFAULT FALSE,
     dental_implants VARCHAR(100),
     last_checkup_date DATE

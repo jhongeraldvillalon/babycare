@@ -380,6 +380,7 @@ svg {
                                 <option value="glass_ionomer">Glass Ionomer</option>
                                 <option value="gold">Gold</option>
                                 <option value="temporary">Temporary Filling</option>
+                                <option value="Other" <?= get_var('fillings') == 'Other' ? 'selected' : '' ?>>Other</option>
                             </select>
                         </div>
                     </div>
@@ -509,4 +510,82 @@ svg {
             historyPopup.style.display = 'none';
         }
     });
+</script>
+
+<!-- OTHERS INPUT FOR FILLING -->
+
+
+<script>
+    // Get references to the select element and the custom vaccine input field
+    const vaccineDropdown = document.getElementById('vaccineSelect');
+    const customVaccineContainer = document.getElementById('customVaccineContainer');
+
+    // Function to toggle the display of the custom vaccine input based on the selected vaccine
+    function toggleCustomVaccineInput() {
+        const selectedValue = vaccineDropdown.value;
+        customVaccineContainer.style.display = selectedValue === 'Other' ? 'block' : 'none';
+    }
+
+    // Add an event listener to the vaccine select element
+    vaccineDropdown.addEventListener('change', toggleCustomVaccineInput);
+
+    // Call the function to set the initial state when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleCustomVaccineInput();
+    });
+</script>
+
+<script>
+    // Get references to the select elements
+    const vaccineSelect = document.getElementById('vaccineSelect');
+    const doseSelect = document.getElementById('doseSelect');
+
+    // Define the available dose options for each vaccine
+    const doseOptions = {
+        'BCG': ['1'],
+        'Hepatitis B': ['1', '2', '3', '4', 'Booster'],
+        'Ditheria, Tetanus, Pertussis (DTP)': ['1', '2', '3', 'Booster 1', 'Booster 2'],
+        'Haemophius Influenzae Type B (Hib)': ['1', '2', '3', 'Booster 1', 'Booster 2'],
+        'Polio (IPV/OPV)': ['1', '2', '3', 'Booster 1', 'Booster 2'],
+        'Measles': ['1'],
+        'Measles, Mumps, Rubella (MMR)': ['1', '2', 'Booster'],
+        'Varicella': ['1', '2', 'Booster'],
+        'Hepatitis A': ['1', '2'],
+        'Pneumococcal (PCV/PPV)': ['1', '2', '3', 'Booster 1', 'Booster 2'],
+        'Meningocal A+C': ['1'],
+        'Rotavirus': ['1', '2', '3'],
+        'Typhoid Fever': ['1', '2', '3'],
+        'Human Papillomavirus (HPV)': ['1', '2', '3'],
+        'Influenza': ['1', '2', '3'],
+        'Other': ['1', '2', '3', '4', '5', '6', '7', '8', 'Booster', 'Booster 1', 'Booster 2', 'Booster 3', 'Booster 4', 'Booster 5', 'Booster 6'],
+
+        // Add more vaccine options and their corresponding doses here
+    };
+
+    // Function to update the dose options based on the selected vaccine
+    function updateDoseOptions() {
+        const selectedVaccine = vaccineSelect.value;
+
+        // Clear the current options in the dose select
+        doseSelect.innerHTML = '<option value="" disabled selected>Select</option>';
+
+        // Add the appropriate dose options based on the selected vaccine
+        if (doseOptions[selectedVaccine]) {
+            doseOptions[selectedVaccine].forEach((dose) => {
+                const option = document.createElement('option');
+                option.value = dose;
+                option.textContent = dose;
+                doseSelect.appendChild(option);
+            });
+        }
+
+        // Enable or disable the dose select based on the selected vaccine
+        doseSelect.disabled = !selectedVaccine;
+    }
+
+    // Add an event listener to the vaccine select to update the dose options
+    vaccineSelect.addEventListener('change', updateDoseOptions);
+
+    // Call the updateDoseOptions function initially to set the initial state
+    updateDoseOptions();
 </script>
