@@ -26,7 +26,7 @@
         <?php
         // Check for overdue immunizations
         $immunizationsController = new Immunization();
-        $overdueImmunizations = checkOverdueImmunizations(child_id_URL());
+        $overdueImmunizations = checkOverdueImmunizations(child_id_URL_milestone());
         $immunizationCount = count($overdueImmunizations);
         $immunizationText = ($immunizationCount !== 1) ? "immunizations" : "immunization";
 
@@ -51,7 +51,7 @@
                 if ($errorCount !== 1) {
                     $errorText = "goals";
                 }
- 
+
                 ?>
 
                 <a href="<?= ROOT ?>/milestonestracker/<?= $row->child_id ?>">

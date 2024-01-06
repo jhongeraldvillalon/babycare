@@ -58,14 +58,21 @@ svg {
         border: 2px solid #2199e8;
     }
 </style>
+<?php
 
+////////////////////// CALCULATE AGE ////////////////////////
+
+$dental = new Dental();
+$dental_row = $dental->first('dental_id', child_id_URL());
+
+?>
 
 <main>
-    <h1>Dental UI</h1>
+    <h1>Dental UI </h1>
     <!-- Analyses -->
 
     <div class="add-form">
-        <h2>Dental</h2>
+        <h2>Dental Edit <?= Auth::getUser_id() ?></h2>
         <div class="form-section">
             <form method="post">
                 <?php if (count($errors) > 0) : ?>
@@ -333,94 +340,24 @@ svg {
                         </div>
                     </div>
                 </div>
-                <div class="recent-orders">
-                    <h2>History</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tooth Number</th>
-                                <th>Date</th>
-                                <th>Last Checkup Date</th>
-                                <th>Observations</th>
-                                <th>Tooth Removal</th>
-                                <th>Rooth Canal Therapy</th>
-                                <th>Erupted</th>
-                                <th>Fillings</th>
-                                <th>Crowns</th>
-                                <th>Bridges</th>
-                                <th>Dental Implants</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            <?php
-                            $dentals = new Dental();
-                            $dentals_exists = $dentals->where('child_id', child_id_URL());
-                            if ($dentals_exists) :
-                                foreach ($dentals_exists as $row) :
-                            ?>
-                                    <tr>
-                                        <td>
-                                            <?= $row->tooth_number ?>
-                                        </td>
-                                        <td>
-                                            <?= $row->date ?>
-                                        </td>
-                                        <td>
-                                            <?= $row->last_checkup_date ?>
-                                        </td>
-                                        <td>
-                                            <?= $row->observations ?>
-                                        </td>
-                                        <td>
-                                            <?= ($row->tooth_removal == 1) ? 'Yes' : 'No' ?>
-                                        </td>
-                                        <td>
-                                            <?= ($row->root_canal_therapy == 1) ? 'Yes' : 'No' ?>
-                                        </td>
-                                        <td>
-                                            <?= ($row->is_erupt == 1) ? 'Yes' : 'No' ?>
-                                        </td>
-                                        <td>
-                                            <?= ucwords(str_replace('_', ' ', $row->fillings)) ?>
-                                        </td>
-                                        <td>
-                                            <?= ucwords(str_replace('_', ' ', $row->crowns)) ?>
-                                        </td>
-                                        <td>
-                                            <?= ucwords(str_replace('_', ' ', $row->bridges)) ?>
-                                        </td>
-                                        <td>
-                                            <?= ucwords(str_replace('_', ' ', $row->dental_implants)) ?>
-                                        </td>
-                                        <td><a href="<?php echo ROOT . "/dentals/edit/" . $row->dental_id ?>">Edit</a></td>
-                                    </tr>
-                                <?php
-                                endforeach; ?>
-                            <?php else : ?>
-
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="form-column" id="teethNumberField">
-                    <input hidden type="text" id="tooth_number" name="tooth_number" value="<?= get_var('tooth_number') ?>" />
+                    <input hidden type="text" id="tooth_number" name="tooth_number" value="<?= get_var('tooth_number', $dental_row->tooth_number) ?>" />
                 </div>
                 <div class="form-row">
                     <div class="form-column">
                         <label for="hearing">Date</label>
-                        <input type="date" id="date_happen" name="date" value="<?= get_var('date') ?>" required />
+                        <input type="date" id="date_happen" name="date" value="<?= get_var('date',  $dental_row->date) ?>" required />
                     </div>
                     <div class="form-column">
                         <label for="hearing">Last Check Up Date</label>
-                        <input type="date" id="last_checkup_date_happen" name="last_checkup_date" value="<?= get_var('last_checkup_date') ?>" required />
+                        <input type="date" id="last_checkup_date_happen" name="last_checkup_date" value="<?= get_var('last_checkup_date',  $dental_row->last_checkup_date) ?>" required />
                     </div>
                     <div class="form-column">
 
 
                         <label for="observations">Observation</label>
-                        <input type="text" id="observations" name="observations" value="<?= get_var('observations') ?>" />
+                        <input type="text" id="observations" name="observations" value="<?= get_var('observations',  $dental_row->observations) ?>" />
 
 
                     </div>
@@ -430,9 +367,9 @@ svg {
                         <label for="tooth_removal">Tooth Removal</label>
                         <div class="select-wrapper">
                             <select id="tooth_removal" name="tooth_removal" required>
-                                <option value="" disabled <?= get_var('tooth_removal') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="1" <?= get_var('tooth_removal') == '1' ? 'selected' : '' ?>>Yes</option>
-                                <option value="0" <?= get_var('tooth_removal') == '0' ? 'selected' : '' ?>>No</option>
+                                <option value="" disabled <?= get_var('tooth_removal',  $dental_row->tooth_removal) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="1" <?= get_var('tooth_removal',  $dental_row->tooth_removal) == '1' ? 'selected' : '' ?>>Yes</option>
+                                <option value="0" <?= get_var('tooth_removal',  $dental_row->tooth_removal) == '0' ? 'selected' : '' ?>>No</option>
                             </select>
                         </div>
                     </div>
@@ -440,9 +377,9 @@ svg {
                         <label for="root_canal_therapy">Root Canal Therapy</label>
                         <div class="select-wrapper">
                             <select id="root_canal_therapy" name="root_canal_therapy" required>
-                                <option value="" disabled <?= get_var('root_canal_therapy') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="1" <?= get_var('root_canal_therapy') == '1' ? 'selected' : '' ?>>Yes</option>
-                                <option value="0" <?= get_var('root_canal_therapy') == '0' ? 'selected' : '' ?>>No</option>
+                                <option value="" disabled <?= get_var('root_canal_therapy', $dental_row->root_canal_therapy) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="1" <?= get_var('root_canal_therapy', $dental_row->root_canal_therapy) == '1' ? 'selected' : '' ?>>Yes</option>
+                                <option value="0" <?= get_var('root_canal_therapy', $dental_row->root_canal_therapy) == '0' ? 'selected' : '' ?>>No</option>
                             </select>
                         </div>
                     </div>
@@ -451,9 +388,9 @@ svg {
                         <label for="is_erupt">Erupted?</label>
                         <div class="select-wrapper">
                             <select id="is_erupt" name="is_erupt" required>
-                                <option value="" disabled <?= get_var('is_erupt') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="1" <?= get_var('is_erupt') == '1' ? 'selected' : '' ?>>Yes</option>
-                                <option value="0" <?= get_var('is_erupt') == '0' ? 'selected' : '' ?>>No</option>
+                                <option value="" disabled <?= get_var('is_erupt',  $dental_row->is_erupt) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="1" <?= get_var('is_erupt',  $dental_row->is_erupt) == '1' ? 'selected' : '' ?>>Yes</option>
+                                <option value="0" <?= get_var('is_erupt',  $dental_row->is_erupt) == '0' ? 'selected' : '' ?>>No</option>
                             </select>
                         </div>
                     </div>
@@ -464,41 +401,41 @@ svg {
                         <label for="fillingSelect">Type of Filling:</label>
                         <div class="select-wrapper">
                             <select id="fillingSelect" name="fillingSelect" required>
-                                <option value="" disabled <?= get_var('fillingSelect') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="amalgam" <?= get_var('fillingSelect') == 'amalgam' ? 'selected' : '' ?>>Amalgam (Silver Filling)</option>
-                                <option value="composite" <?= get_var('fillingSelect') == 'composite' ? 'selected' : '' ?>>Composite (Tooth-Colored Resin)</option>
-                                <option value="ceramic" <?= get_var('fillingSelect') == 'ceramic' ? 'selected' : '' ?>>Ceramic (Porcelain)</option>
-                                <option value="glass_ionomer" <?= get_var('fillingSelect') == 'glass_ionomer' ? 'selected' : '' ?>>Glass Ionomer</option>
-                                <option value="gold" <?= get_var('fillingSelect') == 'gold' ? 'selected' : '' ?>>Gold</option>
-                                <option value="temporary" <?= get_var('fillingSelect') == 'temporary' ? 'selected' : '' ?>>Temporary Filling</option>
-                                <option value="Other" <?= get_var('fillingSelect') == 'Other' ? 'selected' : '' ?>>Other</option>
+                                <option value="" disabled <?= get_var('fillingSelect',  $dental_row->fillings) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="amalgam" <?= get_var('fillingSelect',  $dental_row->fillings) == 'amalgam' ? 'selected' : '' ?>>Amalgam (Silver Filling)</option>
+                                <option value="composite" <?= get_var('fillingSelect',  $dental_row->fillings) == 'composite' ? 'selected' : '' ?>>Composite (Tooth-Colored Resin)</option>
+                                <option value="ceramic" <?= get_var('fillingSelect',  $dental_row->fillings) == 'ceramic' ? 'selected' : '' ?>>Ceramic (Porcelain)</option>
+                                <option value="glass_ionomer" <?= get_var('fillingSelect',  $dental_row->fillings) == 'glass_ionomer' ? 'selected' : '' ?>>Glass Ionomer</option>
+                                <option value="gold" <?= get_var('fillingSelect',  $dental_row->fillings) == 'gold' ? 'selected' : '' ?>>Gold</option>
+                                <option value="temporary" <?= get_var('fillingSelect',  $dental_row->fillings) == 'temporary' ? 'selected' : '' ?>>Temporary Filling</option>
+                                <option value="Other" <?= get_var('fillingSelect',  $dental_row->fillings) == 'Other' ? 'selected' : '' ?>>Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-column" id="customFillingContainer" style="display: none;">
                         <label for="customFilling">Custom Filling</label>
-                        <input type="text" id="customFilling" value="<?= get_var('customFilling') ?>" name="customFilling" />
+                        <input type="text" id="customFilling" value="<?= get_var('customFilling',  $dental_row->fillings) ?>" name="customFilling" />
                     </div>
                     <div class="form-column">
                         <label for="crownSelect">Type of Crowns:</label>
                         <div class="select-wrapper">
                             <select id="crownSelect" name="crownSelect" required>
-                                <option value="" disabled <?= get_var('crownSelect') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="stainless_steel" <?= get_var('crownSelect') == 'stainless_steel' ? 'selected' : '' ?>>Stainless Steel</option>
-                                <option value="metal" <?= get_var('crownSelect') == 'metal' ? 'selected' : '' ?>>Metal</option>
-                                <option value="porcelain_fused_to_metal" <?= get_var('crownSelect') == 'porcelain_fused_to_metal' ? 'selected' : '' ?>>Porcelain-Fused-to-Metal</option>
-                                <option value="all_resin" <?= get_var('crownSelect') == 'all_resin' ? 'selected' : '' ?>>All-Resin</option>
-                                <option value="all_ceramic" <?= get_var('crownSelect') == 'all_ceramic' ? 'selected' : '' ?>>All-Ceramic or All-Porcelain</option>
-                                <option value="zirconia" <?= get_var('crownSelect') == 'zirconia' ? 'selected' : '' ?>>Zirconia</option>
-                                <option value="e_max" <?= get_var('crownSelect') == 'e_max' ? 'selected' : '' ?>>E-Max</option>
-                                <option value="temporary" <?= get_var('crownSelect') == 'temporary' ? 'selected' : '' ?>>Temporary Crown</option>
-                                <option value="Other" <?= get_var('crownSelect') == 'Other' ? 'selected' : '' ?>>Other</option>
+                                <option value="" disabled <?= get_var('crownSelect',  $dental_row->crowns) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="stainless_steel" <?= get_var('crownSelect',  $dental_row->crowns) == 'stainless_steel' ? 'selected' : '' ?>>Stainless Steel</option>
+                                <option value="metal" <?= get_var('crownSelect',  $dental_row->crowns) == 'metal' ? 'selected' : '' ?>>Metal</option>
+                                <option value="porcelain_fused_to_metal" <?= get_var('crownSelect',  $dental_row->crowns) == 'porcelain_fused_to_metal' ? 'selected' : '' ?>>Porcelain-Fused-to-Metal</option>
+                                <option value="all_resin" <?= get_var('crownSelect',  $dental_row->crowns) == 'all_resin' ? 'selected' : '' ?>>All-Resin</option>
+                                <option value="all_ceramic" <?= get_var('crownSelect',  $dental_row->crowns) == 'all_ceramic' ? 'selected' : '' ?>>All-Ceramic or All-Porcelain</option>
+                                <option value="zirconia" <?= get_var('crownSelect',  $dental_row->crowns) == 'zirconia' ? 'selected' : '' ?>>Zirconia</option>
+                                <option value="e_max" <?= get_var('crownSelect',  $dental_row->crowns) == 'e_max' ? 'selected' : '' ?>>E-Max</option>
+                                <option value="temporary" <?= get_var('crownSelect',  $dental_row->crowns) == 'temporary' ? 'selected' : '' ?>>Temporary Crown</option>
+                                <option value="Other" <?= get_var('crownSelect',  $dental_row->crowns) == 'Other' ? 'selected' : '' ?>>Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-column" id="customCrownContainer" style="display: none;">
                         <label for="customCrown">Custom Crown</label>
-                        <input type="text" id="customCrown" value="<?= get_var('customCrown') ?>" name="customCrown" />
+                        <input type="text" id="customCrown" value="<?= get_var('customCrown',  $dental_row->crowns) ?>" name="customCrown" />
                     </div>
 
                 </div>
@@ -508,46 +445,46 @@ svg {
                         <label for="bridgeSelect">Type of Bridges:</label>
                         <div class="select-wrapper">
                             <select id="bridgeSelect" name="bridgeSelect" required>
-                                <option value="" disabled <?= get_var('bridgeSelect') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="traditional" <?= get_var('bridgeSelect') == 'traditional' ? 'selected' : '' ?>>Traditional Bridge</option>
-                                <option value="cantilever" <?= get_var('bridgeSelect') == 'cantilever' ? 'selected' : '' ?>>Cantilever Bridge</option>
-                                <option value="maryland_bonded" <?= get_var('bridgeSelect') == 'maryland_bonded' ? 'selected' : '' ?>>Maryland Bonded Bridge</option>
-                                <option value="implant_supported" <?= get_var('bridgeSelect') == 'implant_supported' ? 'selected' : '' ?>>Implant-Supported Bridge</option>
-                                <option value="composite" <?= get_var('bridgeSelect') == 'composite' ? 'selected' : '' ?>>Composite Bridge</option>
-                                <option value="temporary" <?= get_var('bridgeSelect') == 'temporary' ? 'selected' : '' ?>>Temporary Bridge</option>
-                                <option value="Other" <?= get_var('bridgeSelect') == 'Other' ? 'selected' : '' ?>>Other</option>
+                                <option value="" disabled <?= get_var('bridgeSelect',  $dental_row->bridges) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="traditional" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'traditional' ? 'selected' : '' ?>>Traditional Bridge</option>
+                                <option value="cantilever" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'cantilever' ? 'selected' : '' ?>>Cantilever Bridge</option>
+                                <option value="maryland_bonded" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'maryland_bonded' ? 'selected' : '' ?>>Maryland Bonded Bridge</option>
+                                <option value="implant_supported" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'implant_supported' ? 'selected' : '' ?>>Implant-Supported Bridge</option>
+                                <option value="composite" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'composite' ? 'selected' : '' ?>>Composite Bridge</option>
+                                <option value="temporary" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'temporary' ? 'selected' : '' ?>>Temporary Bridge</option>
+                                <option value="Other" <?= get_var('bridgeSelect',  $dental_row->bridges) == 'Other' ? 'selected' : '' ?>>Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-column" id="customBridgeContainer" style="display: none;">
                         <label for="customBridge">Custom Bridge</label>
-                        <input type="text" id="customBridge" value="<?= get_var('customBridge') ?>" name="customBridge" />
+                        <input type="text" id="customBridge" value="<?= get_var('customBridge',  $dental_row->bridges) ?>" name="customBridge" />
                     </div>
                     <div class="form-column">
                         <label for="dentalImplantSelect">Type of Dental Implants:</label>
                         <div class="select-wrapper">
-                            <select id="dentalImplantSelect" name="dentalImplantSelect" required>
-                                <option value="" disabled <?= get_var('dentalImplantSelect') == '' ? 'selected' : '' ?>>Select</option>
-                                <option value="endosteal" <?= get_var('dentalImplantSelect') == 'endosteal' ? 'selected' : '' ?>>Endosteal Implant</option>
-                                <option value="subperiosteal" <?= get_var('dentalImplantSelect') == 'subperiosteal' ? 'selected' : '' ?>>Subperiosteal Implant</option>
-                                <option value="all_on_4" <?= get_var('dentalImplantSelect') == 'all_on_4' ? 'selected' : '' ?>>All-on-4 Implant</option>
-                                <option value="mini" <?= get_var('dentalImplantSelect') == 'mini' ? 'selected' : '' ?>>Mini Dental Implant (MDI)</option>
-                                <option value="immediate_load" <?= get_var('dentalImplantSelect') == 'immediate_load' ? 'selected' : '' ?>>Immediate Load Dental Implant</option>
-                                <option value="zygomatic" <?= get_var('dentalImplantSelect') == 'zygomatic' ? 'selected' : '' ?>>Zygomatic Implant</option>
-                                <option value="implant_supported_bridge" <?= get_var('dentalImplantSelect') == 'implant_supported_bridge' ? 'selected' : '' ?>>Implant-Supported Bridge</option>
-                                <option value="implant_retained_denture" <?= get_var('dentalImplantSelect') == 'implant_retained_denture' ? 'selected' : '' ?>>Implant-Retained Denture</option>
-                                <option value="Other" <?= get_var('dentalImplantSelect') == 'Other' ? 'selected' : '' ?>>Other</option>
+                            <select id="dentalImplantSelect" name="dentalImplantSelect" , required>
+                                <option value="" disabled <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == '' ? 'selected' : '' ?>>Select</option>
+                                <option value="endosteal" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'endosteal' ? 'selected' : '' ?>>Endosteal Implant</option>
+                                <option value="subperiosteal" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'subperiosteal' ? 'selected' : '' ?>>Subperiosteal Implant</option>
+                                <option value="all_on_4" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'all_on_4' ? 'selected' : '' ?>>All-on-4 Implant</option>
+                                <option value="mini" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'mini' ? 'selected' : '' ?>>Mini Dental Implant (MDI)</option>
+                                <option value="immediate_load" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'immediate_load' ? 'selected' : '' ?>>Immediate Load Dental Implant</option>
+                                <option value="zygomatic" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'zygomatic' ? 'selected' : '' ?>>Zygomatic Implant</option>
+                                <option value="implant_supported_bridge" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'implant_supported_bridge' ? 'selected' : '' ?>>Implant-Supported Bridge</option>
+                                <option value="implant_retained_denture" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'implant_retained_denture' ? 'selected' : '' ?>>Implant-Retained Denture</option>
+                                <option value="Other" <?= get_var('dentalImplantSelect',  $dental_row->dental_implants) == 'Other' ? 'selected' : '' ?>>Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-column" id="customDentalImplantContainer" style="display: none;">
                         <label for="customDentalImplant">Custom Dental Implant</label>
-                        <input type="text" id="customDentalImplant" value="<?= get_var('customDentalImplant') ?>" name="customDentalImplant" />
+                        <input type="text" id="customDentalImplant" value="<?= get_var('customDentalImplant',  $dental_row->dental_implants) ?>" name="customDentalImplant" />
                     </div>
                 </div>
 
                 <div class="center-button">
-                    <button type="submit">Add</button>
+                    <button type="submit">Save</button>
                 </div>
             </form>
         </div>
@@ -620,84 +557,181 @@ svg {
     });
 </script>
 
-
+<!-- CODE TO SHOW THE CUSTOM FILLING IF THE VALUE OF THE FILLING IS OTHERS -->
 <script>
-    // Get references to the select element and the custom vaccine input field
-    const fillingDropdown = document.getElementById('fillingSelect');
-    const customFillingContainer = document.getElementById('customFillingContainer');
-
-    // Function to toggle the display of the custom vaccine input based on the selected vaccine
-    function toggleCustomFillingInput() {
-        const selectedValue = fillingDropdown.value;
-        customFillingContainer.style.display = selectedValue === 'Other' ? 'block' : 'none';
-    }
-
-    // Add an event listener to the Filling select element
-    fillingDropdown.addEventListener('change', toggleCustomFillingInput);
-
-    // Call the function to set the initial state when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-        toggleCustomFillingInput();
-    });
-</script>
+        const fillingDropdown = document.getElementById('fillingSelect');
+        const customFillingContainer = document.getElementById('customFillingContainer');
+        const customFillingInput = document.getElementById('customFilling');
 
+        const fillings = [
+            'amalgam',
+            'composite',
+            'ceramic',
+            'glass_ionomer',
+            'gold',
+            'temporary',
+            'Other'
+        ];
 
-<script>
-    // Get references to the select element and the custom crown input field
-    const crownDropdown = document.getElementById('crownSelect');
-    const customCrownContainer = document.getElementById('customCrownContainer');
+        const phpValueOfOther = '<?php echo $dental_row->fillings; ?>';
 
-    // Function to toggle the display of the custom crown input based on the selected crown
-    function toggleCustomCrownInput() {
-        const selectedValue = crownDropdown.value; // Corrected variable name
-        customCrownContainer.style.display = selectedValue === 'Other' ? 'block' : 'none';
-    }
+        function checkFilling() {
+            // If phpValueOfOther is not in the fillings array, show the custom filling container
+            if (!fillings.includes(phpValueOfOther)) {
+                customFillingContainer.style.display = 'block';
+                customFillingInput.value = phpValueOfOther;
+                fillingDropdown.value = 'Other';
+            } else {
+                // If phpValueOfOther is in the fillings array, set the dropdown value and hide custom filling container
+                fillingDropdown.value = phpValueOfOther;
+                customFillingContainer.style.display = 'none';
+            }
+        }
 
-    // Add an event listener to the crown select element
-    crownDropdown.addEventListener('change', toggleCustomCrownInput);
+        // Initialize the check on page load
+        checkFilling();
 
-    // Call the function to set the initial state when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleCustomCrownInput();
-    });
-</script>
-
-<script>
-    // Get references to the select element and the custom crown input field
-    const bridgeDropdown = document.getElementById('bridgeSelect');
-    const customBridgeContainer = document.getElementById('customBridgeContainer');
-
-    // Function to toggle the display of the custom crown input based on the selected crown
-    function toggleCustomCrownInput() {
-        const selectedValue = bridgeDropdown.value; // Corrected variable name
-        customBridgeContainer.style.display = selectedValue === 'Other' ? 'block' : 'none';
-    }
-
-    // Add an event listener to the crown select element
-    bridgeDropdown.addEventListener('change', toggleCustomCrownInput);
-
-    // Call the function to set the initial state when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleCustomCrownInput();
+        // Event listener for changes in the dropdown
+        fillingDropdown.addEventListener('change', function() {
+            // If 'Other' is selected, show the custom filling container
+            if (fillingDropdown.value === 'Other') {
+                customFillingContainer.style.display = 'block';
+                customFillingInput.value = ''; // Clear the input field
+            } else {
+                // If another option is selected, hide the custom filling container
+                customFillingContainer.style.display = 'none';
+            }
+        });
     });
 </script>
 
 <script>
-    // Get references to the select element and the custom crown input field
-    const dentalImplantDropdown = document.getElementById('dentalImplantSelect');
-    const customDentalImplantContainer = document.getElementById('customDentalImplantContainer');
-
-    // Function to toggle the display of the custom crown input based on the selected crown
-    function toggleCustomDentalImplant() {
-        const selectedValue = dentalImplantDropdown.value; // Corrected variable name
-        customDentalImplantContainer.style.display = selectedValue === 'Other' ? 'block' : 'none';
-    }
-
-    // Add an event listener to the crown select element
-    dentalImplantDropdown.addEventListener('change', toggleCustomDentalImplant);
-
-    // Call the function to set the initial state when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-        toggleCustomDentalImplant();
+        const crownDropdown = document.getElementById('crownSelect');
+        const customCrownContainer = document.getElementById('customCrownContainer');
+        const customCrownInput = document.getElementById('customCrown');
+
+        const crowns = [
+            'stainless_steel',
+            'metal',
+            'porcelain_fused_to_metal',
+            'all_resin',
+            'all_ceramic',
+            'zirconia',
+            'e_max',
+            'temporary',
+            'Other'
+        ];
+
+        const phpValueOfCrown = '<?php echo $dental_row->crowns; ?>';
+
+        function checkCrown() {
+            if (!crowns.includes(phpValueOfCrown)) {
+                customCrownContainer.style.display = 'block';
+                customCrownInput.value = phpValueOfCrown;
+                crownDropdown.value = 'Other';
+            } else {
+                crownDropdown.value = phpValueOfCrown;
+                customCrownContainer.style.display = 'none';
+            }
+        }
+
+        checkCrown();
+
+        crownDropdown.addEventListener('change', function() {
+            if (crownDropdown.value === 'Other') {
+                customCrownContainer.style.display = 'block';
+                customCrownInput.value = '';
+            } else {
+                customCrownContainer.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bridgeDropdown = document.getElementById('bridgeSelect');
+        const customBridgeContainer = document.getElementById('customBridgeContainer');
+        const customBridgeInput = document.getElementById('customBridge');
+
+        const bridges = [
+            'traditional',
+            'cantilever',
+            'maryland_bonded',
+            'implant_supported',
+            'composite',
+            'temporary',
+            'Other'
+        ];
+
+        const phpValueOfBridge = '<?php echo $dental_row->bridges; ?>';
+
+        function checkBridge() {
+            if (!bridges.includes(phpValueOfBridge)) {
+                customBridgeContainer.style.display = 'block';
+                customBridgeInput.value = phpValueOfBridge;
+                bridgeDropdown.value = 'Other';
+            } else {
+                bridgeDropdown.value = phpValueOfBridge;
+                customBridgeContainer.style.display = 'none';
+            }
+        }
+
+        checkBridge();
+
+        bridgeDropdown.addEventListener('change', function() {
+            if (bridgeDropdown.value === 'Other') {
+                customBridgeContainer.style.display = 'block';
+                customBridgeInput.value = '';
+            } else {
+                customBridgeContainer.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dentalImplantDropdown = document.getElementById('dentalImplantSelect');
+        const customDentalImplantContainer = document.getElementById('customDentalImplantContainer');
+        const customDentalImplantInput = document.getElementById('customDentalImplant');
+
+        const dentalImplants = [
+            'endosteal',
+            'subperiosteal',
+            'all_on_4',
+            'mini',
+            'immediate_load',
+            'zygomatic',
+            'implant_supported_bridge',
+            'implant_retained_denture',
+            'Other'
+        ];
+
+        const phpValueOfDentalImplant = '<?php echo $dental_row->dental_implants; ?>';
+
+        function checkDentalImplant() {
+            if (!dentalImplants.includes(phpValueOfDentalImplant)) {
+                customDentalImplantContainer.style.display = 'block';
+                customDentalImplantInput.value = phpValueOfDentalImplant;
+                dentalImplantDropdown.value = 'Other';
+            } else {
+                dentalImplantDropdown.value = phpValueOfDentalImplant;
+                customDentalImplantContainer.style.display = 'none';
+            }
+        }
+
+        checkDentalImplant();
+
+        dentalImplantDropdown.addEventListener('change', function() {
+            if (dentalImplantDropdown.value === 'Other') {
+                customDentalImplantContainer.style.display = 'block';
+                customDentalImplantInput.value = '';
+            } else {
+                customDentalImplantContainer.style.display = 'none';
+            }
+        });
     });
 </script>

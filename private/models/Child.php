@@ -69,6 +69,16 @@ class Child extends Model
         }
         if (empty($DATA['birth_date'])) {
             $this->errors['birth_date'] = 'Birth Date: Please fill this in';
+        } else {
+            // Calculate age
+            $birthdate = new DateTime($DATA['birth_date']);
+            $today = new DateTime('today');
+            $age = $birthdate->diff($today)->y;
+
+            // Check if age is 5 or more
+            if ($age >= 5) {
+                $this->errors['birth_date'] = 'Child must be under 5 years old';
+            }
         }
 
         if (count($this->errors) == 0) {
@@ -114,7 +124,7 @@ class Child extends Model
         $columns = implode(",", $keys);
         $values = implode(",:", $keys);
         $query = "insert into $this->table ($columns) values (:$values)";
-        
+
         // Perform the insertion
         $this->query($query, $data);
 

@@ -35,18 +35,63 @@ class Dentals extends Controller
         $dentals = new Dental();
 
         if (count($_POST) > 0) {
+
             $dentals = new Dental();
 
             if ($dentals->validate($_POST)) {
-
                 $_POST['child_id'] = $id;
-                // $_POST['is_consult'] = isset($_POST['is_consult']) ? 1 : 0;
-                // if ($_POST['is_consult'] == 0) {
-                //     $_POST['result'] = 'N/A'; // Set result to null if not consulted
-                // }
+
+                // Handling custom filling other input
+                if ($_POST['fillingSelect'] == 'Other' && !empty($_POST['customFilling'])) {
+                    $_POST['fillings'] = sanitize_input($_POST['customFilling']);
+                } else {
+                    $_POST['fillings'] = sanitize_input($_POST['fillingSelect']);
+                }
+                // End of handling filling other input
+
+                // Handling custom filling other input
+                if ($_POST['crownSelect'] == 'Other' && !empty($_POST['customCrown'])) {
+                    $_POST['crowns'] = sanitize_input($_POST['customCrown']);
+                } else {
+                    $_POST['crowns'] = sanitize_input($_POST['crownSelect']);
+                }
+                // End of handling filling other input
+
+                // Handling custom filling other input
+                if ($_POST['bridgeSelect'] == 'Other' && !empty($_POST['customBridge'])) {
+                    $_POST['bridges'] = sanitize_input($_POST['customBridge']);
+                } else {
+                    $_POST['bridges'] = sanitize_input($_POST['bridgeSelect']);
+                }
+                // End of handling filling other input
+
+                // Handling custom filling other input
+                if ($_POST['dentalImplantSelect'] == 'Other' && !empty($_POST['customDentalImplant'])) {
+                    $_POST['dental_implants'] = sanitize_input($_POST['customDentalImplant']);
+                } else {
+                    $_POST['dental_implants'] = sanitize_input($_POST['dentalImplantSelect']);
+                }
+                // End of handling filling other input
+                $_POST['tooth_number'] = intval($_POST['tooth_number']);
+                $insertData = [
+                    'child_id' => $id,
+                    'tooth_number' => $_POST['tooth_number'],
+                    'date' => $_POST['date'],
+                    'last_checkup_date' => $_POST['last_checkup_date'],
+                    'observations' => $_POST['observations'],
+                    'tooth_removal' => $_POST['tooth_removal'],
+                    'root_canal_therapy' => $_POST['root_canal_therapy'],
+                    'is_erupt' => $_POST['is_erupt'],
+                    // Have Others Field
+                    'fillings' => $_POST['fillings'],
+                    'crowns' => $_POST['crowns'],
+                    'bridges' => $_POST['bridges'],
+                    'dental_implants' => $_POST['dental_implants']
+                    // End of have Others field
+                ];
 
                 $dentals = new Dental();
-                $dentals->insertAndGetId($_POST);
+                $dentals->insertAndGetId($insertData);
 
                 $this->redirect('dentals/' . $id);
             } else {
@@ -74,38 +119,84 @@ class Dentals extends Controller
         }
 
         $errors = [];
+        $dentals = new Dental();
         $dental = new Dental();
-        $dental_row = $dental->first('dental_log_id', child_id_URL());
+        $dental_row = $dental->first('dental_id', child_id_URL());
 
         $children = new Child();
         $child_row = $children->first('child_id', $dental_row->child_id);
         if (count($_POST) > 0) {
 
-            if ($dental->validate($_POST)) {
+            if ($dentals->validate($_POST)) {
 
-                $_POST['child_id'] = $id;
-                $_POST['is_consult'] = isset($_POST['is_consult']) ? 1 : 0;
-                if ($_POST['is_consult'] == 0) {
-                    $_POST['result'] = 'N/A'; // Set result to null if not consulted
+                // Handling custom filling other input
+                if ($_POST['fillingSelect'] == 'Other' && !empty($_POST['customFilling'])) {
+                    $_POST['fillings'] = sanitize_input($_POST['customFilling']);
+                } else {
+                    $_POST['fillings'] = sanitize_input($_POST['fillingSelect']);
                 }
+                // End of handling filling other input
 
-                $dental->updateDentals($child_row->child_id, $dental_row->dental_log_id, $_POST);
+                // Handling custom filling other input
+                if ($_POST['crownSelect'] == 'Other' && !empty($_POST['customCrown'])) {
+                    $_POST['crowns'] = sanitize_input($_POST['customCrown']);
+                } else {
+                    $_POST['crowns'] = sanitize_input($_POST['crownSelect']);
+                }
+                // End of handling filling other input
+
+                // Handling custom filling other input
+                if ($_POST['bridgeSelect'] == 'Other' && !empty($_POST['customBridge'])) {
+                    $_POST['bridges'] = sanitize_input($_POST['customBridge']);
+                } else {
+                    $_POST['bridges'] = sanitize_input($_POST['bridgeSelect']);
+                }
+                // End of handling filling other input
+
+                // Handling custom filling other input
+                if ($_POST['dentalImplantSelect'] == 'Other' && !empty($_POST['customDentalImplant'])) {
+                    $_POST['dental_implants'] = sanitize_input($_POST['customDentalImplant']);
+                } else {
+                    $_POST['dental_implants'] = sanitize_input($_POST['dentalImplantSelect']);
+                }
+                // End of handling filling other input
+
+                $insertData = [
+                    'child_id' => $id,
+                    'tooth_number' => $_POST['tooth_number'],
+                    'date' => $_POST['date'],
+                    'last_checkup_date' => $_POST['last_checkup_date'],
+                    'observations' => $_POST['observations'],
+                    'tooth_removal' => $_POST['tooth_removal'],
+                    'root_canal_therapy' => $_POST['root_canal_therapy'],
+                    'is_erupt' => $_POST['is_erupt'],
+                    // Have Others Field
+                    'fillings' => $_POST['fillings'],
+                    'crowns' => $_POST['crowns'],
+                    'bridges' => $_POST['bridges'],
+                    'dental_implants' => $_POST['dental_implants']
+                    // End of have Others field
+                ];
+
+
+                $dentals->updateDentals($child_row->child_id, $dental_row->dental_id, $insertData);
                 $this->redirect('dentals/' . $child_row->child_id);
             } else {
-                $errors = $dental->errors;
+                $errors = $dentals->errors;
             }
         }
 
-        $row = $dental->where('child_id', $child_row->child_id);
+        $row = $dentals->where('child_id', $child_row->child_id);
         if (Auth::access('parent') || Auth::i_own_content($row)) {
 
             echo $this->view('includes/header');
             echo $this->view('includes/nav');
             echo $this->view(
-                'healthLogs.edit',
+                'dentals.edit',
                 [
                     'row' => $row,
                     'errors' => $errors,
+
                 ]
             );
             echo $this->view('includes/footer');

@@ -118,6 +118,24 @@ function child_id_URL()
     return end($url_parts);
 }
 
+function child_id_URL_milestone()
+{
+    // Get the current URL path
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    // Split the URL into path and query string
+    $url_components = explode('?', $current_url);
+
+    // The first component is the URL path
+    $url_path = $url_components[0];
+
+    // Split the URL path by '/'
+    $url_parts = explode('/', $url_path);
+
+    // The child_id will be the last part of the URL path
+    return end($url_parts);
+}
+
 function calculateBabyAgeInMonths($birthday)
 {
     $birthdayTimestamp = strtotime($birthday);

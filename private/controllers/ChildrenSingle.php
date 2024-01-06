@@ -59,7 +59,6 @@ class ChildrenSingle extends Controller
         $milestones = new Milestone();
         // for Milestone Tracker
         $milestoneTracker = new MilestoneTracker();
-        $milestoneTrackerRow = $milestoneTracker->where('child_id', $id);
 
         $children = new Child();
         $child_row = $children->first('child_id', $id);
@@ -76,6 +75,7 @@ class ChildrenSingle extends Controller
         }
 
         if ($child_row) {
+
             $query = "SELECT * FROM milestones WHERE disabled = 0 ";
 
             if ($ageInMonths <= 1) {
@@ -90,13 +90,10 @@ class ChildrenSingle extends Controller
                 $query .= "AND age_range in ('1', '2', '4', '6', '8')";
             } else if ($ageInMonths < 10) {
                 $query .= "AND age_range in ('1', '2', '4', '6', '8', '10')";
-         
             } else if ($ageInMonths < 12) {
                 $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12')";
-         
             } else if ($ageInMonths < 18) {
                 $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18')";
-            
             } else if ($ageInMonths < 24) {
                 $query .= "AND age_range in ('1', '2', '4', '6', '8', '10', '12', '18', '24')";
             } else if ($ageInMonths < 36) {
@@ -116,7 +113,7 @@ class ChildrenSingle extends Controller
                         'child_id' => $id,
                         'milestone_id' => $milestone->milestone_id
                     ]);
-                  
+
                     // If not accomplished, add an error message
                     if (!$milestoneCheck) {
                         $errors[] = "You haven't accomplished the milestone: " . $milestone->name . " for this child.";
@@ -212,7 +209,6 @@ class ChildrenSingle extends Controller
             }
         }
 
-
         echo $this->view('includes/header');
         echo $this->view('includes/nav');
 
@@ -243,21 +239,26 @@ class ChildrenSingle extends Controller
 
         if (count($_POST) > 0) {
             if (isset($_POST['search'])) {
-
                 if (trim($_POST['name']) != "") {
                     $user = new User();
                     $name = "%" . trim($_POST['name']) . '%';
-                    $query = "SELECT * FROM users 
-            WHERE (first_name LIKE CONCAT('%', :fname, '%') OR last_name LIKE CONCAT('%', :lname, '%')) 
-            AND approve = '1' 
-            AND user_role NOT IN ('admin', 'super_admin', 'parent') 
-            LIMIT 10";
+
+                    // Updated query to select only staffs associated with the child
+                    $query = "SELECT users.* FROM users 
+                              JOIN child_staffs ON users.user_id = child_staffs.user_id 
+                              WHERE child_staffs.child_id = :child_id 
+                              AND child_staffs.disabled = 0
+                              AND (users.first_name LIKE :name OR users.last_name LIKE :name) 
+                              AND users.approve = '1' 
+                              AND users.user_role NOT IN ('admin', 'super_admin', 'parent') 
+                              LIMIT 10";
+
                     $results = $user->query($query, [
-                        "fname" => $name,
-                        "lname" => $name,
+                        "child_id" => $id,
+                        "name" => $name,
                     ]);
                 } else {
-                    $errors[] = "Please type something to search for a name";
+                    $errors[] = "Please type something to search for a name.";
                 }
             } else if (isset($_POST["selected"])) {
                 // remove Staff

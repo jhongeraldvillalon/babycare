@@ -236,21 +236,21 @@ CREATE TABLE dentals (
     id INT AUTO_INCREMENT PRIMARY KEY,
 	child_id VARCHAR(60) NOT NULL,
     dental_id varchar(60) NOT NULL,
+	tooth_number INT NOT NULL,
+
     date DATE,
-    tooth_number INT NOT NULL,
+	last_checkup_date DATE,
     observations TEXT,
+
+	tooth_removal BOOLEAN DEFAULT FALSE,
+    root_canal_therapy BOOLEAN DEFAULT FALSE,
+	is_erupt BOOLEAN DEFAULT FALSE,
+
     fillings VARCHAR(100),
     crowns VARCHAR(100),
     bridges VARCHAR(100),
-    root_canal_therapy BOOLEAN DEFAULT FALSE,
-	is_erupt BOOLEAN DEFAULT FALSE,
-    tooth_removal BOOLEAN DEFAULT FALSE,
-    dental_implants VARCHAR(100),
-    last_checkup_date DATE
+	dental_implants VARCHAR(100)
 );
-
-
-
 
 Notification {
 	Immunization -> kung late na si baby
