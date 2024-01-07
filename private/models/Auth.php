@@ -131,6 +131,21 @@ class Auth
 
         return false;
     }
+    public static function updateSessionData($userId)
+    {
+        $userModel = new User();
+        $userData = $userModel->first('id', $userId);
 
-
+        if ($userData) {
+            // Assuming you store user data in session under 'user'
+            $_SESSION['user'] = $userData;
+        }
+    }
+    public static function getFirst_name()
+    {
+        if (isset($_SESSION['user']) && isset($_SESSION['user']->first_name)) {
+            return $_SESSION['user']->first_name;
+        }
+        return null;
+    }
 }

@@ -52,8 +52,14 @@
                     </span>
                     <h3>Milestones</h3>
                 </a>
+                <a href="<?= ROOT ?>/accounts">
+                    <span class="material-icons-sharp">
+                        face
+                    </span>
+                    <h3>My Account</h3>
+                </a>
 
-                
+
                 <a href="<?= ROOT ?>/logout">
                     <span class="material-icons-sharp">
                         logout
