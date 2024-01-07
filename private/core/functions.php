@@ -123,17 +123,23 @@ function child_id_URL_milestone()
     // Get the current URL path
     $current_url = $_SERVER['REQUEST_URI'];
 
-    // Split the URL into path and query string
-    $url_components = explode('?', $current_url);
+    // Parse the URL to get its components
+    $parsed_url = parse_url($current_url);
 
-    // The first component is the URL path
-    $url_path = $url_components[0];
+    // Get the path part of the URL
+    $path = $parsed_url['path'];
 
-    // Split the URL path by '/'
-    $url_parts = explode('/', $url_path);
+    // Split the path by '/'
+    $path_parts = explode('/', $path);
 
-    // The child_id will be the last part of the URL path
-    return end($url_parts);
+    // Get the last part of the path which should be the child_id
+    $child_id = end($path_parts);
+
+    // If there's a query string, it may be attached to the child_id, so separate it
+    $child_id_parts = explode('&', $child_id);
+
+    // Return only the child_id part
+    return $child_id_parts[0];
 }
 
 function calculateBabyAgeInMonths($birthday)

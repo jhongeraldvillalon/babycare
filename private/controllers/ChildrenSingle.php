@@ -449,4 +449,27 @@ class ChildrenSingle extends Controller
         echo $this->view('childrensingle', $data);
         echo $this->view('includes/footer');
     }
+
+    // public function addAppointment($childId = '')
+    // {
+    //     if (!Auth::logged_in()) {
+    //         $this->redirect("login");
+    //     }
+
+    //     $childStaff = new ChildStaff();
+    //     if (!$childStaff->isStaffAssignedToChild(Auth::getUser_id(), $childId)) {
+    //         $this->redirect("home");
+    //     }
+
+    //     $appointment = new Appointment();
+
+    //     if (count($_POST) > 0) {
+    //         // Process the form data and add an appointment
+    //         // Validate, sanitize, and insert data into the database
+    //     }
+
+    //     echo $this->view('add_appointment', [
+    //         'child_id' => $childId
+    //     ]);
+    // }
 }

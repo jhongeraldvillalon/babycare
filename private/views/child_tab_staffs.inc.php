@@ -33,7 +33,7 @@
             <?php endforeach; ?>
 
         <?php else : ?>
-            <p>No staff were found in this child</p>
+            <p>There is currently no staff member associated with this child.</p>
         <?php endif; ?>
 
     </div>

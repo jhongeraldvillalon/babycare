@@ -252,6 +252,13 @@ CREATE TABLE dentals (
 	dental_implants VARCHAR(100)
 );
 
+CREATE TABLE codes (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	email VARCHAR(500),
+	code VARCHAR(5),
+	expire INT
+)
+
 Notification {
 	Immunization -> kung late na si baby
 	Growth Chart -> Kapag Obese na si Baby

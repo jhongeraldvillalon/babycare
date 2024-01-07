@@ -65,6 +65,37 @@
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+    <?php
+            switch ($page_tab) {
+                case 'staffs':
+                    include(views_path('child_tab_staffs'));
+                    break;
+
+                case 'staffs_add':
+                    include(views_path('child_tab_staffs_add'));
+                    break;
+
+                case 'staffs_remove':
+                    include(views_path('child_tab_staffs_remove'));
+                    break;
+
+                    // Uncommenting this code will make the feature of adding parents working
+                    // case 'parents':
+                    //     include(views_path('child_tab_parents'));
+                    //     break;
+
+                    // case 'parents_add':
+                    //     include(views_path('child_tab_parents_add'));
+                    //     break;
+
+                    // case 'parents_remove':
+                    //     include(views_path('child_tab_parents_remove'));
+                    //     break;
+
+                default:
+                    break;
+            }
+    ?>
     <div class="analyse">
         <div class="searches">
             <a href="<?= ROOT ?>/childprints/<?= $row->child_id ?>">
@@ -226,41 +257,8 @@
             </a>
         </div>
     </div>
-    <?php
-            switch ($page_tab) {
-                case 'staffs':
-                    include(views_path('child_tab_staffs'));
-                    break;
 
-                case 'staffs_add':
-                    include(views_path('child_tab_staffs_add'));
-                    break;
-
-                case 'staffs_remove':
-                    include(views_path('child_tab_staffs_remove'));
-                    break;
-
-                    // Uncommenting this code will make the feature of adding parents working
-                    // case 'parents':
-                    //     include(views_path('child_tab_parents'));
-                    //     break;
-
-                    // case 'parents_add':
-                    //     include(views_path('child_tab_parents_add'));
-                    //     break;
-
-                    // case 'parents_remove':
-                    //     include(views_path('child_tab_parents_remove'));
-                    //     break;
-
-                default:
-                    break;
-            }
-    ?>
 <?php else : ?>
     <p>This profile cant be found</p>
 <?php endif; ?>
-
-
-
 </main>
